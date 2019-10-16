@@ -9,11 +9,11 @@ if($functions->loggedIn()) {
 }
 
 ?>
-    <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top" style='opacity: 0.93; background-color: #262626!important;'>
+    <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top" style='opacity: 0.95; background-color: #262626!important;'>
         <div class="container">
-                <a href="home.php" class="navbar-brand">
+                <a href="index.php" class="navbar-brand">
                     <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>
-                        <span style='letter-spacing: -2.5px;'>
+                        <span style='letter-spacing: -2.6px;'>
                             <span style='color: #ff0000;'>S</span>
                             <span style='color: #f77737;'>o</span>
                             <span style='color: #fffc00;'>c</span>

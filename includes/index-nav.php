@@ -10,13 +10,25 @@ if($functions->loggedIn()) {
 }
 
 ?>
-    <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top">
+    <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top" style='opacity: 0.95; background-color: #262626!important;'>
         <div class="container">
-               
                 <a href="index.php" class="navbar-brand">
-                         <img src="logo.png" style='width: 30px; height: 30px;' class='mr-2 mb-1' alt="">
-                         <span style="font-size: 1.5rem;" class='font-logo font-open-sans'>SocialsHub</span>
-                         <span class="badge badge-light ml-1" style='font-size: 0.7rem;'>BETA</span>
+                    
+                    <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>
+                        <span style='letter-spacing: -2.6px;'>
+                            <span style='color: #ff0000;'>S</span>
+                            <span style='color: #f77737;'>o</span>
+                            <span style='color: #fffc00;'>c</span>
+                            <span style='color: #1da1f2;'>i</span>
+                            <span style='color: #7289da;'>a</span>
+                            <span style='color: #3b5998;'>l</span>
+                            <span style='color: #6441a5;'>s</span>
+                        </span>
+                        Hub
+                        <span style='font-size: 1rem; color: #fff; letter-spacing: 0.5px;'>.net</span>
+                    </span>
+
+                    
                 </a>
                 
                 <button class="navbar-toggler" data-toggle='collapse' data-target='#nav'>

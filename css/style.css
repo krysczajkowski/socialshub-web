@@ -67,8 +67,8 @@ pre {
 }
 
 .font-logo {
-    font-family: 'Rambla', sans-serif; 
-    letter-spacing: 1px;
+    color: #fefefe;
+    font-weight: 700;
 }
 
 .font-arial {

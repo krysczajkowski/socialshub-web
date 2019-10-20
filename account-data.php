@@ -9,15 +9,17 @@ if(!$functions->loggedIn()) {
     header('Location: index.php');
     exit();
 }
-
-//Downloading user social medias
-$sm = $functions->showSocialMedia($user->id);
+    
 ?>
     
 <body>
     <?php include 'includes/nav.php'; 
         //We check is user active and if he is not we change his location to welcome.php
         $functions->isUserActive($user->active);
+    
+        //Downloading user social medias
+        $sm = $functions->showSocialMedia($user->id);
+    
     ?>
 
     <div class="bg-white my-5 border rounded container">
@@ -54,7 +56,7 @@ $sm = $functions->showSocialMedia($user->id);
                         <?php 
                         foreach ($sm as $socialMediaRow) {
                             if(!empty($socialMediaRow->smedia_name)) {
-                                echo "<div class='mt-3 ml-2'><span class='font-weight-bold'>$socialMediaRow->smedia</span></div>";
+                                echo "<div class='mt-3 ml-2'><span class='font-weight-bold'style='text-transform: capitalize;'>$socialMediaRow->smedia</span></div>";
                                 echo "<div class='ml-4'><span class='font-weight-bold'>Username: </span>$socialMediaRow->smedia_name</div>";
                                 echo "<div class='ml-4'><span class='font-weight-bold'>Link: </span>$socialMediaRow->smedia_link</div>";
 

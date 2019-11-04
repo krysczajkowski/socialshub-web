@@ -64,7 +64,7 @@ if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_PO
 
 <form action="" method="post" id='i-recaptcha'>
     <input type="text" value='<?php if(isset($reg_name)) {echo $reg_name;} ?>' class="form-control" placeholder='Name' name='nameRegister'>
-    <input type="text" value='<?php if(isset($reg_email)) {echo $reg_email;} ?>' class="form-control mt-2" placeholder='Email' name='emailRegister'>
+    <input type="email" value='<?php if(isset($reg_email)) {echo $reg_email;} ?>' class="form-control mt-2" placeholder='Email' name='emailRegister'>
     <input type="Password" value='<?php if(isset($reg_password)) {echo $reg_password;} ?>' class="form-control mt-2" placeholder='Password' name='passwordRegister'>
     <!-- TERMS CHECKBOX -->
     <div class="custom-control custom-checkbox mt-2">

@@ -1,4 +1,20 @@
-<?php session_start(); ob_start(); ?>
+<?php 
+    error_reporting(0);
+
+    ob_start();
+
+    require_once "fb-files/config.php"; //session start is in this file 
+
+    if (isset($_SESSION['access_token'])) {
+        header('Location: fb-files/fb-logIn.php');
+        exit();
+    }
+
+    $redirectURL = "https://socialshub.net/fb-files/fb-callback.php";
+    $permissions = ['email'];
+    $loginURL = $helper->getLoginUrl($redirectURL, $permissions);
+
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -33,7 +49,7 @@
         $reg_password = $_SESSION['reg_password'];
         $reg_name = $_SESSION['reg_name'];
         
-        $functions->register_user($reg_email, $reg_password, $reg_name);
+        $functions->register_user($reg_email, $reg_password, $reg_name, 0);
         echo("<script>location.href = '".BASE_URL."welcome.php';</script>");  
         //header('Location: welcome.php');
         
@@ -122,10 +138,13 @@
 
                 </div>
 
+                <!-- RIGHT PANEL -->
+                    
                     <div class="col-md-6 mt-3">
                         <div class="col-md-10">
                             <div class="card card-body shadow-sm">
                                 <?php include 'includes/login.php'; ?>
+                                <a href="<?php echo $loginURL; ?>" class="fb connect mt-2" style='width: 65%;'>Continue with Facebook</a>
                             </div>
                         </div>
 

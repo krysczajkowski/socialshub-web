@@ -73,6 +73,25 @@ class Functions {
         return $user->id;
     }
 
+    public function userIdByEmail($email) {
+        $stmt = $this->pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        return $user->id;
+    }
+    
+    public function isUserFbUser($id) {
+        $stmt = $this->pdo->prepare("SELECT fb_user FROM users WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        return $user->fb_user;
+    }
+    
+    
     //       ACTIVATE USER FUNCTIONS
     public function activate_user() {
 
@@ -113,7 +132,7 @@ class Functions {
     //       USER LOGIN FUNCTION
     public function login_user($email, $password, $remember) {
         $hash = md5($password);
-        $stmt = $this->pdo->prepare("SELECT id FROM users WHERE email = :email AND password = :password");
+        $stmt = $this->pdo->prepare("SELECT id FROM users WHERE email = :email AND password = :password AND fb_user = 0");
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":password", $hash, PDO::PARAM_STR);
         $stmt->execute();
@@ -133,12 +152,20 @@ class Functions {
 
 
     //       USER REGISTER FUNCTION
-    public function register_user($email, $password, $screenName) {
-        $hash = md5($password);
+    public function register_user($email, $password, $screenName, $fb_user) {
+        $user_active = 0;
+        
+        if($fb_user == 1) {
+            $hash = '';
+            $user_active = 1;
+        } else {
+            $hash = md5($password);
+        }
+        
         $validationCode = md5($screenName . microtime());
         $remember = 0;
 
-        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`, `password`, `screenName`, `validationCode`, `active` , `profileImage`, `profileCover`) VALUES (:email, :password, :screenName, :validationCode, 0 ,'images/defaultProfileImage.png', 'images/defaultCoverImage.png')");
+        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`, `password`, `screenName`, `validationCode`, `active` , `profileImage`, `profileCover`, `fb_user`) VALUES (:email, :password, :screenName, :validationCode, $user_active ,'images/defaultProfileImage.png', 'images/defaultCoverImage.png', $fb_user)");
 
 	    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
  	    $stmt->bindParam(":password", $hash , PDO::PARAM_STR);
@@ -162,6 +189,7 @@ class Functions {
         }
         
         //Sending Email
+        if($fb_user == 0) {
         $subject = "SocialsHub - Activate Your Account";
         $message = "
 <html>
@@ -191,6 +219,7 @@ class Functions {
 
 
             mail($email, $subject, $message, $header);
+        }
     }
 
 
@@ -527,7 +556,8 @@ class Functions {
         return $stmt->fetchAll(PDO::FETCH_OBJ); 
     }
     
-
+    
+    
     //       RANKING FUNCTIONS 
 
     public function rankingGenerator() {

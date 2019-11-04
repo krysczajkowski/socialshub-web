@@ -15,7 +15,7 @@ if($functions->loggedIn()) {
                     if($functions->loggedIn()) {
                         echo $user->screenName;
                     } else {
-                        echo 'home.php';
+                        echo 'index.php';
                     }
                  ?>" class="navbar-brand">
                     <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>

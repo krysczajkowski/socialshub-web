@@ -8,7 +8,7 @@
         <meta name='keywords' content='social media, social link, social links, socialhub, social hub, socials hub, friends, celebrity, instagram, twitter, facebook, snapchat, twitch, tiktok, discord, mail, poland, website, bio, book for social media, book, book of social media, wikipedia, socialshub, wroclaw, profile visits, search, social media search, social link search'>
     <link rel="icon" href="logo.png">
     <title>SocialsHub. Social links database.</title>
-    
+    <link rel="shortcut icon" href="">
     
     
     <!--  BOOTSTRAP include  -->

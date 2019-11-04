@@ -19,29 +19,55 @@ $eDeleteA = '';
         //We check is user active and if he is not we change his location to welcome.php
         $functions->isUserActive($user->active);
     
-    
+       
         // DELETE ACCOUNT CODE
         if(isset($_POST['delete-account'])) {
-            $password = $functions->checkInput($_POST['password']);
-            $correctPassword  = $user->password;
+            // If user was registered with no facebook
+            if(isset($_POST['password'])) {
+                $password = $functions->checkInput($_POST['password']);
+                $correctPassword  = $user->password;
 
-            //Hashing pass from input
+                //Hashing pass from input
 
-            $hash = md5($password);
+                $hash = md5($password);
 
-            if($correctPassword === $hash) {
+                if($correctPassword === $hash) {
 
-                //Usun konto, napisz to w logowaniu ze konto zostalo ususniete, wyslij maila z tym ze konto zostalo usuniete
-                $functions->delete_account($user->id);
-                
-                setcookie('account_deleted', '1', time()+60);
-                
-            } else {
-                $eDeleteA = 'Your password is incorrect.';
+                    //Usun konto, napisz to w logowaniu ze konto zostalo ususniete, wyslij maila z tym ze konto zostalo usuniete
+                    $functions->delete_account($user->id);
+
+                    setcookie('account_deleted', '1', time()+60);
+
+                } else {
+                    $eDeleteA = 'Your password is incorrect.';
+                }
             }
-        }
-   
-    
+            
+            //If user was registered by facebook
+            if(isset($_POST['email-confirm'])) {
+                
+                $email = $_POST['email-confirm'];
+                
+                if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $eDeleteA = 'Invalid Email.';
+                } else {
+                    $correctEmail  = $user->email;
+
+                    if($correctEmail === $email) {
+
+                        //Deleting Account 
+                        $functions->delete_account($user->id);
+
+                        setcookie('account_deleted', '1', time()+60);
+
+                    } else {
+                        $eDeleteA = 'Your email is incorrect.';
+                    } 
+                }
+                
+
+            }
+        }  
     
     ?>
 
@@ -54,9 +80,11 @@ $eDeleteA = '';
                     <div class="col-12 my-3 pl-4">
                         <a href="settings.php" class='text-dark h5 none-decoration'>Edit Profile</a>
                     </div>
+                    <?php if(!$functions->isUserFbUser($user->id)) {?>
                     <div class="col-12 my-3 pl-4">
                         <a href="edit-password.php" class='text-dark h5 none-decoration'>Change Password</a>
                     </div>
+                    <?php } ?>
                     <div class="col-12 my-3 pl-4 border-left border-dark">
                         <a href="privacy_and_security.php" class='text-dark h5 none-decoration'>Privacy and Security</a>
                     </div>
@@ -86,7 +114,13 @@ $eDeleteA = '';
                                     <div class="card-title h4 mb-4">Permanently Delete Account</div>   
                                        
                                         <!-- INPUTS -->
-                                        <input type="password" class='form-control' placeholder="Password" name='password'>
+                                        <?php if($functions->isUserFbUser($_SESSION['user_id'])) { ?>
+                                            <input type="email" class='form-control' placeholder="Confirm Your Email" name='email-confirm'>
+                                        <?php } else { ?>
+                                            <input type="password" class='form-control' placeholder="Password" name='password'>
+                                        <?php } ?>
+                                        
+                                        
                                         <div class="row">
                                            <div class="col-lg-4 col-xl-3">
                                                 <input type="submit" name='delete-account' class='btn btn-danger mt-2' value='Delete Account' style='font-size: 1rem; width:100%;'>

@@ -16,10 +16,9 @@ if($functions->loggedIn()) {
                     if($functions->loggedIn()) {
                         echo $user->screenName;
                     } else {
-                        echo 'home.php';
+                        echo 'index.php';
                     }
                  ?>" class="navbar-brand">
-                    
                     <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>
                         <span style='letter-spacing: -2.6px;'>
                             <span style='color: #ff0000;'>S</span>
@@ -32,9 +31,7 @@ if($functions->loggedIn()) {
                         </span>
                         Hub
                         <span style='font-size: 1rem; color: #fff; letter-spacing: 0.5px;'>.net</span>
-                    </span>
-
-                    
+                    </span>      
                 </a>
                 
                 <button class="navbar-toggler" data-toggle='collapse' data-target='#nav'>

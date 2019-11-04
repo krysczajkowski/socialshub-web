@@ -10,6 +10,10 @@ if(!$functions->loggedIn()) {
     exit();
 }
     
+if($functions->isUserFbUser($_SESSION['user_id'])) {
+    header('Location: index.php');
+}
+    
 // CHANGE PASSWORD CODE
 $eChangePassword = '';
 $sChangePassword = '';

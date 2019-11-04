@@ -1,13 +1,11 @@
+<?php session_start(); ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include 'includes/head.php';
-
 if(!$functions->loggedIn()) {
     header('Location: index.php');
-    exit();
 }
-
 ?>
 
 <body>

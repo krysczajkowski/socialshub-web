@@ -1,3 +1,4 @@
+<?php session_start(); ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,10 +17,6 @@
     // Dodaj tego javascripta ale przed praca na obrazkach sprawdź czy uploadProfile itp w ogole istnieje, jeżeli tak to zacznij prace, jak ją skończysz to obowiązkowo po próbuj hackować strone 
 
         $ranking = $functions->rankingGenerator();
-
-        
-
-
 
         for($i=0; $i < count($ranking); $i++) {
             $rankingUserId   = $ranking[$i]->account_id;
@@ -44,7 +41,7 @@
                         </div>
                     </div>
 
-                    <div class="xd">
+                    <div>
                         <div class="stats">
 
                             <?php for($k=0; $k < 3; $k++) { ?>

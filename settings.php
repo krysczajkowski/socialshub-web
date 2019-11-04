@@ -122,9 +122,11 @@ if(!$functions->loggedIn()) {
                     <div class="col-12 my-3 pl-4 border-left border-dark">
                         <a href="settings.php" class='text-dark h5 none-decoration'>Edit Profile</a>
                     </div>
+                    <?php if(!$functions->isUserFbUser($user->id)) {?>
                     <div class="col-12 my-3 pl-4">
                         <a href="edit-password.php" class='text-dark h5 none-decoration'>Change Password</a>
                     </div>
+                    <?php } ?>
                     <div class="col-12 my-3 pl-4">
                         <a href="privacy_and_security.php" class='text-dark h5 none-decoration'>Privacy and Security</a>
                     </div>
@@ -192,11 +194,7 @@ if(!$functions->loggedIn()) {
                             </div>
                             
                             <div class="col-xs-12 col-md-9 d-flex align-items-center">   
-                                <textarea spellcheck="false" class='form-control' style="overflow:hidden; height: 200px; width: 78%;" name='textarea' placeholder="Here you can write about you and your social medias
-Instagram: - your Instagram name -
-TikTok:         - your TikTok name -
-Snapchat:   - your Snapchat name -
-Twitter:       - your Twitter name -"><?php echo $user->bio ?></textarea>
+                                <textarea spellcheck="false" class='form-control' style="overflow:hidden; height: 200px; width: 78%;" name='textarea' placeholder="Describe yourself."><?php echo $user->bio ?></textarea>
                         
                             </div>
                                                         

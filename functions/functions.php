@@ -141,8 +141,8 @@ class Functions {
             $user = $stmt->fetch(PDO::FETCH_OBJ);
 
             if($remember == 'on') {
-                setcookie('email', $email, time() + 5184000); //Ustawiamy sesje zeby go kilka miesiecy nie wylogowywalo
-                setcookie('user_id', $user->id, time() + 5184000);
+                setcookie('email', $email, time() + 5184000, '/'); //Ustawiamy sesje zeby go kilka miesiecy nie wylogowywalo
+                setcookie('user_id', $user->id, time() + 5184000, '/');
             }
 
             $_SESSION['user_id'] = $user->id;
@@ -158,19 +158,22 @@ class Functions {
         if($fb_user == 1) {
             $hash = '';
             $user_active = 1;
+            $profilePicture = $_SESSION['fb-userData']['picture']['url'];
         } else {
             $hash = md5($password);
+            $profilePicture = 'images/defaultProfileImage.png';
         }
         
         $validationCode = md5($screenName . microtime());
         $remember = 0;
 
-        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`, `password`, `screenName`, `validationCode`, `active` , `profileImage`, `profileCover`, `fb_user`) VALUES (:email, :password, :screenName, :validationCode, $user_active ,'images/defaultProfileImage.png', 'images/defaultCoverImage.png', $fb_user)");
+        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`, `password`, `screenName`, `validationCode`, `active` , `profileImage`, `profileCover`, `fb_user`) VALUES (:email, :password, :screenName, :validationCode, $user_active ,:profilePicture, 'images/defaultCoverImage.png', $fb_user)");
 
 	    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
  	    $stmt->bindParam(":password", $hash , PDO::PARAM_STR);
 	    $stmt->bindParam(":screenName", $screenName, PDO::PARAM_STR);
 	    $stmt->bindParam(":validationCode", $validationCode, PDO::PARAM_STR);
+	    $stmt->bindParam(":profilePicture", $profilePicture);
         $stmt->execute();
         
         $user_id = $this->pdo->lastInsertId();
@@ -556,7 +559,14 @@ class Functions {
         return $stmt->fetchAll(PDO::FETCH_OBJ); 
     }
     
-    
+    public function weekVisitors($id) {
+        $stmt = $this->pdo->prepare("SELECT COUNT(id) as weekVisits FROM visitors WHERE visit_date BETWEEN date_sub(now(),INTERVAL 1 WEEK) AND now()  AND account_id = :account_id");
+        $stmt->bindParam(':account_id', $id);
+        $stmt->execute();
+
+        //Returning number of visitors this week
+        return $stmt->fetch(PDO::FETCH_OBJ)->weekVisits;
+    }    
     
     //       RANKING FUNCTIONS 
 

@@ -97,7 +97,13 @@
                                 if(isset($_SESSION['user_id']) || isset($_COOKIE['user_id'])) {
                                     if($profileId === $_SESSION['user_id'] || $profileId === $_COOKIE['user_id']) { ?>
                                     <span class='text-muted ml-3'>
-                                        <strong style='color: #555;'><?php echo $functions->showVisitors($profileId); ?></strong> Profile Visits 
+                                        <strong style='color: #555;'>
+                                            <?php echo $functions->showVisitors($profileId); ?>
+                                        </strong> Profile Visits 
+                                        <span class='mx-2'>|</span> 
+                                        <strong style='color: #555;'>
+                                            <?php echo $functions->weekVisitors($profileId); ?>
+                                        </strong> Visits This Week
                                     </span>
 
                                     <!-- <span class='ml-2 pl-2 text-muted border-left'><strong style='color: #555;'> -->
@@ -113,7 +119,7 @@
     if(!empty($profileData->bio)) {
        echo $functions->text2link($profileData->bio);
     } else if (empty($profileData->bio) && $user->id === $profileData->id) {
-       echo "<div class='container text-center text-muted' style='font-size: 1.1rem;'>Write names of your social medias here <i class='far fa-comment'></i><br><a href='https://socialshub.net/settings.php' class='link'>Add Bio</a></div>";
+       echo "<div class='container text-center text-muted' style='font-size: 1.1rem;'><a href='https://socialshub.net/settings.php' class='link'>Set your bio, name and pictures here</a></div>";
     }
 
     if ($user->id === $profileId) {
@@ -151,7 +157,7 @@
         <div class="container">
                   
             <div class="d-flex">
-                <span style='font-size: 1.1rem;' class='pt-1'>SocialsHub.com uses cookies to give you the best possible experience.<a href="privacy-policy.php"> Read More</a></span>
+                <span style='font-size: 1.1rem;' class='pt-1'>SocialsHub.net uses cookies to give you the best possible experience.<a href="privacy-policy.php"> Read More</a></span>
                 
                 <!-- Accept cookie button -->
                 <a href="?accept-cookies" class='btn btn-success font-weight-bold ml-auto' style='font-size: 1.1rem;'>OK</a>

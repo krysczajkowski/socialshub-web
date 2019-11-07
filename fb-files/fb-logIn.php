@@ -8,18 +8,20 @@ if(!isset($_SESSION['access_token'])) {
 
 if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     //User exist, logIn him
+    $email = $_SESSION['fb-userData']['email'];
     
-    $userId = $functions->userIdByEmail($_SESSION['fb-userData']['email']);
+    $userId = $functions->userIdByEmail($email);
+    
     
     $_SESSION['user_id'] = $userId;
     
     $user = $functions->user_data($userId);
         
-    setcookie('email', $email, time() + 5184000); //Ustawiamy sesje zeby go kilka miesiecy nie wylogowywalo
-    setcookie('user_id', $user->id, time() + 5184000);    
+    setcookie('email', $email, time() + 5184000, '/'); //Setting cookie to not log out user
+    setcookie('user_id', $userId, time() + 5184000, '/');  
 
     header('Location: '. BASE_URL. $user->screenName);
-    exit();
+    
 } else {
     //User does not exist, make him an account
     
@@ -40,14 +42,14 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     $userId = $functions->userIdByEmail($email);
     $user = $functions->user_data($userId);
     
-    setcookie('email', $email, time() + 5184000); //Ustawiamy sesje zeby go kilka miesiecy nie wylogowywalo
-    setcookie('user_id', $user->id, time() + 5184000);   
+    setcookie('email', $email, time() + 5184000, '/'); //Ustawiamy sesje zeby go kilka miesiecy nie wylogowywalo
+    setcookie('user_id', $userId, time() + 5184000, '/');   
     
     
     $_SESSION['user_id'] = $userId;
     
     header('Location: '. BASE_URL. $user->screenName);
-    exit();
+    
 }
 
 

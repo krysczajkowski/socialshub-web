@@ -97,11 +97,11 @@
                                 if(isset($_SESSION['user_id']) || isset($_COOKIE['user_id'])) {
                                     if($profileId === $_SESSION['user_id'] || $profileId === $_COOKIE['user_id']) { ?>
                                     <span class='text-muted ml-3'>
-                                        <strong style='color: #555;'>
+                                        <strong class='grey-font'>
                                             <?php echo $functions->showVisitors($profileId); ?>
                                         </strong> Profile Visits 
                                         <span class='mx-2'>|</span> 
-                                        <strong style='color: #555;'>
+                                        <strong class='grey-font'>
                                             <?php echo $functions->weekVisitors($profileId); ?>
                                         </strong> Visits This Week
                                     </span>

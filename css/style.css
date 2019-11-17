@@ -23,6 +23,9 @@ pre {
     font-size: 1.2rem;
 }
 
+.grey-font {
+    color: #555;
+}
 
 /* Facebook button */
 a.fb {

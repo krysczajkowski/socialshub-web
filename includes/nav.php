@@ -11,13 +11,7 @@ if($functions->loggedIn()) {
 ?>
     <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top" style='opacity: 0.95; background-color: #262626!important;'>
         <div class="container">
-                <a href="<?php 
-                    if($functions->loggedIn()) {
-                        echo $user->screenName;
-                    } else {
-                        echo 'index.php';
-                    }
-                 ?>" class="navbar-brand">
+                <a href="home.php" class="navbar-brand">
                     <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>
                         <span style='letter-spacing: -2.6px;'>
                             <span style='color: #ff0000;'>S</span>
@@ -52,6 +46,12 @@ if($functions->loggedIn()) {
                             <div class="profileImage-sm border rounded-circle dropdown-toggle"  id="dropdown" data-toggle="dropdown"></div>
                             <div class="dropdown-menu">
                                 <a href="<?php echo BASE_URL.$user->screenName ?>" class="dropdown-item"><i class="fas fa-user-circle"></i> <?php echo $user->screenName; ?> </a>
+                                    <!-- DARK MODE SWITCH-->
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="darkSwitch">
+        <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+    </div>
+    <script src="js/dark-mode-switch.min.js"></script>
                                 <a href="settings.php" class="dropdown-item"><i class="fas fa-cog"></i>  Settings</a>
                                 <a href="../logout.php" class="dropdown-item"><i class="fas fa-user-times"></i>  Logout</a>
                             </div>

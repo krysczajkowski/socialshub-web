@@ -12,13 +12,7 @@ if($functions->loggedIn()) {
 ?>
     <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top" style='opacity: 0.95; background-color: #262626!important;'>
         <div class="container">
-                <a href="<?php 
-                    if($functions->loggedIn()) {
-                        echo $user->screenName;
-                    } else {
-                        echo 'index.php';
-                    }
-                 ?>" class="navbar-brand">
+                <a href="home.php" class="navbar-brand">
                     <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>
                         <span style='letter-spacing: -2.6px;'>
                             <span style='color: #ff0000;'>S</span>

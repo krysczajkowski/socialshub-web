@@ -37,7 +37,7 @@ if(!$functions->loggedIn()) {
                 } else if ($name != $user->screenName && $functions->name_exist($name)) {
                     $_SESSION['eSettings'] = 'Sorry, this name is already taken.';
                 } else if(!preg_match('/^[a-zA-Z0-9]+$/', $name)) {
-                    $_SESSION['eSettings'] = 'Only letters and numbers allowed in name field.';
+                    $_SESSION['eSettings'] = 'The name field must consist of numbers and letters.';
                 } else if ($email != $user->email && $functions->email_exist($email)) {
                     $_SESSION['eSettings'] = 'This email is already in use.';
                 } else {
@@ -114,7 +114,7 @@ if(!$functions->loggedIn()) {
     
     ?>
     <div class="bg-white my-5 border rounded container">
-        <div class="row">
+        <div class="row settings-card">
            
             <!-- LEFT SETTINGS PANEL -->
             <div class="d-none d-md-block col-md-4 col-lg-3">

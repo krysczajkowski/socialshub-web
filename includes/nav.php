@@ -46,14 +46,14 @@ if($functions->loggedIn()) {
                             <div class="profileImage-sm border rounded-circle dropdown-toggle"  id="dropdown" data-toggle="dropdown"></div>
                             <div class="dropdown-menu">
                                 <a href="<?php echo BASE_URL.$user->screenName ?>" class="dropdown-item"><i class="fas fa-user-circle"></i> <?php echo $user->screenName; ?> </a>
+                                <a href="settings.php" class="dropdown-item"><i class="fas fa-cog"></i>  Settings</a>
+                                <a href="../logout.php" class="dropdown-item"><i class="fas fa-user-times"></i>  Logout</a>
                                     <!-- DARK MODE SWITCH-->
-    <div class="custom-control custom-switch">
+    <div class="custom-control custom-switch mt-3 ml-3">
         <input type="checkbox" class="custom-control-input" id="darkSwitch">
         <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
     </div>
-    <script src="js/dark-mode-switch.min.js"></script>
-                                <a href="settings.php" class="dropdown-item"><i class="fas fa-cog"></i>  Settings</a>
-                                <a href="../logout.php" class="dropdown-item"><i class="fas fa-user-times"></i>  Logout</a>
+    <script src="js/dark-mode-switch.min.js"></script> 
                             </div>
                         </div>
                     

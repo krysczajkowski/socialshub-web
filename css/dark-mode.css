@@ -56,9 +56,17 @@
     border: 1px solid black !important;
   }
 
+  [data-theme="dark"] .kurwa {
+    background-color: #101010 !important;
+  }
+
   [data-theme="dark"] .search {
     background-color: white !important;
     color: #000 !important;
+  }
+
+  [data-theme="dark"] .search-row:hover {
+    background-color: #202020 !important;
   }
 
   [data-theme="dark"] .dropdown-item {

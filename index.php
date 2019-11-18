@@ -93,7 +93,34 @@
                     </div>
 
                     <!-- LEFT LIST -->
-
+                    <div class="row mt-2 pt-3 ml-1">
+                        <div class="col-2">
+                            <i class="fas fa-share fa-2x mt-2 ml-2 share-color"></i>
+                        </div>
+                        <div class="col-10">
+                            <div class="d-block">
+                                <span class='index-list-header '>Share</span>
+                            </div>
+                            <div class="d-block" style='line-height: 28px;'>
+                                <span class='index-list-text'>Share your all social media by only one link</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <div class="row mt-2 pt-3 ml-1">
+                        <div class="col-2">
+                            <i class="fas fa-hashtag fa-2x mt-2 ml-2 vanishing-posts-color"></i>
+                        </div>
+                        <div class="col-10">
+                            <div class="d-block">
+                                <span class='index-list-header'>Easy for your viewers</span>
+                            </div>
+                            <div class="d-block" style='line-height: 28px;'>
+                                <span class='index-list-text'>Help your viewers find all your social links</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row mt-4 pt-3 ml-1">
                         <div class="col-2">
                             <i class="far fa-address-book fa-2x mt-2 ml-2 bookmark-color"></i>
@@ -103,38 +130,10 @@
                                 <span class='index-list-header'>Book of social links</span>
                             </div>
                             <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Find everyone's social links and store your own</span>
+                                <span class='index-list-text'>Find everyone's social links</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row mt-2 pt-3 ml-1">
-                        <div class="col-2">
-                            <i class="fas fa-hashtag fa-2x mt-2 ml-2 vanishing-posts-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Vanishing Posts</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Posts that disappear - you can only see newest posts</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-2 pt-3 ml-1">
-                        <div class="col-2">
-                            <i class="fas fa-share fa-2x mt-2 ml-2 share-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Share</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Share your all social media by only one link</span>
-                            </div>
-                        </div>
-                    </div>
+                    </div>                    
 
                 </div>
 
@@ -151,7 +150,7 @@
                         <div class="col-md-10 mt-3 mb-4">
                             <div class="card card-body shadow-sm">
                                 <div class="font-open-sans">
-                                    <p class='h5 font-weight-bold'>Join future world largest social media website.</p>
+                                    <p class='h5 font-weight-bold'>Join future world largest social links hub.</p>
                                     <p class='text-muted'><strong style='letter-spacing: 0.5px;'>It's easy and quick.</strong></p>
                                 </div>
                                  <?php include 'includes/signup-form.php'; ?>

@@ -50,11 +50,11 @@ if(isset($_POST['oldPassword']) && isset($_POST['newPassword']) && isset($_POST[
     ?>
 
     <div class="bg-white my-5 border rounded container">
-        <div class="row">
+        <div class="row settings-card">
            
             <!-- LEFT SETTINGS PANEL -->
             <div class="d-none d-md-block col-md-4 col-lg-3">
-                <div class="row settings-card">
+                <div class="row">
                     <div class="col-12 my-3 pl-4">
                         <a href="settings.php" class='text-dark h5 none-decoration'>Edit Profile</a>
                     </div>

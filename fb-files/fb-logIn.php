@@ -8,10 +8,9 @@ if(!isset($_SESSION['access_token'])) {
 
 if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     //User exist, logIn him
+
     $email = $_SESSION['fb-userData']['email'];
-    
     $userId = $functions->userIdByEmail($email);
-    
     
     $_SESSION['user_id'] = $userId;
     
@@ -22,6 +21,7 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
 
     header('Location: '. BASE_URL. $user->screenName);
     
+    exit();
 } else {
     //User does not exist, make him an account
     
@@ -49,7 +49,9 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     $_SESSION['user_id'] = $userId;
     
     header('Location: '. BASE_URL. $user->screenName);
-    
+
+    exit();
+
 }
 
 

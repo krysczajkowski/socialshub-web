@@ -10,16 +10,19 @@ if(isset($_POST['loginEmail']) && !empty($_POST['loginEmail']) &&isset($_POST['l
     $password  = $_POST['loginPassword'];
     $remember  = isset($_POST['remember']);
     
-    if(!empty($email) || !empty($password)) {
+    if(!empty($email) && !empty($password)) {
         $email     = $functions->checkInput($email);
         $password  = $functions->checkInput($password);
         
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $eLogin = 'Invalid format of email.';
         } else {
-            
-            if($functions->login_user($email, $password, $remember) == false) {
+            $user = $functions->login_user($email, $password, $remember);
+            if($user != null) {
                 $eLogin = "Your credentials are not correct.";
+            }else{
+                header('Location: '.BASE_URL.$user->screenName);
+                exit();
             }
         }
         

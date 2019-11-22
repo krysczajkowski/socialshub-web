@@ -17,7 +17,7 @@ if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_PO
     $privacy  = isset($_POST['accept-privacy']);
 
 
-    if(!empty($username) || !empty($reg_email) || !empty($reg_password)) {
+    if(!empty($username) && !empty($reg_email) && !empty($reg_password)) {
 
         if(!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
             $eRegister = 'Invalid email.';
@@ -47,9 +47,9 @@ if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_PO
                 $_SESSION['reg_email'] = $reg_email;
                 $_SESSION['reg_password'] = $reg_password;
                 
-                $_SESSION['registerUser'] = 1;
-                echo("<script>location.href = '".BASE_URL."';</script>");  
-
+                //$_SESSION['registerUser'] = 1;
+                $functions->register_user($reg_email, $reg_password, $reg_name, 0);
+                echo("<script>location.href = '".BASE_URL."welcome.php';</script>"); 
             }
         }
 

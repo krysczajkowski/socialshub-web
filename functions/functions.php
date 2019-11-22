@@ -146,9 +146,9 @@ class Functions {
             }
 
             $_SESSION['user_id'] = $user->id;
-            header('Location: '.BASE_URL.$user->screenName);
-            exit();
+            return $user;
         }
+        return null;
     }
 
 

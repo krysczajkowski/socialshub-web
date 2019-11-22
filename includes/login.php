@@ -19,10 +19,10 @@ if(isset($_POST['loginEmail']) && !empty($_POST['loginEmail']) &&isset($_POST['l
         } else {
             $user = $functions->login_user($email, $password, $remember);
             if($user != null) {
-                $eLogin = "Your credentials are not correct.";
-            }else{
                 header('Location: '.BASE_URL.$user->screenName);
                 exit();
+            }else{
+                $eLogin = "Your credentials are not correct.";
             }
         }
         

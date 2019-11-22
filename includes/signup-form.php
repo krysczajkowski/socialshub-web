@@ -17,7 +17,7 @@ if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_PO
     $privacy  = isset($_POST['accept-privacy']);
 
 
-    if(!empty($username) && !empty($reg_email) && !empty($reg_password)) {
+    if(!empty($username) || !empty($reg_email) || !empty($reg_password)) {
 
         if(!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
             $eRegister = 'Invalid email.';

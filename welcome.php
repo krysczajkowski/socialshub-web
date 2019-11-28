@@ -13,7 +13,7 @@ if(!$functions->loggedIn()) {
 
 <div class="container">
     <div class='jumbotron mt-5 w-75 mx-auto'>
-        <div class='container'>
+        <div class='container text-always-dark'>
             <h3 class='font-weight-bold'>Please verify your email address.</h3>
             <hr>
             <p class='lead'>To continue using SocialsHub, you'll need to confirm your email address. Please check your email or spam folder for an activation link to activate your account. We send it to <b><?php echo $user->email; ?></b>

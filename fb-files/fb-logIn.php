@@ -48,7 +48,7 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     
     $_SESSION['user_id'] = $userId;
     
-    header('Location: '. BASE_URL. $user->screenName);
+    header('Location: '. BASE_URL .'settings.php');
 
     exit();
 

@@ -112,7 +112,7 @@ class Functions {
                     $stmt2 = $this->pdo->prepare("UPDATE `users` SET `active` = 1, `validationCode` = 0 WHERE `id` = :id");
                     $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt2->execute();
-                    header('Location: '.BASE_URL.$user->screenName);
+                    header('Location: '.BASE_URL. 'settings.php');
                 } else {
                     header('Location: welcome.php');
                 }

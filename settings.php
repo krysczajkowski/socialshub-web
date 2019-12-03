@@ -16,6 +16,8 @@ if(!$functions->loggedIn()) {
         //We check is user active and if he is not we change his location to welcome.php
         $functions->isUserActive($user->active);
     
+        //Downloading all data about user's social medias
+        $sm = $functions->showSocialMedia($user->id);
         
         //If everything went good we can redirect to user.php
         $changes_success = 1;
@@ -66,37 +68,31 @@ if(!$functions->loggedIn()) {
 
 
                     // FILTERING SOCIAL MEDIA
- 
-                    $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'discord', 'snapchat','facebook', 'mail'];
- 
-                    for($i = 0; $i < count($socialmedia); $i++) {
-                        $sm = $functions->showSocialMediaName($user->id, $socialmedia[$i]);
-                        $name = $functions->checkInput($_POST[$sm[0]->smedia . '-name']);
-                        //Dodaje social medie
-                        //$functions->addSocialMedia($user->id, $socialmedia[$i]);
+                    foreach ($sm as $socialMediaRow) {
+
+                        $smedia = $socialMediaRow->smedia;                    
+                                        
                         
+                        $smedia_name = $functions->checkInput($_POST[$smedia . '-name']);
+                        $smedia_link = $functions->checkInput($_POST[$smedia . '-link']);
                         
-                        if((empty($name)) || (!empty($name) && strlen($name) < 30)) {
-
-                            //Checking instagram link input
-                            if (!empty($_POST[$sm[0]->smedia . '-link'])) {
-                                $link = $functions->checkInput($_POST[$sm[0]->smedia .'-link']);
-                                if($functions->isTextLink($link)) {
-
-                                    $functions->updateSocialMedia($user->id, $sm[0]->smedia , $name, $link);
-
-                                } else {
-                                    $changes_success = 0;
-                                    $_SESSION['eSettings'] = $link . ' is not link';
-                                }
+                      
+                        
+                        if((empty($smedia_name)) || (!empty($smedia_name) && strlen($smedia_name) < 30)) { 
+                            
+                            if(!empty($smedia_link) && !$functions->isTextLink($smedia_link)) {
+                                $changes_success = 0;
+                                $_SESSION['eSettings'] = $smedia_link . ' is not link';
                             } else {
-                                $functions->updateSocialMedia($user->id, $sm[0]->smedia, $name, '');
-                            }
+                                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
+                                $functions->addNewSocialMedia($user->id);
+                            }                      
+                                      
                         } else {
                             $changes_success = 0;
-                            $_SESSION['eSettings'] = $sm[0]->smedia . ' name must be under 30 letters.';
+                            $_SESSION['eSettings'] = $smedia . ' name must be under 30 letters.';
                         } 
-
+                                                
                     }
  
 
@@ -211,45 +207,25 @@ if(!$functions->loggedIn()) {
 
                         <!-- ADD SOCIAL LINKS -->
                         <div class="row pt-1">
-                            
                             <div class="col-xs-12 col-md-11 offset-md-1 d-flex align-items-center">
-
-                                <!-- Instagram INPUTS -->
-                                <?php 
-                                    // Downloading name and url of social media 
-                                    $sm = $functions->showSocialMediaName($user->id, 'instagram'); 
-                                ?>
-
                                 <div class='row'>
-
-                                <?php 
-           
-                                    $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'discord', 'snapchat','facebook', 'mail'];
-
-                                    for($i = 0; $i < count($socialmedia); $i++) {
-                                        $sm = $functions->showSocialMediaName($user->id, $socialmedia[$i]);
-                                        //$functions->addSocialMedia($user->id, $socialmedia[$i]);
-                                        $smName = $sm[0]->smedia_name;
-                                        
+                                    <?php    
+                                    foreach ($sm as $socialMediaRow) {
+                                            
                                         echo "
                                             <div class='col-10'>
-                                            <div class='input-group settings-social-input'>
-                                                <div class='input-group-prepend settings-social-name-div'>
+                                            <div class='input-group settings-social-input p-0'>
+                                                <div class='input-group-prepend settings-social-name-div p-0'>
                                                     <span id='' class='input-group-text settings-social-name' style=''>
-                                                        <span class='settings-social-text'>".$socialmedia[$i]."</span>
+                                                        <span class='medium-font settings-social-text p-0 socicon-$socialMediaRow->smedia'></span>
                                                     </span>
                                                 </div>
-                                                <input type='text' placeholder='Name' class='form-control' name='".$sm[0]->smedia."-name' id='".$sm[0]->smedia."-name' value='$smName' >
-                                                <input type='url' placeholder='Url Link (optional)' class='form-control' name='".$sm[0]->smedia."-link' id='".$sm[0]->smedia."-link' value=". $sm[0]->smedia_link .">
+                                                <input type='text' placeholder='Your ".$socialMediaRow->smedia."' class='form-control ' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$socialMediaRow->smedia_name' >
+                                                <input type='url' placeholder='https://url' class='form-control' name='".$socialMediaRow->smedia."-link' id='".$socialMediaRow->smedia."-link' value=". $socialMediaRow->smedia_link .">
                                             </div>
                                             </div>";
-                                    }
-
-                                ?>
-
+                                    } ?>
                                 </div>
-
-
                             </div>
                         </div>
 

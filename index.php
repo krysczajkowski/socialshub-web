@@ -17,7 +17,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script> 
        
     <?php include 'includes/head.php'; 
     
@@ -43,18 +43,18 @@
     }
     
     
-    // if($_SESSION['registerUser'] === 1) {
-    //     $_SESSION['registerUser'] = 0;
-    //     $reg_email = $_SESSION['reg_email'];
-    //     $reg_password = $_SESSION['reg_password'];
-    //     $reg_name = $_SESSION['reg_name'];
+    if($_SESSION['registerUser'] === 1) {
+        $_SESSION['registerUser'] = 0;
+        $reg_email = $_SESSION['reg_email'];
+        $reg_password = $_SESSION['reg_password'];
+        $reg_name = $_SESSION['reg_name'];
         
-    //     $functions->register_user($reg_email, $reg_password, $reg_name, 0);
-    //     echo("<script>location.href = '".BASE_URL."welcome.php';</script>");  
-    //     //header('Location: welcome.php');
+        $functions->register_user($reg_email, $reg_password, $reg_name, 0);
+        echo("<script>location.href = '".BASE_URL."welcome.php';</script>");  
+        //header('Location: welcome.php');
         
         
-    // }
+    }
     
     ?>
     <body>  

@@ -40,16 +40,15 @@ if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_PO
 
             if (!$res['success']) {
                 // What happens when the reCAPTCHA is not properly set up
-                $eRegiseter = "Sorry you can't be registered now.";
+                $_SESSION['reg_password'] = "Sorry you can't be registered now.";
             } else {
                 //Adding user to database
                 $_SESSION['reg_name'] = $reg_name;
                 $_SESSION['reg_email'] = $reg_email;
                 $_SESSION['reg_password'] = $reg_password;
                 
-                //$_SESSION['registerUser'] = 1;
-                $functions->register_user($reg_email, $reg_password, $reg_name, 0);
-                echo("<script>location.href = '".BASE_URL."welcome.php';</script>"); 
+                $_SESSION['registerUser'] = 1;
+                echo("<script>location.href = '".BASE_URL."index.php';</script>");                 
             }
         }
 

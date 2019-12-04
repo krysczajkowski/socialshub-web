@@ -144,6 +144,7 @@
                             <div class="card card-body shadow-sm">
                                 <?php include 'includes/login.php'; ?>
                                 <a href="<?php echo $loginURL; ?>" class="fb connect mt-2" style='width: 65%;' id='fb-index-button'>Continue with Facebook</a>
+                                <span class='text-muted font-weight-bold'>Facebook is the fastest way to Sign Up!</span>
                             </div>
                         </div>
 

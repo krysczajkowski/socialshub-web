@@ -112,7 +112,38 @@ class Functions {
                     $stmt2 = $this->pdo->prepare("UPDATE `users` SET `active` = 1, `validationCode` = 0 WHERE `id` = :id");
                     $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt2->execute();
-                    header('Location: '.BASE_URL. 'settings.php');
+                    // Mail to user
+                        
+        $subject = "SocialsHub - Activate Your Account";
+        $message = "
+<html>
+<head>
+    <meta>
+    <title>SocialsHub - Password Reset</title>
+</head>
+<body style='font-family: Helvetica; background-color: #fafafa;'>
+    <div style='background-color: #fff; margin-top: 2%; padding: 2% 5% 1% 5%; text-align: center;'>
+        <img src='https://socialshub.net/logo.png' style='width: 80px; height: 80px; margin-bottom: 1%;' alt=''> <br>
+        <h2 style='font-size 1.5rem;'>Activate Account</h2>
+
+        <h2 style='font-size: 1.4rem;'>Dear User,</h2>
+        <p style='font-size: 1.2rem;'>Thank you for registration in <b>SocialsHub</b>!</p>
+        <p style='font-size: 1.2rem;'>You just need to confirm your email. </p>
+        <a style='background-color: #28a745; border: 1px solid #28a745; padding: 9px 15px; font-weight: bold; border-radius: 4px; font-size: 1.2rem; color: #fff; letter-spacing: 1px; cursor: pointer; text-decoration: none;' href='https://socialshub.net/activate.php?email=$email&code=$validationCode'>Confirm Email</a>
+        <p style='margin-top: 10%;'>Thank You, <a href='https://socialshub.net' style='color: #0000EE; text-decoration: none;'>SocialsHub</a></p>
+    </div>
+</body>
+</html>
+";
+        
+            $header = "MIME-Version: 1.0" . "\r\n";
+            //$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            $header .= "From: SocialsHub <socialshub@socialshub.net>";
+                    
+                    
+                    
+                    header('Location: '.BASE_URL. 'settings.php');    
                 } else {
                     header('Location: welcome.php');
                 }
@@ -182,7 +213,7 @@ class Functions {
 
         //Creating rows in Social_links table
         
-        $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'discord', 'snapchat','facebook', 'mail'];
+        $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'discord', 'snapchat','facebook', 'mail', 'github', 'linkedin', 'pinterest', 'spotify', 'coundcloud'];
 
         for($i = 0; $i < count($socialmedia); $i++) {
 
@@ -514,32 +545,36 @@ class Functions {
     
     //       SOCIAL MEDIA FUNCTIONS 
 
-    public function updateSocialMedia ($account_id, $socialmedia, $name, $link) {
+    public function updateSocialLinks ($account_id, $socialmedia, $name, $link) {
         $stmt = $this->pdo->prepare("UPDATE social_links SET smedia_name = :smedia_name , smedia_link = :smedia_link WHERE account_id = :account_id AND smedia = :smedia");
         
         $stmt->bindParam(':smedia_name', $name);
         $stmt->bindParam(':smedia_link', $link);
         $stmt->bindParam(':account_id', $account_id);
         $stmt->bindParam(':smedia', $socialmedia);
-        $stmt->execute();
-
+        $stmt->execute();           
     }
 
+    public function addNewSocialMedia ($account_id) {
 
-    public function addSocialMedia ($account_id, $socialmedia) {
-        $stmt = $this->pdo->prepare("SELECT * FROM social_links WHERE account_id = :account_id AND smedia = :smedia");
-        $stmt->bindParam(':account_id', $account_id);
-        $stmt->bindParam(':smedia', $socialmedia);
-        $stmt->execute();
+        $newSocialMedia = ['github', 'linkedin', 'pinterest', 'spotify', 'soundcloud'];
 
-        // Creating new row in db || Updating existing row in db
-        if($stmt->rowCount() == 0) {
-            $stmt = $this->pdo->prepare("INSERT INTO social_links (id, account_id, smedia) VALUES (NULL,:account_id, :smedia)");
-
+        for($i=0; $i < count($newSocialMedia); $i++) {
+            $stmt = $this->pdo->prepare("SELECT * FROM social_links WHERE account_id = :account_id AND smedia = :smedia");
             $stmt->bindParam(':account_id', $account_id);
-            $stmt->bindParam(':smedia', $socialmedia);
+            $stmt->bindParam(':smedia', $newSocialMedia[$i]);
             $stmt->execute();
-        } 
+
+            if($stmt->rowCount() == 0) {
+                $stmt = $this->pdo->prepare("INSERT INTO social_links (id, account_id, smedia) VALUES (NULL, :account_id, :smedia)");
+    
+                $stmt->bindParam(':account_id', $account_id);
+                $stmt->bindParam(':smedia', $newSocialMedia[$i]);
+                $stmt->execute(); 
+                        
+            }
+        }
+
     }
 
 

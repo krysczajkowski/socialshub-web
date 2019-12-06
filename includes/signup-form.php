@@ -26,7 +26,7 @@ if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_PO
         } else if ($functions->name_exist($reg_name)) {
             $eRegister = 'Sorry, this name is already taken.';
         } else if(!preg_match('/^[a-zA-Z0-9]+$/', $reg_name)) {
-            $eRegister = 'Only letters, numbers and white space allowed.';
+            $eRegister = 'Only letters, numbers and white space allowed in name field.';
         } else if ($functions->email_exist($reg_email)) {
             $eRegister = 'This email is already in use.';
         } else if (strlen($reg_password) < 5 || strlen($reg_password) > 25) {

@@ -25,6 +25,9 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
 } else {
     //User does not exist, make him an account
     
+    // Setting mini tutorial for user
+    setcookie('new-user-tut1', '1', time()+20, '/'); 
+
     $email = $_SESSION['fb-userData']['email'];
     
     //Filtering and deleting whitespace characters from first name and last name

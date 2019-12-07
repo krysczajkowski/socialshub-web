@@ -112,36 +112,9 @@ class Functions {
                     $stmt2 = $this->pdo->prepare("UPDATE `users` SET `active` = 1, `validationCode` = 0 WHERE `id` = :id");
                     $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt2->execute();
-                    // Mail to user
-                        
-        $subject = "SocialsHub - Activate Your Account";
-        $message = "
-<html>
-<head>
-    <meta>
-    <title>SocialsHub - Password Reset</title>
-</head>
-<body style='font-family: Helvetica; background-color: #fafafa;'>
-    <div style='background-color: #fff; margin-top: 2%; padding: 2% 5% 1% 5%; text-align: center;'>
-        <img src='https://socialshub.net/logo.png' style='width: 80px; height: 80px; margin-bottom: 1%;' alt=''> <br>
-        <h2 style='font-size 1.5rem;'>Activate Account</h2>
 
-        <h2 style='font-size: 1.4rem;'>Dear User,</h2>
-        <p style='font-size: 1.2rem;'>Thank you for registration in <b>SocialsHub</b>!</p>
-        <p style='font-size: 1.2rem;'>You just need to confirm your email. </p>
-        <a style='background-color: #28a745; border: 1px solid #28a745; padding: 9px 15px; font-weight: bold; border-radius: 4px; font-size: 1.2rem; color: #fff; letter-spacing: 1px; cursor: pointer; text-decoration: none;' href='https://socialshub.net/activate.php?email=$email&code=$validationCode'>Confirm Email</a>
-        <p style='margin-top: 10%;'>Thank You, <a href='https://socialshub.net' style='color: #0000EE; text-decoration: none;'>SocialsHub</a></p>
-    </div>
-</body>
-</html>
-";
-        
-            $header = "MIME-Version: 1.0" . "\r\n";
-            //$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-            $header .= "From: SocialsHub <socialshub@socialshub.net>";
-                    
-                    
+                    // Setting mini tutorial for user
+                    setcookie('new-user-tut1', '1', time()+20);                                       
                     
                     header('Location: '.BASE_URL. 'settings.php');    
                 } else {

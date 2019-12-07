@@ -31,6 +31,20 @@
 ?>
    
     <div class="container">
+
+        <!-- MESSAGE TO NEW USERS -->
+        <?php if(isset($_COOKIE['new-user-tut2'])) { ?>
+        <div class="container">
+            <div class='alert bg-success text-white alert-dismissable mt-3 p-2'>
+            <div class="container">
+                <button type="button" class='close' data-dismiss='alert'>
+                    <span>&times;</span>
+                </button>
+                <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName?>, <b>it's time to get your Socialshub URL out there in the world!</b></span>
+            </div>
+        </div>
+        <?php } ?>
+
         <!-- COVER IMAGE -->
         <div class='coverImage shadow'></div>
         <div class="row d-flex">

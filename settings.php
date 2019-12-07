@@ -85,6 +85,14 @@ if(!$functions->loggedIn()) {
                                 $changes_success = 0;
                                 $_SESSION['eSettings'] = $smedia_link . ' is not link';
                             } else {
+
+                                // Setting #2 tutorial for new user
+                                if(isset($_SESSION['set-tut2'])) {
+                                    setcookie('new-user-tut2', '1', time()+20);
+                                    unset($_SESSION['set-tut2']);
+                                }
+
+
                                 $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
                                 $functions->addNewSocialMedia($user->id);
                             }                      
@@ -108,7 +116,25 @@ if(!$functions->loggedIn()) {
     // Dodaj tego javascripta ale przed praca na obrazkach sprawdź czy uploadProfile itp w ogole istnieje, jeżeli tak to zacznij prace, jak ją skończysz to obowiązkowo po próbuj hackować strone 
     
     ?>
+
+
     <div class="bg-white my-5 border rounded container">
+        <!-- MESSAGE TO NEW USERS -->
+        <?php if(isset($_COOKIE['new-user-tut1'])) { 
+            
+            $_SESSION['set-tut2'] = 1;  
+
+            ?>
+            <div class='alert bg-success text-white alert-dismissable mt-2 p-2'>
+                <div class="container">
+                    <button type="button" class='close' data-dismiss='alert'>
+                        <span>&times;</span>
+                    </button>
+                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'>Hi <b><?php echo $user->screenName?></b>, it’s great to have you! <b>You are one step away from creating your most useful url🥰</b></span>
+                </div>
+            </div>
+        <?php }  ?>
+
         <div class="row settings-card">
            
             <!-- LEFT SETTINGS PANEL -->

@@ -51,9 +51,6 @@
         
         $functions->register_user($reg_email, $reg_password, $reg_name, 0);
         echo("<script>location.href = '".BASE_URL."welcome.php';</script>");  
-        //header('Location: welcome.php');
-        
-        
     }
     
     ?>

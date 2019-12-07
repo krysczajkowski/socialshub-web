@@ -58,7 +58,7 @@ $eDeleteA = '';
                         //Deleting Account 
                         $functions->delete_account($user->id);
 
-                        setcookie('account_deleted', '1', time()+60);
+                        setcookie('account_deleted', '1', time()+15);
 
                     } else {
                         $eDeleteA = 'Your email is incorrect.';

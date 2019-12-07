@@ -36,7 +36,7 @@ $eDeleteA = '';
                     //Usun konto, napisz to w logowaniu ze konto zostalo ususniete, wyslij maila z tym ze konto zostalo usuniete
                     $functions->delete_account($user->id);
 
-                    setcookie('account_deleted', '1', time()+60);
+                    setcookie('account_deleted', '1', time()+15);
 
                 } else {
                     $eDeleteA = 'Your password is incorrect.';

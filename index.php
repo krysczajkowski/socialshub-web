@@ -50,7 +50,7 @@
         $reg_name = $_SESSION['reg_name'];
         
         $functions->register_user($reg_email, $reg_password, $reg_name, 0);
-        echo("<script>location.href = '".BASE_URL."welcome.php';</script>");  
+        echo("<script>location.href = '".BASE_URL."settings.php';</script>");  
     }
     
     ?>

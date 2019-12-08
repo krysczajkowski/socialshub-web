@@ -17,7 +17,7 @@ $eDeleteA = '';
 <body>
     <?php include 'includes/nav.php'; 
         //We check is user active and if he is not we change his location to welcome.php
-        $functions->isUserActive($user->active);
+        $functions->redirectNotActiveUser($user->active);
     
        
         // DELETE ACCOUNT CODE

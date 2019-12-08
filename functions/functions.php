@@ -128,10 +128,17 @@ class Functions {
 
     public function isUserActive($active) {
         if($active == 0){
-            header('Location: welcome.php');
+            return false;
+        } else {
+            return true;
         }
     }
 
+    public function redirectNotActiveUser($active) {
+        if($active == 0){
+            header('Location: welcome.php');
+        }
+    }
 
     //       USER LOGIN FUNCTION
     public function login_user($email, $password, $remember) {

@@ -46,7 +46,7 @@ if(isset($_POST['oldPassword']) && isset($_POST['newPassword']) && isset($_POST[
 <body>
     <?php include 'includes/nav.php'; 
         //We check is user active and if he is not we change his location to welcome.php
-        $functions->isUserActive($user->active);
+        $functions->redirectNotActiveUser($user->active);
     ?>
 
     <div class="bg-white my-5 border rounded container">

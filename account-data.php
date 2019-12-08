@@ -15,7 +15,7 @@ if(!$functions->loggedIn()) {
 <body>
     <?php include 'includes/nav.php'; 
         //We check is user active and if he is not we change his location to welcome.php
-        $functions->isUserActive($user->active);
+        $functions->redirectNotActiveUser($user->active);
     
         //Downloading user social medias
         $sm = $functions->showSocialMedia($user->id);

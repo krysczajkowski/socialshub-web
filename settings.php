@@ -13,8 +13,6 @@ if(!$functions->loggedIn()) {
 <body>
    
     <?php include 'includes/nav.php';
-        //We check is user active and if he is not we change his location to welcome.php
-        $functions->isUserActive($user->active);
     
         //Downloading all data about user's social medias
         $sm = $functions->showSocialMedia($user->id);
@@ -117,7 +115,6 @@ if(!$functions->loggedIn()) {
     
     ?>
 
-
     <div class="bg-white my-5 border rounded container">
         <!-- MESSAGE TO NEW USERS -->
         <?php if(isset($_COOKIE['new-user-tut1'])) { 
@@ -134,6 +131,19 @@ if(!$functions->loggedIn()) {
                 </div>
             </div>
         <?php }  ?>
+   
+        <!-- MESSAGE IF USER IS NOT ACTIVE -->
+        <?php if(!$functions->isUserActive($user->active)) { ?>
+            <div class='alert bg-warning text-white alert-dismissable mt-2 p-2'>
+                <div class="container">
+                    <button type="button" class='close' data-dismiss='alert'>
+                        <span>&times;</span>
+                    </button>
+                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'><b>Please activate your email - <?php echo $user->email; ?></b></span>
+                </div>
+            </div>
+        <?php }  ?>
+
 
         <div class="row settings-card">
            

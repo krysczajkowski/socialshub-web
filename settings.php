@@ -207,8 +207,15 @@ if(!$functions->loggedIn()) {
                             </div>
                         </div>
                     
+                        <div class="row">
+                            <div class="col-xs-12 col-md-3 d-flex justify-content-end justify-text-md-start"></div>
+                            <div class="col-xs-12 col-md-9 d-flex align-items-center">
+                                <p class='text-secondary font-weight-bold align-self-end' style='font-size: 0.8rem;'>Only letters and numbers allowed! </p>
+                            </div>
+                        </div>
+
                         <!-- EMAIL INPUT -->
-                        <div class="row pt-3">
+                        <div class="row pt-1">
                             <div class="col-xs-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
                                 <strong>Email</strong>
                             </div>

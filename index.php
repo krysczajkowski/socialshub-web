@@ -49,6 +49,9 @@
         $reg_password = $_SESSION['reg_password'];
         $reg_name = $_SESSION['reg_name'];
         
+        // Setting mini tutorial for user
+        setcookie('new-user-tut1', '1', time()+20); 
+
         $functions->register_user($reg_email, $reg_password, $reg_name, 0);
         echo("<script>location.href = '".BASE_URL."settings.php';</script>");  
     }
@@ -81,25 +84,26 @@
         
         <div class="container mt-3">
             <div class="row">
-                <div class="col-md-6 medium-font mt-4 ">
+                <div class="col-md-6 medium-font mt-4 mb-4">
                     <div class="container mt-4 font-open-sans">
                             
-                            
                             <span style="font-size: 2.3rem;" class='font-weight-bold'>SocialsHub</span> 
-                            <p  style="font-weight: 600; font-size: 1.4rem;">SocialsHub is social links book.</p>   
+                            <p  style="font-weight: 600; font-size: 1.4rem;">All social links. One URL.</p>
+                            
+   
                     </div>
 
                     <!-- LEFT LIST -->
-                    <div class="row mt-2 pt-3 ml-1">
+                    <div class="row mt-5 ml-1">
                         <div class="col-2">
                             <i class="fas fa-share fa-2x mt-2 ml-2 share-color"></i>
                         </div>
                         <div class="col-10">
                             <div class="d-block">
-                                <span class='index-list-header '>Share</span>
+                                <span class='index-list-header'>Make your URL do more.</span>
                             </div>
                             <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Share your all social media by only one link</span>
+                                <span class='index-list-text'>Share your all social links by only one URL.</span>
                             </div>
                         </div>
                     </div>
@@ -110,10 +114,10 @@
                         </div>
                         <div class="col-10">
                             <div class="d-block">
-                                <span class='index-list-header'>Easy for your viewers</span>
+                                <span class='index-list-header'>Help your followers.</span>
                             </div>
                             <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Help your viewers find all your social links</span>
+                                <span class='index-list-text'>One link bio. Multiple destinations.</span>
                             </div>
                         </div>
                     </div>
@@ -124,13 +128,13 @@
                         </div>
                         <div class="col-10">
                             <div class="d-block">
-                                <span class='index-list-header'>Book of social links</span>
+                                <span class='index-list-header'>Join us!</span>
                             </div>
                             <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Find everyone's social links</span>
+                                <span class='index-list-text'>Join the best thing since baseball & hotdogs.</span>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
 
                 </div>
 
@@ -149,7 +153,7 @@
                             <div class="card card-body shadow-sm">
                                 <div class="font-open-sans">
                                     <p class='h5 font-weight-bold'>Join future world largest social links hub.</p>
-                                    <p class='text-muted'><strong style='letter-spacing: 0.5px;'>It's easy and quick.</strong></p>
+                                    <p class='text-muted'><strong style='letter-spacing: 0.5px;'>Easy and quick.</strong></p>
                                 </div>
                                  <?php include 'includes/signup-form.php'; ?>
 

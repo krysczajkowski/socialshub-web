@@ -26,9 +26,11 @@ if(!$functions->loggedIn()) {
         if(isset($_POST['email']) && isset($_POST['name']) && isset($_POST['textarea']) ) {
             if(isset($_FILES['uploadProfile']) && isset($_FILES['uploadCover'])) {
 
-                $name   = $functions->checkInput($_POST['name']);
+                $name   = $_POST['name'];
                 $email  = $functions->checkInput($_POST['email']);
                 $bio    = $functions->checkInput($_POST['textarea']);
+
+                $name = preg_replace("/[^a-zA-Z0-9]/", "", $name);
 
                 if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $_SESSION['eSettings'] = 'Invalid email.';
@@ -36,8 +38,6 @@ if(!$functions->loggedIn()) {
                     $_SESSION['eSettings'] = 'Name must be between 2 and 25 characters.';
                 } else if ($name != $user->screenName && $functions->name_exist($name)) {
                     $_SESSION['eSettings'] = 'Sorry, this name is already taken.';
-                } else if(!preg_match('/^[a-zA-Z0-9]+$/', $name)) {
-                    $_SESSION['eSettings'] = 'The name field must consist of numbers and letters.';
                 } else if ($email != $user->email && $functions->email_exist($email)) {
                     $_SESSION['eSettings'] = 'This email is already in use.';
                 } else {
@@ -115,7 +115,19 @@ if(!$functions->loggedIn()) {
     
     ?>
 
-    <div class="bg-white my-5 border rounded container">
+    <div class="bg-white my-5 border rounded container"> 
+        <!-- MESSAGE IF USER IS NOT ACTIVE -->
+        <?php if(!$functions->isUserActive($user->active)) { ?>
+            <div class='alert bg-warning text-white alert-dismissable mt-2 p-2'>
+                <div class="container">
+                    <button type="button" class='close' data-dismiss='alert'>
+                        <span>&times;</span>
+                    </button>
+                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'><b>Please activate your email - <?php echo $user->email; ?></b></span>
+                </div>
+            </div>
+        <?php }  ?>
+
         <!-- MESSAGE TO NEW USERS -->
         <?php if(isset($_COOKIE['new-user-tut1'])) { 
             
@@ -131,19 +143,6 @@ if(!$functions->loggedIn()) {
                 </div>
             </div>
         <?php }  ?>
-   
-        <!-- MESSAGE IF USER IS NOT ACTIVE -->
-        <?php if(!$functions->isUserActive($user->active)) { ?>
-            <div class='alert bg-warning text-white alert-dismissable mt-2 p-2'>
-                <div class="container">
-                    <button type="button" class='close' data-dismiss='alert'>
-                        <span>&times;</span>
-                    </button>
-                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'><b>Please activate your email - <?php echo $user->email; ?></b></span>
-                </div>
-            </div>
-        <?php }  ?>
-
 
         <div class="row settings-card">
            

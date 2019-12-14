@@ -111,10 +111,7 @@ class Functions {
                 if($stmt->rowCount() > 0) {
                     $stmt2 = $this->pdo->prepare("UPDATE `users` SET `active` = 1, `validationCode` = 0 WHERE `id` = :id");
                     $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
-                    $stmt2->execute();
-
-                    // Setting mini tutorial for user
-                    setcookie('new-user-tut1', '1', time()+20);                                       
+                    $stmt2->execute();                              
                     
                     header('Location: '.BASE_URL. 'settings.php');    
                 } else {
@@ -220,7 +217,7 @@ class Functions {
         <h2 style='font-size: 1.4rem;'>Dear User,</h2>
         <p style='font-size: 1.2rem;'>Thank you for registration in <b>SocialsHub</b>!</p>
         <p style='font-size: 1.2rem;'>You just need to confirm your email. </p>
-        <a style='background-color: #28a745; border: 1px solid #28a745; padding: 9px 15px; font-weight: bold; border-radius: 4px; font-size: 1.2rem; color: #fff; letter-spacing: 1px; cursor: pointer; text-decoration: none;' href='https://socialshub.net/activate.php?email=$email&code=$validationCode'>Confirm Email</a>
+        <a style='background-color: #28a745; border: 1px solid #28a745; padding: 9px 15px; font-weight: bold; border-radius: 4px; font-size: 1.2rem; color: #fff; cursor: pointer; text-decoration: none;' href='https://socialshub.net/activate.php?email=$email&code=$validationCode'>Confirm Email</a>
         <p style='margin-top: 10%;'>Thank You, <a href='https://socialshub.net' style='color: #0000EE; text-decoration: none;'>SocialsHub</a></p>
     </div>
 </body>

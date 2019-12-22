@@ -23,6 +23,7 @@ pre {
     font-size: 1.2rem;
 }
 
+
 .grey-font {
     color: #555;
 }
@@ -102,16 +103,6 @@ a, [type="button"] {
     color: #555!important;
 }
 
-.profileImage {
-    top: -170px; 
-    left: 30px; 
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
 
 .font-logo {
     color: #fefefe;
@@ -323,6 +314,15 @@ label:focus,
     display:none;
 }
 
+.profileImage { 
+    left: 30px; 
+    width: 180px;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .profileImage-sm {
     width: 30px;
     height: 30px;
@@ -377,8 +377,9 @@ label:focus,
 
 @media (max-width: 575px) {
     .profileImage{
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
+        margin-left: 2rem;
     }
 }
 
@@ -395,13 +396,17 @@ label:focus,
     font-size: 1.1rem;
 }
 
+@media (min-width: 767px) {
+    .profileImage {
+        margin-left: auto;
+    }
+}
 
 /* Extra large devices (large desktops) */
 
 @media (min-width: 1200px) {
     .profileImage{
-        width: 230px;
-        height: 230px;
-        top: -190px; 
+        width: 200px;
+        height: 200px;
     }
 }

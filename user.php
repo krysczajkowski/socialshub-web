@@ -36,81 +36,40 @@
         <?php if(isset($_COOKIE['new-user-tut2'])) { ?>
         <div class="container">
             <div class='alert bg-success text-white alert-dismissable mt-3 p-2'>
-            <div class="container">
-                <button type="button" class='close' data-dismiss='alert'>
-                    <span>&times;</span>
-                </button>
-                <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName?>, <b>it's time to get your Socialshub URL out there in the world!</b></span>
+                <div class="container">
+                    <button type="button" class='close' data-dismiss='alert'>
+                        <span>&times;</span>
+                    </button>
+                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName?>, <b>it's time to get your Socialshub URL out there in the world!</b></span>
+                </div>
             </div>
         </div>
         <?php } ?>
 
-        <!-- COVER IMAGE -->
-        <div class='coverImage shadow'></div>
-        <div class="row d-flex">
+        <div class="row d-flex mt-4">
             <!-- PROFILE IMAGE -->
-            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-                <div class='profileImage border rounded-circle'></div>
+            <div class="col-md-4 col-sm-12">
+                <div class='profileImage border rounded-circle shadow-sm'></div>
             </div>
-        </div>
-    </div>
+            
+            <!-- RIGHT COLUMN -->
+            <div class="col-md-8 col-sm-12">
+                <div class="pl-5">
+                    <h4 class='my-3 font-open-sans' style='letter-spacing: 0.5px; font-size: 1.7rem; text-transform: capitalize;'><?php echo $profileData->screenName; ?></h4>
 
-    <div class="container mt-5">
-            <div class="row">
-                <!-- LEFT COLUMN -->
-                <div class="col-xs-12 col-md-4">
-                    <div class="card my-3 shadow-sm">
-
-                        <div class="card-header bg-white border-0 mt-1"><span class='pl-1 font-open-sans lg-font'>Social Links</span>
-                        </div>
-
-                        <div class="card-body">
-                            <?php 
-                                $sm = $functions->showSocialMedia($profileId);
-                                //Displaying social links :D
-
-                                foreach ($sm as $socialMediaRow) {
-                                    if(!empty($socialMediaRow->smedia_name)) {
-                                        echo "<p class='p-0 ml-2'>";
-                                        echo "<a class='link d-flex' "; 
-
-                                        if(!empty($socialMediaRow->smedia_link)) {
-                                            echo "href='$socialMediaRow->smedia_link'";
-                                        } else {
-                                            echo '';
-                                        }
-
-                                        echo " target='_blank'>";
-                                        echo "<span class='socicon-$socialMediaRow->smedia' style='font-size: 1.9rem;'></span>";
-                                        echo "<span class='mb-2 ml-3 w-75 user-social-name' style='font-size: 1.3rem; color: #404040;' > $socialMediaRow->smedia_name </span>";
-                                        echo "</a>";
-                                        echo "</p>";
-                                    }
-                                }
-
-
-
-                                //If this is logged in user's socials, add Edit button
-                                if($user->id === $profileId) {
-                                   echo "<div class='container text-center text-muted' style='font-size: 1.1rem;'><br><a href='https://socialshub.net/settings.php' class='link'><i class='far fa-comment'></i> Edit Social Links</a></div>";
-                                }
-
-                            ?> 
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <!-- RIGHT COLUMN -->
-                <div class="col-xs-12 col-md-8">
-                    <div class="card my-3 shadow-sm">
-                        <div class="card-header bg-light"><h4 class='pl-3 font-open-sans' style='letter-spacing: 0.5px; font-size: 1.7rem; text-transform: capitalize;'><?php echo $profileData->screenName; ?></h4>
-
-                            <?php //FOOTER OF CARD - View counter
-                                if(isset($_SESSION['user_id']) || isset($_COOKIE['user_id'])) {
-                                    if($profileId === $_SESSION['user_id'] || $profileId === $_COOKIE['user_id']) { ?>
-                                    <span class='text-muted ml-3'>
+                    <div class="my-3">
+<pre>
+<?php 
+    //BIO DISPLAY
+    if(!empty($profileData->bio)) {
+       echo $functions->text2link($profileData->bio);
+    }
+?>
+</pre>                 
+                    </div>                        
+                               
+                            <?php //FOOTER OF CARD - View counter ?>
+                                    <span class='text-muted'>
                                         <strong class='grey-font'>
                                             <?php echo $functions->showVisitors($profileId); ?>
                                         </strong> Profile Visits 
@@ -119,38 +78,65 @@
                                             <?php echo $functions->weekVisitors($profileId); ?>
                                         </strong> Visits This Week
                                     </span>
-
-                                    <!-- <span class='ml-2 pl-2 text-muted border-left'><strong style='color: #555;'> -->
-                            <?php //echo $functions->showViews($profileId) ; ?>
-                                    <!-- </strong> Profile Views</span> -->
-                        <?php } } ?>
-                        </div>
-                        <div class="card-body pb-1 mb-0">
-                            <div class="container">
-<pre style='font-size: 1.2rem;'>
+                                                    
+<pre style='font-size: 1.2rem;' class='mt-3'>
 <?php
 
-    if(!empty($profileData->bio)) {
-       echo $functions->text2link($profileData->bio);
-    } else if (empty($profileData->bio) && $user->id === $profileData->id) {
-       echo "<div class='container text-center text-muted' style='font-size: 1.1rem;'><a href='https://socialshub.net/settings.php' class='link'>Set your bio, name and pictures here</a></div>";
-    }
-
     if ($user->id === $profileId) {
-        echo "<div class='container text-center text-muted' style='font-size: 1.1rem;'><br><a href='https://socialshub.net/settings.php' class='link'><i class='far fa-edit'></i> Edit Your Bio</a></div>";
+        echo "<a href='https://socialshub.net/settings.php' class='btn btn-light font-weight-bold py-1 px-3'>Edit Profile</a>";
     }
-
 
 ?>
-</pre>
-                            </div>
-                        </div>
-
-                    </div>
+</pre>                
+                
+                
                 </div>
             </div>
-        
+        </div>
+
+  
+    <div class="container mt-2">
+        <div class="row">    
+
+            <div class='col-lg-4 col-sm-5 col-6 mt-4 ml-2'>
+                <div class="my-3 ml-5">
+                    <div class="pl-5">
+                        <?php 
+                            $sm = $functions->showSocialMedia($profileId);
+                            //Displaying social links :D
+
+                            foreach ($sm as $socialMediaRow) {
+                                if(!empty($socialMediaRow->smedia_name)) {
+                                    echo "<div class='row my-2 mb-3'>";
+                                    echo "<a class='link d-flex border-0' "; 
+
+                                    if(!empty($socialMediaRow->smedia_link)) {
+                                        echo "href='$socialMediaRow->smedia_link'";
+                                    } else {
+                                        echo '';
+                                    }
+
+                                    echo " target='_blank' type='button' name='$socialMediaRow->smedia'>";
+                                    echo "<span class='socicon-$socialMediaRow->smedia mr-4' style='font-size: 1.9rem;'></span>";
+                                    echo "<span class='user-social-name' style='font-size: 1.4rem; color: #404040;' > $socialMediaRow->smedia_name </span>";
+                                    echo "</a>";
+                                    echo "</div>";
+                                }
+                            }
+
+                        ?> 
+                    </div>
+                </div>
+            </div>  
+
+
+            <!-- LEFT COLUMN -->
+            <div class="col-lg-8 col-sm-7 col-6">
+            </div>  
+
+        </div>
     </div>
+</div>
     
     <?php include 'includes/footer.php'; ?>
     

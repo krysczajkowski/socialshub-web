@@ -24,7 +24,7 @@ if(!$functions->loggedIn()) {
         // SETTINGS CODE    
     
         if(isset($_POST['email']) && isset($_POST['name']) && isset($_POST['textarea']) ) {
-            if(isset($_FILES['uploadProfile']) && isset($_FILES['uploadCover'])) {
+            if(isset($_FILES['uploadProfile'])) {
 
                 $name   = $_POST['name'];
                 $email  = $functions->checkInput($_POST['email']);
@@ -191,9 +191,6 @@ if(!$functions->loggedIn()) {
                                 <a href=""  class="font-weight-bold none-decoration pl-3"
                                 onclick="document.getElementById('uploadProfile').click(); return false">Change Profile Photo</a>
 
-                                <input type="file" id="uploadCover" name="uploadCover" style="visibility: hidden; width: 1px; height: 1px" multiple />
-                                <a href=""  class="font-weight-bold none-decoration px-2 d-block "
-                                onclick="document.getElementById('uploadCover').click(); return false">Change Cover Photo</a>  
                             </div>
                         </div>
                        

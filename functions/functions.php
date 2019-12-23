@@ -563,6 +563,14 @@ class Functions {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function showNotEmptySocialMedia ($account_id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM social_links WHERE account_id = :account_id AND smedia_link != ''");
+        $stmt->bindParam(':account_id', $account_id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function showSocialMediaName ($account_id, $smedia) {
         $stmt = $this->pdo->prepare("SELECT smedia_name, smedia_link, smedia FROM social_links WHERE account_id = :account_id AND smedia = :smedia");
         $stmt->bindParam(':account_id', $account_id);

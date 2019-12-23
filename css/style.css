@@ -390,6 +390,30 @@ label:focus,
     }
 }
 
+@media (max-width: 1000px) {
+
+    /* NEW RANKING STYLES*/
+    .ranking-picture {
+        
+    }
+
+    .ranking-number {
+        margin-right: 20% !important;
+    }
+
+    .ranking-bio {
+        margin-left: 20% !important;
+    }
+
+    .ranking-name {
+        margin-left: 20% !important;
+    }
+
+    .ranking-social {
+        margin-left: 10% !important;
+    }
+}
+
 /* Terms and privacy policy */
 
 .li-first {

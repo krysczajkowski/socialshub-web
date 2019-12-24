@@ -8,25 +8,21 @@
     <?php include 'includes/nav.php'; ?>
 
 
-    <div class="container mt-5">
-        <h3 class='mb-3'><b>Most Popular This Week</b></h3>
-        <div class="row"> 
+     <div class="p-3 row col-md-8 offset-md-2 mt-3">
+         <h3 class='ml-2 font-weight-bold'>The Most Interesting Profiles</h3>
+     </div>
+
+    <div class="container">
+        <div class="row">
 
      <?php
-    
-    // Dodaj tego javascripta ale przed praca na obrazkach sprawdź czy uploadProfile itp w ogole istnieje, jeżeli tak to zacznij prace, jak ją skończysz to obowiązkowo po próbuj hackować strone 
         $ranking = $functions->rankingGenerator();
         
         for($i=0; $i < count($ranking); $i++) {
             $rankingUserId   = $ranking[$i]->account_id;
             $rankingUserData = $functions->user_data($rankingUserId);    
             $rankingUserSM   = $functions->showNotEmptySocialMedia($rankingUserId);   
-            $rankingPosition = $i + 1;
-
-            echo '<pre>';
-            //print_r();
-            echo '</pre>';
-            //print_r($rankingUserData[$i]);      
+            $rankingPosition = $i + 1;    
     ?>
     <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
         <div class="col-1 pt-3">

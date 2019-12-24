@@ -592,7 +592,7 @@ class Functions {
     //       RANKING FUNCTIONS 
 
     public function rankingGenerator() {
-        $stmt = $this->pdo->prepare("SELECT COUNT(id) as weekVisits, account_id FROM visitors WHERE visit_date BETWEEN date_sub(now(),INTERVAL 1 WEEK) AND now() GROUP BY account_id ORDER BY COUNT(id) DESC LIMIT 8 ");
+        $stmt = $this->pdo->prepare("SELECT COUNT(id) as weekVisits, account_id FROM visitors WHERE visit_date BETWEEN date_sub(now(),INTERVAL 1 WEEK) AND now() GROUP BY account_id ORDER BY COUNT(id) DESC LIMIT 10 ");
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_OBJ);

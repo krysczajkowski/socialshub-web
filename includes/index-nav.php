@@ -12,7 +12,7 @@ if($functions->loggedIn()) {
 ?>
     <nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top" style='opacity: 0.95; background-color: #262626!important;'>
         <div class="container">
-            <a href="home.php" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <span style="border-left: 1px solid white" class='font-logo font-open-sans pl-4 medium-font'>
                     <span style='letter-spacing: -2.6px;'>
                         <span style='color: #ff0000;'>S</span>
@@ -57,7 +57,7 @@ if($functions->loggedIn()) {
 
               <?php  } else { ?>
 
-              <button onclick="window.location='index.php';" style='letter-spacing: 1px;' class='btn btn-sm px-3 btn-primary font-weight-bold'>Log In or Sign Up</button>
+              <button onclick="window.location='signUp.php';" style='letter-spacing: 1px;' class='btn btn-sm px-3 btn-primary font-weight-bold'>Log In or Sign Up</button>
 
               <?php } ?>
 

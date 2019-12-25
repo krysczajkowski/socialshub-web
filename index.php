@@ -1,176 +1,78 @@
-<?php 
-    error_reporting(0);
-
-    ob_start();
-
-    require_once "fb-files/config.php"; //session start is in this file 
-
-    if (isset($_SESSION['access_token'])) {
-        header('Location: fb-files/fb-logIn.php');
-        exit();
-    }
-
-    $redirectURL = "https://socialshub.net/fb-files/fb-callback.php";
-    $permissions = ['email'];
-    $loginURL = $helper->getLoginUrl($redirectURL, $permissions);
-
-?>
+<?php session_start(); ob_start(); ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script> 
-       
-    <?php include 'includes/head.php'; 
-    
-    //ReCaptcha Invisble code
-    
-    if($functions->loggedIn()) {
-        
-        if(isset($_SESSION['user_id'])) {
-            $user_id = $_SESSION['user_id'];
-        } else if (isset($_COOKIE['user_id'])) {
-            $user_id = $_COOKIE['user_id'];
-        }
-        
-        $user = $functions->user_data($user_id);
-        echo("<script>location.href = '".BASE_URL.$user->screenName."'</script>");
-        exit();       
-    }
-    
-    if($_SESSION['rec_pass'] === 1) {
-        $_SESSION['rec_pass'] = 0;
-        $email = $_SESSION['rec_email'];
-        $functions->recover_password($email);
-    }
-    
-    
-    if($_SESSION['registerUser'] === 1) {
-        $_SESSION['registerUser'] = 0;
-        $reg_email = $_SESSION['reg_email'];
-        $reg_password = $_SESSION['reg_password'];
-        $reg_name = $_SESSION['reg_name'];
-        
-        // Setting mini tutorial for user
-        setcookie('new-user-tut1', '1', time()+20); 
+<html lang="en">
 
-        $functions->register_user($reg_email, $reg_password, $reg_name, 0);
-        echo("<script>location.href = '".BASE_URL."settings.php';</script>");  
-    }
-    
+<?php include 'includes/head.php'; ?>
+ 
+<body> 
+    <?php include 'includes/nav.php'; ?>
+
+
+     <div class="p-3 row col-md-8 offset-md-2 mt-3">
+         <h3 class='ml-2 font-weight-bold'>The Most Interesting Profiles</h3>
+     </div>
+
+    <div class="container">
+        <div class="row">
+
+     <?php
+        $ranking = $functions->rankingGenerator();
+        
+        for($i=0; $i < count($ranking); $i++) {
+            $rankingUserId   = $ranking[$i]->account_id;
+            $rankingUserData = $functions->user_data($rankingUserId);    
+            $rankingUserSM   = $functions->showNotEmptySocialMedia($rankingUserId);   
+            $rankingPosition = $i + 1;    
     ?>
-    <body>  
-       
-        <div class='alert alert-white bg-dark text-white alert-dismissable m-0'>
-            <div class="container">
-                <button type="button" class='close' style='color: #fff;' data-dismiss='alert'>
-                    <span>&times;</span>
-                </button>
-               <span class='' style='font-size: 0.9rem; color: #c0c0c0;'>SocialsHub uses cookies to give you the best possible experience. <a href="privacy-policy.php" style='color: #c0c0c0;'>Read More</a></span>
-            </div>
+    <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
+        <div class="col-1 pt-3">
+            <h3 class='font-weight-bold ranking-number'><?php echo '#'.$rankingPosition; ?></h3>
         </div>
 
-       
-        <!-- MESSAGE IF USER DELETED ACCOUNT -->
-        <?php if(isset($_COOKIE['account_deleted'])) { ?>
-            <div class='alert bg-danger text-white alert-dismissable mt-0 mb-4 p-2'>
-                <div class="container">
-                    <button type="button" class='close' data-dismiss='alert'>
-                        <span>&times;</span>
-                    </button>
-                   <span class='text-white' style='font-size: 1rem; color: #c0c0c0;'>Your account has been deleted. We hope you come back soon.</span>
-                </div>
-            </div>
-        <?php }  ?>
-        
-        
-        <div class="container mt-3">
+        <div class="col-2">
+            <img src="<?php echo $rankingUserData->profileImage ?> " class='ranking-picture border rounded-circle shadow-sm' style='width: 5rem; height: 5rem;' >
+        </div>
+
+        <div class="col-8">
             <div class="row">
-                <div class="col-md-6 medium-font mt-4 mb-4">
-                    <div class="container mt-4 font-open-sans">
-                            
-                            <span style="font-size: 2.3rem;" class='font-weight-bold'>SocialsHub</span> 
-                            <p  style="font-weight: 600; font-size: 1.4rem;">All social links. One URL.</p>
-                            
-   
-                    </div>
-
-                    <!-- LEFT LIST -->
-                    <div class="row mt-5 ml-1">
-                        <div class="col-2">
-                            <i class="fas fa-share fa-2x mt-2 ml-2 share-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Make your URL do more.</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Share your all social links by only one URL.</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                     <div class="row mt-2 pt-3 ml-1">
-                        <div class="col-2">
-                            <i class="fas fa-hashtag fa-2x mt-2 ml-2 vanishing-posts-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Help your followers.</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>One link bio. Multiple destinations.</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row mt-4 pt-3 ml-1">
-                        <div class="col-2">
-                            <i class="far fa-address-book fa-2x mt-2 ml-2 bookmark-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Join us!</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Join the best thing since baseball & hotdogs.</span>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="col-12">
+                    <h3 class='font-weight-bold w-50 ranking-name'><?php echo $rankingUserData->screenName; ?></h3>
+                </div>
+                <div class="col-12 mb-2 mt-1">
+                    <p class='ranking-bio'>
+                        <?php echo substr($rankingUserData->bio, 0, 45) . ' ...  <a href="'. $rankingUserData->screenName.'" class="link" target="_blank">visit profile</a>' ?>
+                    </p>
                 </div>
 
-                <!-- RIGHT PANEL -->
-                    
-                    <div class="col-md-6 mt-3">
-                        <div class="col-md-10">
-                            <div class="card card-body shadow-sm">
-                                <?php include 'includes/login.php'; ?>
-                                <a href="<?php echo $loginURL; ?>" class="fb connect mt-2" style='width: 65%;' id='fb-index-button'>Continue with Facebook</a>
-                                <span class='text-muted font-weight-bold'>Facebook is the fastest way to Sign Up!</span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-10 mt-3 mb-4">
-                            <div class="card card-body shadow-sm">
-                                <div class="font-open-sans">
-                                    <p class='h5 font-weight-bold'>Join future world largest social links hub.</p>
-                                    <p class='text-muted'><strong style='letter-spacing: 0.5px;'>Easy and quick.</strong></p>
-                                </div>
-                                 <?php include 'includes/signup-form.php'; ?>
-
-                            </div>
+                <div class="col-12">
+                    <?php 
+                        for($k=0; $k<3; $k++) {
+                            if(isset($rankingUserSM[$k]->smedia_link)) {
+                                $smedia_link = $rankingUserSM[$k]->smedia_link;
                             
-                        </div>
-                    </div>
+                        
+                     ?>
+                        <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link' target='_blank'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> mx-3 ranking-social' style='font-size: 1.9rem;'>
+                        </span></a> 
+                    <?php } } ?>  
+                </div>
+
             </div>
         </div>
-        
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script>
-        $("#fb-index-button").on("click", function() {
-            $("#fb-index-button").addClass("btn disabled");
-        });
-        </script>
-    </body>
+
+    </div>
+
+    <?php } // END OF THE LOOP ?>
+
+            </div>
+    </div>
+    <!-- Including footer -->
+    <?php include 'includes/footer.php'; ?>
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <?php include 'js/script.php' ?>
+    <script src='js/search.js'></script>
+</body>
 </html>

@@ -32,7 +32,7 @@
     }
     
     if(isset($_POST['cancel'])) {
-        echo("<script>location.href = '".BASE_URL."'</script>");
+        echo("<script>location.href = '".BASE_URL."signUp.php'</script>");
         exit();
     }
     

@@ -15,7 +15,7 @@ if(isset($_SESSION['user_id'])) {
     unset($_SESSION['user_id']);
 }
 
-header('Location: signUp.php');
+header('Location: signIn.php');
 
 $_SESSION = array();
 session_destroy();

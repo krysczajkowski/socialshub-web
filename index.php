@@ -25,7 +25,7 @@
             $rankingPosition = $i + 1;    
     ?>
     <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
-        <div class="col-1 pt-3">
+        <div class="col-2 pt-3">
             <h3 class='font-weight-bold ranking-number'><?php echo '#'.$rankingPosition; ?></h3>
         </div>
 

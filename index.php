@@ -36,7 +36,7 @@
         <div class="col-8">
             <div class="row">
                 <div class="col-12">
-                    <h3 class='font-weight-bold w-50 ranking-name'><?php echo $rankingUserData->screenName; ?></h3>
+                    <p class='font-weight-bold w-75 h3 ranking-name'><?php echo $rankingUserData->screenName; ?></p>
                 </div>
                 <div class="col-12 mb-2 mt-1">
                     <p class='ranking-bio'>

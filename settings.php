@@ -196,16 +196,16 @@ if(!$functions->loggedIn()) {
                        
                         <!-- NAME INPUT -->
                         <div class="row pt-3">
-                            <div class="col-xs-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
+                            <div class="col-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
                                 <strong>Name</strong>
                             </div>
-                            <div class="col-xs-12 col-md-9 d-flex align-items-center">
-                                <input type="text" class="form-control" value='<?php echo $user->screenName ?>' style='width: 65%;' name='name'>
+                            <div class="col-12 col-md-6 d-flex align-items-center">
+                                <input type="text" class="form-control" value='<?php echo $user->screenName ?>' name='name'>
                             </div>
                         </div>
                     
                         <div class="row">
-                            <div class="col-xs-12 col-md-3 d-flex justify-content-end justify-text-md-start"></div>
+                            <div class="col-12 col-md-3 d-flex justify-content-end justify-text-md-start"></div>
                             <div class="col-xs-12 col-md-9 d-flex align-items-center">
                                 <p class='text-secondary font-weight-bold align-self-end' style='font-size: 0.8rem;'>Only letters and numbers allowed! </p>
                             </div>
@@ -213,22 +213,22 @@ if(!$functions->loggedIn()) {
 
                         <!-- EMAIL INPUT -->
                         <div class="row pt-1">
-                            <div class="col-xs-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
+                            <div class="col-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
                                 <strong>Email</strong>
                             </div>
-                            <div class="col-xs-12 col-md-9 d-flex align-items-center">
-                                <input type="email" class="form-control" style='width: 65%;' value='<?php echo $user->email ?>' name='email'>
+                            <div class="col-12 col-md-6 d-flex align-items-center">
+                                <input type="email" class="form-control" value='<?php echo $user->email ?>' name='email'>
                             </div>
                         </div>
 
                         <!-- BIO INPUT -->
                         <div class="row pt-3">
-                            <div class="col-xs-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
+                            <div class="col-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">
                                 <strong>Content</strong>
                             </div>
                             
-                            <div class="col-xs-12 col-md-9 d-flex align-items-center">   
-                                <textarea spellcheck="false" class='form-control' style="overflow:hidden; height: 200px; width: 78%;" name='textarea' placeholder="Describe yourself."><?php echo $user->bio ?></textarea>
+                            <div class="col-12 col-md-6 d-flex align-items-center">   
+                                <textarea spellcheck="false" class='form-control' style="overflow:hidden; height: 200px;" name='textarea' placeholder="Describe yourself."><?php echo $user->bio ?></textarea>
                         
                             </div>
                                                         
@@ -254,7 +254,7 @@ if(!$functions->loggedIn()) {
                                         $name = (isset($_SESSION[$socialMediaRow->smedia . '-inputName']) ? $_SESSION[$socialMediaRow->smedia . '-inputName'] : $socialMediaRow->smedia_name);
 
                                         echo "
-                                            <div class='col-10'>
+                                            <div class='col-12 col-md-10'>
                                             <div class='input-group settings-social-input p-0'>
                                                 <div class='input-group-prepend settings-social-name-div p-0'>
                                                     <span id='' class='input-group-text settings-social-name' style=''>

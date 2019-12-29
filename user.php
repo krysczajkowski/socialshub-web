@@ -149,7 +149,7 @@
     ?>
     
     <!-- This website is using cookies information here -->
-    <?php if(!$functions->loggedIn() && !isset($_COOKIE['accept-cookies'])) {  ?>
+    <?php if(!isset($_COOKIE['accept-cookies'])) {  ?>
     
     <div style='margin-top: 150px;'></div>
     <div class='alert alert-dark bg-light text-black alert-dismissable fixed-bottom m-0'>

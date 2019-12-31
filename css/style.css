@@ -127,7 +127,6 @@ a, [type="button"] {
 }
 
 
-
 /*   HOME RANKING STYLES   */
 
 .tile{
@@ -287,12 +286,12 @@ a, [type="button"] {
 
 .index-list-header {
     font-weight: 700!important;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .index-list-text{
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 textarea {

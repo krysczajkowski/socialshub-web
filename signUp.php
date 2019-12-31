@@ -136,8 +136,8 @@
                 <div class="col-md-6 medium-font mt-4 mb-4">
                     <div class="container mt-4 font-open-sans">
                             
-                            <span style="font-size: 2.3rem;" class='font-weight-bold'>SocialsHub</span> 
-                            <p  style="font-weight: 600; font-size: 1.4rem;">All social links. One URL.</p>
+                            <span style="font-size: 2rem;" class='font-weight-bold'>SocialsHub</span> 
+                            <p  style="font-weight: 600; font-size: 1.2rem;">All social links. One URL.</p>
                             
    
                     </div>
@@ -192,7 +192,7 @@
                         <div class="col-md-10 mt-3 mb-4">
                             <div class="pt-4">
                                 <div class="font-open-sans">
-                                    <p class='font-weight-bold' style='font-size: 1.1rem;'>Join future world largest social links hub.</p>
+                                    <p class='font-weight-bold' style='font-size: 1.1rem;'>Join future world's biggest links hub.</p>
                                 </div>
 
                                 <form action="signUp.php" method="post" id='i-recaptcha'>
@@ -211,14 +211,14 @@
                                         <label class="custom-control-label" for="accept-privacy" style='font-size: 0.95rem;'>I agree to the <a href="privacy-policy.php" target="_blank" class='text-primary'>Privacy Policy</a>, including use of cookies</label>
                                     </div>
                                     <!-- We can't use any name or id on g-recaptcha button -->
-                                    <input type="submit" class='g-recaptcha btn btn-success btn-block mt-2' value = 'Sign Up' data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit" >
+                                    <input type="submit" class='g-recaptcha btn btn-dark font-weight-bold btn-block mt-2' value = 'Create Account' data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit" >
 
                                     <?php $functions->display_error_message($eRegister); $eRegister = '';?>
 </form>
 
                             </div>
-                            <a href="<?php echo $loginURL; ?>" class="fb connect mt-2 w-100 text-center" id='fb-index-button'>Continue with Facebook</a>
-
+                            <a class="fb connect mt-2 w-100 text-center text-white" id='fb-index-button'>Continue with Facebook</a>
+                            <div id="terms-error-message" class='text-danger'></div>
 
                         </div>
                     </div>
@@ -258,9 +258,16 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src='js/search.js'></script>
         <script>
-        $("#fb-index-button").on("click", function() {
-            $("#fb-index-button").addClass("btn disabled");
-        });
+            $("#fb-index-button").click(function(){
+                if($('#accept-terms').is(':checked') && $('#accept-privacy').is(':checked')) {
+                    $("#fb-index-button").addClass("btn disabled");
+                    var loginURL = "<?php echo $loginURL; ?>";
+                    window.location.assign(loginURL);
+                }
+                else {
+                    $("#terms-error-message").text("Please accept the terms & privacy policy.")
+                }
+            });
         </script>
     </body>
 </html>

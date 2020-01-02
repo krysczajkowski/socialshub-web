@@ -36,6 +36,12 @@ p {
     margin-left: 4rem!important;
 }
 
+img.signUp-iphone-gif{
+  width: auto;
+  height: 30rem;
+  margin-left: auto;
+}
+
 /* Facebook button */
 a.fb {
     font-family: Lucida Grande, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -398,7 +404,12 @@ label:focus,
 
     .UserSocialLinksBox {
         margin-left: 0!important;
-    }      
+    } 
+
+    img.signUp-iphone-gif {
+        margin-left: auto;
+        margin-right: auto;
+    }       
 }
 
 @media (max-width: 1000px) {

@@ -133,66 +133,21 @@
         
         <div class="container mt-3">
             <div class="row">
-                <div class="col-md-6 medium-font mt-4 mb-4">
-                    <div class="container mt-4 font-open-sans">
-                            
-                            <span style="font-size: 2rem;" class='font-weight-bold'>SocialsHub</span> 
-                            <p  style="font-weight: 600; font-size: 1.2rem;">All social links. One URL.</p>
-                            
-   
-                    </div>
-
+                <div class="col-md-5 medium-font mt-4 mb-4 order-md-1 order-2">
                     <!-- LEFT LIST -->
-                    <div class="row mt-5 ml-1">
-                        <div class="col-2">
-                            <i class="fas fa-share fa-2x mt-2 ml-2 share-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Make your URL do more.</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Share your all social links by only one URL.</span>
-                            </div>
-                        </div>
+                    <div class="row mt-3 ml-1">
+                        <img src="gifs/signUp-iphone-gif.gif" class='signUp-iphone-gif'/>
                     </div>
-                    
-                     <div class="row mt-2 pt-3 ml-1">
-                        <div class="col-2">
-                            <i class="fas fa-hashtag fa-2x mt-2 ml-2 vanishing-posts-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Help your followers.</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>One link bio. Multiple destinations.</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row mt-4 pt-3 ml-1">
-                        <div class="col-2">
-                            <i class="far fa-address-book fa-2x mt-2 ml-2 bookmark-color"></i>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-block">
-                                <span class='index-list-header'>Join us!</span>
-                            </div>
-                            <div class="d-block" style='line-height: 28px;'>
-                                <span class='index-list-text'>Join the best thing since baseball & hotdogs.</span>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!-- RIGHT PANEL -->
-                    <div class='col-md-6 mt-5'>
+                    <div class='col-md-6 mt-5 order-md-2 order-1'>
+
                         <div class="col-md-10 mt-3 mb-4">
                             <div class="pt-4">
                                 <div class="font-open-sans">
-                                    <p class='font-weight-bold' style='font-size: 1.1rem;'>Join future world's biggest links hub.</p>
+                                    <p class='font-weight-bold my-0' style='font-size: 1.2rem;'>SocialsHub. All links in one simple link.</p>
+                                    <p class='text-muted font-weight-bold my-1' style='font-size: 0.9rem;'>Let your URL be more.</p>
                                 </div>
 
                                 <form action="signUp.php" method="post" id='i-recaptcha'>

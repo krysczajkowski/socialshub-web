@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(250, 250, 250, 0.7);
+    background-color: #fff;
     font-family: 'Lato', sans-serif;
     padding: 0;
     margin: 0;
@@ -37,8 +37,8 @@ p {
 }
 
 img.signUp-iphone-gif{
-  width: auto;
-  height: 30rem;
+  width: auto!important;
+  height: 30rem!important;
   margin-left: auto;
 }
 

@@ -63,6 +63,8 @@
     //BIO DISPLAY
     if(!empty($profileData->bio)) {
        echo $functions->text2link($profileData->bio);
+    } else {
+        echo 'No bio yet.';
     }
 ?>
 </pre>                 

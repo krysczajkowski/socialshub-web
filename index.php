@@ -5,7 +5,14 @@
 <?php include 'includes/head.php'; ?>
  
 <body> 
-    <?php include 'includes/nav.php'; ?>
+    <?php include 'includes/nav.php'; 
+
+    // Sign Up or Log In popup for new users
+    if(!$functions->loggedIn()) {
+        include 'includes/signUp-popup.php';
+    }
+    
+    ?>
 
 
      <div class="p-3 row col-md-8 offset-md-2 mt-3">

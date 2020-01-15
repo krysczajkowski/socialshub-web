@@ -112,7 +112,7 @@ class Functions {
                     $stmt2 = $this->pdo->prepare("UPDATE `users` SET `active` = 1, `validationCode` = 0 WHERE `id` = :id");
                     $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt2->execute();                              
-                    
+    
                     header('Location: '.BASE_URL. 'settings.php');    
                 } else {
                     header('Location: welcome.php');
@@ -589,14 +589,6 @@ class Functions {
         return $stmt->fetch(PDO::FETCH_OBJ)->weekVisits;
     }    
     
-    public function showLinks ($account_id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM links WHERE account_id = :account_id and is_active = 1 ORDER BY `order` DESC");
-        $stmt->bindParam(':account_id', $account_id);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
     //       RANKING FUNCTIONS 
 
     public function rankingGenerator() {

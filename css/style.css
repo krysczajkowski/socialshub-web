@@ -15,6 +15,16 @@ p {
     word-break: break-all;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
 .lg-font {
     font-size: 1.7rem;
 }
@@ -27,6 +37,13 @@ p {
     font-size: 1.2rem;
 }
 
+.normal-font {
+    font-size: 1rem!important;
+}
+
+.super-small-font {
+    font-size: 0.8rem;
+}
 
 .grey-font {
     color: #555;
@@ -386,6 +403,45 @@ label:focus,
 .search-row:hover{
     background-color: #fafafa;
 }
+
+
+/* Settings-links.php */
+
+#sortable {
+    list-style-type: none;
+}
+
+.fa-trash {
+    position: relative;
+    float: right;
+    border: 0;
+    cursor: pointer;
+}
+
+.fa-edit {
+    position: relative;
+    float: right;
+    border: 0;
+    cursor: pointer;
+}
+.display-show {
+    display: block;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.custom-links-container {
+    padding: 1.5rem 3rem;
+}
+
+/* Terms and privacy policy */
+
+.li-first {
+    font-size: 1.1rem;
+}
+
 /* Breakpoints */
 
 @media (max-width: 575px) {
@@ -434,12 +490,10 @@ label:focus,
     .ranking-social {
         margin-left: 10% !important;
     }
-}
 
-/* Terms and privacy policy */
-
-.li-first {
-    font-size: 1.1rem;
+    .custom-links-container {
+        padding: 0.75rem 0.5rem!important;
+    }
 }
 
 @media (min-width: 767px) {

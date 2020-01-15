@@ -8,6 +8,36 @@ if(!$functions->loggedIn()) {
 }
     
 ?>
+
+<style>
+h1 {
+	text-align: center;
+}
+#sortable {
+	list-style-type: none;
+}
+
+.fa-trash {
+	position: relative;
+	float: right;
+	border: 0;
+	cursor: pointer;
+}
+
+.fa-edit {
+	position: relative;
+	float: right;
+	border: 0;
+	cursor: pointer;
+}
+.display-show {
+	display: block;
+}
+
+.display-none {
+	display: none !important;
+}
+</style>
  
 <body>
    
@@ -44,13 +74,38 @@ if(!$functions->loggedIn()) {
             
             <!-- RIGHT SETTINGS PANEL -->
             <div class="col-md-8 col-lg-9 border-left">
+			    <div class='custom-links-container'>
+    				<h1 class='h3 font-weight-bold'>My Links</h1>
+    				<div class="row">
+    					<div class="col">
+    						<div class="form-group">
+    							<input type="text" id="title" class="form-control" placeholder="Title" >							
+    							<input type="hidden" id="id_title">
+    						</div>
+    						<div class="form-group">
+    							<input type="text" id="link" class="form-control" placeholder="https://url" id="link">
+    							<div class="error display-none error-message alert alert-danger alert-dismissible mt-2">
+    							</div>
+    							<input type="hidden" id="id_link">
+    						</div>						
+    						<a href="#" id="save_button" class="btn btn-primary btn-lg btn-block normal-font font-weight-bold">ADD NEW LINK</a>
+    					</div>
+    				</div>
 
-    
-               <!-- DO THE FRONTEND HERE shariq619 -->
+    				<div class="row mt-4">
+    					<div class="col">
+    						<div class="form-group">
+    							<form id="sortable_form">
+    								<ul id="sortable" class="list-group">
+    								</ul>
+    							</form>
+    							<a href="#" id="delete_button" class="mt-2 btn btn-danger btn-lg btn-block display-none">Delete selected</a>
+    						</div>
+    					</div>
+    				</div>
 
 
-
-            </div>
+                </div>
                 
             </div>
 
@@ -61,6 +116,7 @@ if(!$functions->loggedIn()) {
     <?php include 'includes/footer.php'; ?>
    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <?php include 'js/script.php' ?>
@@ -72,5 +128,108 @@ if(!$functions->loggedIn()) {
         })
 
     </script>
+<script>
+    $(function() {
+
+        $.fn.sortableli = function() {
+            $("#sortable li").each(function(index){
+                var parent = $(this);
+               /* $( this ).hover(function(){
+                    var cb = $(this).find(":checkbox");
+                    $(this).find("img").toggleClass('display-show');
+                    if(!cb.is(':checked')){
+                        cb.toggleClass('display-show');
+                    }
+                });*/
+                $(this).find(".fa-edit").click(function(){					
+                    $("#title").val($(this).attr('data'));
+					$("#link").val( parent.find("a").attr('href') );
+                    $("#id_link").val($(this).attr('id'));
+                    $("#link").focus();
+                    return false;
+                });
+            });
+
+            $(this).find(":checkbox").click(function(){
+                $('#delete_button').addClass('display-none');
+                $(".checkbox").each(function(index){
+                    if($(this).is(':checked')){
+                        $('#delete_button').removeClass('display-none');
+                    }
+                });
+            });
+            return this;
+        };
+
+        // Get all active bookmark
+        $.fn.selectable = function() {
+            $.post( "functions/select.php", function(data){
+                $("#sortable").html('');
+                $("#sortable").prepend(data);
+                $("#sortable").sortableli();
+            } );
+            return this;
+        };
+
+        // Create sortable
+        $( "#sortable" ).selectable();
+        $( "#sortable" ).sortable({
+            placeholder: "ui-state-highlight",
+            update: function( event, ui ) {
+                var sorted = $( "#sortable" ).sortable( "serialize", { key: "sort" } );
+                $.post( "functions/order.php",{ 'choices[]': sorted});
+            }
+        });
+        $( "#sortable" ).disableSelection();
+
+        // Insert new link
+        $("#save_button").click(function(){
+            $(".error-message").addClass("display-none");
+
+            if($("#link").val().length > 0){
+                if(Validalink($("#link").val())){
+                    $.post( "functions/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val() }, function(data){
+                        $( "#sortable" ).selectable();
+                        $('#link').val('');
+                    } );
+                    $("#id_link").val('');
+					$("#title").val('');
+                }else{
+                    $(".error-message").html("Please provide a valid link.");
+                    $(".error-message").removeClass("display-none");
+                }
+            }else{
+                $(".error-message").html("Please enter your link.");
+                $(".error-message").removeClass("display-none");
+            }
+            return false;
+        });
+
+        // Delete link
+        $(document).on('click','.fa-trash',function(){
+			
+            // array_val =  [];
+
+            // $(".checkbox").each(function(index){
+                // if($(this).is(':checked')){
+                    // array_val.push($(this).attr('id'));
+                // }
+            // });
+			
+			
+            $.post( "functions/delete.php",{'choice':$(this).attr('id')}, function(data){
+                $( "#sortable" ).selectable();
+                //$('#delete_button').addClass('display-none');
+            } );
+            return false;
+        });
+
+    });
+
+    function Validalink(link) {
+        var regex=/^(ht|f)tps?:\/\/\w+([\.\-\w]+)?\.([a-z]{2,4}|travel)(:\d{2,5})?(\/.*)?$/i;
+        return regex.test(link);
+    }
+</script>	
 </body>
 </html>

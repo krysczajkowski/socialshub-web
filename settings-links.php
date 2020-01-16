@@ -1,3 +1,4 @@
+<?php session_start(); ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,6 @@ h1 {
     <?php include 'includes/nav.php';
         //We check is user active and if he is not we change his location to welcome.php
         $functions->isUserActive($user->active);
-    
                 
     ?>
     

@@ -1,10 +1,15 @@
 <?php
+	session_start();
 	include "db.php";
 
 
-	$account_id = $_COOKIE['user_id'];
+	if(isset($_COOKIE['user_id'])) {
+		$account_id = $_COOKIE['user_id'];	
+	} else {
+		$account_id = $_SESSION['user_id'];
+	}
 
-    $stm  =$pdo->query("SELECT * FROM links WHERE is_active = '1' and account_id = ".$account_id." ORDER BY 6 DESC");
+    $stm  = $pdo->query("SELECT * FROM links WHERE is_active = '1' and account_id = ".$account_id." ORDER BY 6 DESC");
     $datas =  $stm->fetchAll(PDO::FETCH_ASSOC);
 	
 	

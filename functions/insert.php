@@ -1,9 +1,14 @@
 <?php
+	session_start();
 	include "db.php";
 
 	$date = date('Y-m-d H:i:s');
 	
-	$account_id = $_COOKIE['user_id'];
+	if(isset($_COOKIE['user_id'])) {
+		$account_id = $_COOKIE['user_id'];	
+	} else {
+		$account_id = $_SESSION['user_id'];
+	}
 
 	$id = str_replace('img-', '', $_POST["id"]);
 	$title = test_input($_POST["title"]);

@@ -138,7 +138,7 @@
                             <div class="row">
                                 <div class='col-md-10 offset-md-1'>
                                     <?php 
-                                        $links = $functions->showLinks($profileId);
+                                        $links = $functions->showActiveLinks($profileId);
                                         //Displaying links :D
 
                                         foreach ($links as $link) {
@@ -147,6 +147,12 @@
                                                 echo "<a href='$link->link' class='btn btn-light btn-block font-weight-bold px-2 py-3 small-font mt-2 rounded-0' style='border-bottom: 2px solid #303030;' target='_blank'>$link->title</a>";
 
                                             }
+                                        }
+
+                                        if($user->id === $profileId && empty($links)) {
+                                            echo "<div class='text-center mt-4'>";
+                                            echo "<a class='link font-weight-bold small-font' href='settings-links.php'>[Add Your Custom Links]</a>";
+                                            echo "</div>";
                                         }
 
                                     ?> 

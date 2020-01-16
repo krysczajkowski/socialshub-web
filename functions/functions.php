@@ -588,14 +588,26 @@ class Functions {
         //Returning number of visitors this week
         return $stmt->fetch(PDO::FETCH_OBJ)->weekVisits;
     }    
-    
-    public function showLinks ($account_id) {
+ 
+
+    //       CUSTOM LINKS FUNCTIONS  
+
+    public function showActiveLinks ($account_id) {
         $stmt = $this->pdo->prepare("SELECT * FROM links WHERE account_id = :account_id and is_active = 1 ORDER BY `order` DESC");
         $stmt->bindParam(':account_id', $account_id);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function showNotActiveLinks ($account_id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM links WHERE account_id = :account_id and is_active = 0 ORDER BY `order` DESC");
+        $stmt->bindParam(':account_id', $account_id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
     //       RANKING FUNCTIONS 
 

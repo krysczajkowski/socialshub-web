@@ -74,7 +74,15 @@ h1 {
             
             <!-- RIGHT SETTINGS PANEL -->
             <div class="col-md-8 col-lg-9 border-left">
+
 			    <div class='custom-links-container'>
+
+                   <!-- Go to custom links message for mobile users -->
+                    <div class="row d-block d-md-none d-lg-none d-lg-none border-bottom border-secondary text-center pt-1 pb-3 mb-5">
+                        <a href="settings.php" class='link'><i class="fas fa-user-edit"></i> Edit Your Profile</a>
+                    </div>
+
+
     				<h1 class='h3 font-weight-bold'>My Links</h1>
     				<div class="row">
     					<div class="col">

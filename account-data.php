@@ -32,9 +32,14 @@ if(!$functions->loggedIn()) {
                         <a href="settings.php" class='text-dark h5 none-decoration'>Edit Profile</a>
                     </div>
                     <div class="col-12 my-3 pl-4">
+                        <a href="settings-links.php" class='text-dark h5 none-decoration'>My Links</a>
+                    </div>
+                    <?php if(!$functions->isUserFbUser($user->id)) {?>
+                    <div class="col-12 my-3 pl-4">
                         <a href="edit-password.php" class='text-dark h5 none-decoration'>Change Password</a>
                     </div>
-                    <div class="col-12 my-3 pl-4 border-left border-dark">
+                    <?php } ?>
+                    <div class="col-12 my-3 pl-4">
                         <a href="privacy_and_security.php" class='text-dark h5 none-decoration'>Privacy and Security</a>
                     </div>
                 </div>
@@ -51,7 +56,8 @@ if(!$functions->loggedIn()) {
                         <div class="my-2"><span class="font-weight-bold">Profile Visits: </span><?php echo $functions->showVisitors($user->id); ?></div>
 
 
-                        <div class="font-weight-bold mt-4" style='font-size: 1.2rem;'>Social Media Names & Links</div>
+                        <!-- DISPLAY SOCIAL LINKS -->
+                        <div class="font-weight-bold mt-4" style='font-size: 1.2rem;'>Social Names & Links</div>
 
                         <?php 
                         foreach ($sm as $socialMediaRow) {
@@ -63,6 +69,40 @@ if(!$functions->loggedIn()) {
                             }
                         } 
                         ?>   
+
+
+                        <!-- DISPLAY ACTIVE CUSTOM LINKS -->
+                        <div class="font-weight-bold mt-4" style='font-size: 1.2rem;'>Active Custom Links</div>
+
+                        <?php 
+                        $activeCustomLinks = $functions->showActiveLinks($user->id);
+
+                        foreach ($activeCustomLinks as $activeCustomLink) {
+                            if(!empty($activeCustomLink->title)) {
+                                echo "<div class='mt-3'>";
+                                echo "<div class='ml-4'><span class='font-weight-bold'>Title: </span>$activeCustomLink->title</div>";
+                                echo "<div class='ml-4'><span class='font-weight-bold'>Link: </span>$activeCustomLink->link</div>";
+                                echo "</div>";
+                            }
+                        } 
+                        ?> 
+
+
+                        <!-- DISPLAY NOT ACTIVE CUSTOM LINKS -->
+                        <div class="font-weight-bold mt-4" style='font-size: 1.2rem;'>Not Active Custom Links</div>
+
+                        <?php 
+                        $notActiveCustomLinks = $functions->showNotActiveLinks($user->id);
+
+                        foreach ($notActiveCustomLinks as $notActiveCustomLink) {
+                            if(!empty($notActiveCustomLink->title)) {
+                                echo "<div class='mt-3'>";
+                                echo "<div class='ml-4'><span class='font-weight-bold'>Title: </span>$notActiveCustomLink->title</div>";
+                                echo "<div class='ml-4'><span class='font-weight-bold'>Link: </span>$notActiveCustomLink->link</div>";
+                                echo "</div>";
+                            }
+                        } 
+                        ?> 
                     </div>
                 </div>
             </div>

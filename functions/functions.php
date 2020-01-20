@@ -382,13 +382,18 @@ class Functions {
             }
             imagedestroy( $img );
 
-            // Yes!
-            $newFileName = rename( $temp_file, ( getcwd() . DIRECTORY_SEPARATOR . $target_path . $target_file));
+            if( rename( $temp_file, ( getcwd() . DIRECTORY_SEPARATOR . $target_path . $target_file))) {
 
-            move_uploaded_file($target_path, $target_file);
+                move_uploaded_file($target_path, $target_file);
+                $fileRoot = $target_path . $target_file;
+                return $fileRoot;
 
-            $fileRoot = $target_path . $target_file;
-            return $fileRoot;
+
+            } else {
+                $_SESSION['eSettings'] = 'Sorry, your image was not uploaded.1';
+            }
+
+
 
             // Delete any temp files
             if( file_exists( $temp_file ) )

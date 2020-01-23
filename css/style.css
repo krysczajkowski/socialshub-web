@@ -113,14 +113,11 @@ a, [type="button"] {
 }
 
 .settings-social-text {
-    margin-left:auto;
     margin-right: 0.7rem;
     text-transform: capitalize;
+    margin-left: 0!important;
 }
 
-.settings-social-name-div {
-    width: 23%!important;
-}
 
 .settings-social-input {
     margin-top: 0.5%;
@@ -473,10 +470,6 @@ label:focus,
     /* NEW RANKING STYLES*/
     .ranking-picture {
         
-    }
-
-    .ranking-number {
-        margin-right: 20% !important;
     }
 
     .ranking-bio {

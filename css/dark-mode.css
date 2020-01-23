@@ -7,9 +7,13 @@
     background-color:  #333 !important;
   }
 
-/*  [data-theme="dark"] li {
-    background-color:  #eee !important;
-  }*/
+  [data-theme="dark"] .text-dark {
+    color: #eee !important;
+  }
+
+  [data-theme="dark"] .text-dark:hover {
+    color: #eee !important;
+  }
 
   [data-theme="dark"] .text-always-dark{
     color: #222 !important;
@@ -23,10 +27,6 @@
     color: #eee !important;
     background-color: #101010 !important;
     border: 1px solid black !important;
-  }
-
-  [data-theme="dark"] .text-dark {
-    color: #eee !important;
   }
 
   [data-theme="dark"] .border {

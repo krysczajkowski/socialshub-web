@@ -21,6 +21,24 @@ if(!$functions->loggedIn()) {
         $changes_success = 1;
 
 
+        //Links
+        $links = [
+            'youtube' => 'https://youtube.com/',
+            'facebook' => 'https://facebook.com/',
+            'twitter' => 'https://twitter.com/', 
+            'instagram' => 'https://instagram.com/',
+            'tiktok' => 'https://tiktok.com/@',
+            'snapchat' => 'https://snapchat.com/add/',
+            'twitch' => 'https://twitch.tv/',
+            'soundcloud' => 'https://soundcloud.com/',
+            'linkedin' => 'https://linkedin.com/in/',
+            'spotify' => 'https://open.spotify.com/artist/',
+            'github' => 'https://github.com/',
+            'pinterest' => 'https://pinterest.com/'
+
+        ];
+
+
         // SETTINGS CODE    
     
         if(isset($_POST['email']) && isset($_POST['name']) && isset($_POST['textarea']) ) {
@@ -72,28 +90,25 @@ if(!$functions->loggedIn()) {
                                         
                         
                         $smedia_name = $functions->checkInput($_POST[$smedia . '-name']);
-                        $smedia_link = $functions->checkInput($_POST[$smedia . '-link']);
                         
                         //Session to hold in input wrong (over 30 chars) social name
                         $_SESSION[$smedia . '-inputName'] = $smedia_name;
                         
                         if((empty($smedia_name)) || (!empty($smedia_name) && strlen($smedia_name) < 30)) { 
                             
-                            if(!empty($smedia_link) && !$functions->isTextLink($smedia_link)) {
-                                $changes_success = 0;
-                                $_SESSION['eSettings'] = $smedia_link . ' is not link';
-                            } else {
 
-                                // Setting #2 tutorial for new user
-                                if(isset($_SESSION['set-tut2'])) {
-                                    setcookie('new-user-tut2', '1', time()+20);
-                                    unset($_SESSION['set-tut2']);
-                                }
+                            $smedia_link = $links[$smedia] . $smedia_name;
+
+                            // Setting #2 tutorial for new user
+                            if(isset($_SESSION['set-tut2'])) {
+                                setcookie('new-user-tut2', '1', time()+20);
+                                unset($_SESSION['set-tut2']);
+                            }
 
 
-                                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
-                                $functions->addNewSocialMedia($user->id);
-                            }                      
+                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
+                            $functions->addNewSocialMedia($user->id);
+                                                
                                       
                         } else {
                             $changes_success = 0;
@@ -261,18 +276,22 @@ if(!$functions->loggedIn()) {
 
                                         $name = (isset($_SESSION[$socialMediaRow->smedia . '-inputName']) ? $_SESSION[$socialMediaRow->smedia . '-inputName'] : $socialMediaRow->smedia_name);
 
+                                        $smedia = $socialMediaRow->smedia;
+
                                         echo "
-                                            <div class='col-12 col-md-10'>
-                                            <div class='input-group settings-social-input p-0'>
-                                                <div class='input-group-prepend settings-social-name-div p-0'>
-                                                    <span id='' class='input-group-text settings-social-name' style=''>
-                                                        <span class='medium-font settings-social-text p-0 socicon-$socialMediaRow->smedia'></span>
-                                                    </span>
-                                                </div>
-                                                <input type='text' placeholder='Your ".$socialMediaRow->smedia."' class='form-control ' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
-                                                <input type='url' placeholder='https://url' class='form-control' name='".$socialMediaRow->smedia."-link' id='".$socialMediaRow->smedia."-link' value=". $socialMediaRow->smedia_link .">
-                                            </div>
-                                            </div>";
+<div class='col-12 col-md-10'>
+<div class='row mb-1'>
+    <div class='col-7 col-md-5'>
+        <span id='' class='input-group-text settings-social-name px-auto' style=''>
+            <span class='medium-font settings-social-text p-0 socicon-$socialMediaRow->smedia'></span>
+            $links[$smedia]
+        </span>
+    </div>
+    <div class='col-5 col-md-7'>
+        <input type='text' placeholder='Your ".$socialMediaRow->smedia." name' class='form-control' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
+    </div>
+</div>
+</div>";
 
                                         unset($_SESSION[$socialMediaRow->smedia . '-inputName']);
                                     } ?>

@@ -32,24 +32,33 @@
             $rankingPosition = $i + 1;    
     ?>
     <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
-        <div class="col-2 pt-3">
-            <h3 class='font-weight-bold ranking-number'><?php echo '#'.$rankingPosition; ?></h3>
+        <div class="col-2 pt-3 h3 font-weight-bold">
+            <a class='link text-dark' href="<?php echo $rankingUserData->screenName; ?>" target="_blank">
+                <?php echo '#'.$rankingPosition; ?>
+            </a>
         </div>
+         
 
-        <div class="col-2">
-            <img src="<?php echo $rankingUserData->profileImage ?> " class='ranking-picture border rounded-circle shadow-sm' style='width: 5rem; height: 5rem;' >
-        </div>
-
+        <a href="<?php echo $rankingUserData->screenName; ?>" class='link' target="_blank">
+            <div class="col-2">
+                <img src="<?php echo $rankingUserData->profileImage ?> " class='ranking-picture border rounded-circle shadow-sm' style='width: 5rem; height: 5rem;' > 
+            </div>
+        </a>
         <div class="col-8">
             <div class="row">
-                <div class="col-12">
-                    <p class='font-weight-bold w-75 h3 ranking-name'><?php echo $rankingUserData->screenName; ?></p>
-                </div>
-                <div class="col-12 mb-2 mt-1">
-                    <p class='ranking-bio'>
-                        <?php echo substr($rankingUserData->bio, 0, 45) . ' ...  <a href="'. $rankingUserData->screenName.'" class="link" target="_blank">visit profile</a>' ?>
-                    </p>
-                </div>
+                <a class='font-weight-bold w-100 h3 ranking-name link text-dark' href="<?php echo $rankingUserData->screenName; ?>" target="_blank">
+                    <div class="col-12">
+                        <?php echo $rankingUserData->screenName; ?>
+                    </div>
+                </a>
+
+                <a class='link text-dark' href="<?php echo $rankingUserData->screenName; ?>" target="_blank">
+                    <div class="col-12 mb-2 mt-1">
+                        <p class='ranking-bio d-inline-block'>
+                            <?php echo substr($rankingUserData->bio, 0, 45) . ' ... '; ?>
+                        </p>
+                    </div>
+                </a>
 
                 <div class="col-12">
                     <?php 
@@ -66,7 +75,6 @@
 
             </div>
         </div>
-
     </div>
 
     <?php } // END OF THE LOOP ?>

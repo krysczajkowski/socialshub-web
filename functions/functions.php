@@ -9,9 +9,9 @@ class Functions {
 
     //       HELPER FUNCTIONS
     public function checkInput($var) {
-        $var = htmlspecialchars($var);
-        $var = trim($var);
-        $var = stripslashes($var);
+        $var = htmlspecialchars($var, ENT_QUOTES, 'UTF-8');
+        $var = trim($var, ENT_QUOTES, 'UTF-8');
+        $var = stripslashes($var, ENT_QUOTES, 'UTF-8');
         return $var;
     }
 
@@ -190,7 +190,7 @@ class Functions {
 
         //Creating rows in Social_links table
         
-        $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'discord', 'snapchat','facebook', 'mail', 'github', 'linkedin', 'pinterest', 'spotify', 'coundcloud'];
+        $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'snapchat','facebook', 'github', 'linkedin', 'pinterest', 'spotify', 'soundcloud'];
 
         for($i = 0; $i < count($socialmedia); $i++) {
 
@@ -460,6 +460,10 @@ class Functions {
         $stmt4 = $this->pdo->prepare("DELETE FROM social_links WHERE account_id = :account_id");
         $stmt4->bindParam(':account_id', $id);
         $stmt4->execute(); 
+
+        $stmt5 = $this->pdo->prepare("DELETE FROM links WHERE account_id = :account_id");
+        $stmt5->bindParam(':account_id', $id);
+        $stmt5->execute(); 
         
         //Sending Email
         $subject = "Your Account Has Been Deleted";

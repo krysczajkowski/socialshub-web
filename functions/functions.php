@@ -9,9 +9,9 @@ class Functions {
 
     //       HELPER FUNCTIONS
     public function checkInput($var) {
-        $var = htmlspecialchars($var, ENT_QUOTES, 'UTF-8');
-        $var = trim($var, ENT_QUOTES, 'UTF-8');
-        $var = stripslashes($var, ENT_QUOTES, 'UTF-8');
+        $var = htmlspecialchars($var);
+        $var = trim($var);
+        $var = stripslashes($var);
         return $var;
     }
 

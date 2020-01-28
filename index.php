@@ -31,51 +31,44 @@
             $rankingUserSM   = $functions->showNotEmptySocialMedia($rankingUserId);   
             $rankingPosition = $i + 1;    
     ?>
-    <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
-        <div class="col-2 pt-3 h3 font-weight-bold">
-            <a class='link text-dark' href="<?php echo $rankingUserData->screenName; ?>" target="_blank">
-                <?php echo '#'.$rankingPosition; ?>
-            </a>
-        </div>
-         
-
-        <a href="<?php echo $rankingUserData->screenName; ?>" class='link' target="_blank">
-            <div class="col-2">
-                <img src="<?php echo $rankingUserData->profileImage ?> " class='ranking-picture border rounded-circle shadow-sm' style='width: 5rem; height: 5rem;' > 
+        <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
+            <div class="col-2 pt-3">
+                <h3 class='font-weight-bold ranking-number'><?php echo '#'.$rankingPosition; ?></h3>
             </div>
-        </a>
-        <div class="col-8">
-            <div class="row">
-                <a class='font-weight-bold w-100 h3 ranking-name link text-dark' href="<?php echo $rankingUserData->screenName; ?>" target="_blank">
-                    <div class="col-12">
-                        <?php echo $rankingUserData->screenName; ?>
-                    </div>
-                </a>
 
-                <a class='link text-dark' href="<?php echo $rankingUserData->screenName; ?>" target="_blank">
-                    <div class="col-12 mb-2 mt-1">
-                        <p class='ranking-bio d-inline-block'>
-                            <?php echo substr($rankingUserData->bio, 0, 45) . ' ... '; ?>
+            <div class="col-2">
+                <img src="<?php echo $rankingUserData->profileImage ?> " class='ranking-picture border rounded-circle shadow-sm' style='width: 5rem; height: 5rem;' >
+            </div>
+
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12">
+                        <p class='font-weight-bold w-75 h3 ranking-name'>
+                            <a href="<?php echo $rankingUserData->screenName; ?>" class='link text-dark'><?php echo $rankingUserData->screenName; ?></a>
                         </p>
                     </div>
-                </a>
-
-                <div class="col-12">
-                    <?php 
-                        for($k=0; $k<3; $k++) {
-                            if(isset($rankingUserSM[$k]->smedia_link)) {
-                                $smedia_link = $rankingUserSM[$k]->smedia_link;
+                    <div class="col-12 mb-2 mt-1">
+                        <p class='ranking-bio'>
+                            <?php echo substr($rankingUserData->bio, 0, 45) . ' ... ' ?>
+                        </p>
+                    </div>
+                    
+                    <div class="col-12">
+                        <?php 
+                             for($k=0; $k<3; $k++) {
+                                 if(isset($rankingUserSM[$k]->smedia_link)) {
+                                     $smedia_link = $rankingUserSM[$k]->smedia_link;
+                                
                             
-                        
-                     ?>
-                        <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link' target='_blank'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> mx-3 ranking-social' style='font-size: 1.9rem;'>
-                        </span></a> 
-                    <?php } } ?>  
-                </div>
+                         ?>
+                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link' target='_blank'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> mx-3 ranking-social' style='font-size: 1.9rem;'>
+                            </span></a> 
+                        <?php } } ?>  
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
     <?php } // END OF THE LOOP ?>
 

@@ -280,14 +280,14 @@ if(!$functions->loggedIn()) {
 
                                         echo "
 <div class='col-12 col-md-10'>
-<div class='row mb-1'>
-    <div class='col-7 col-md-5'>
+<div class='row mb-2'>
+    <div class='col-12 col-lg-5'>
         <span id='' class='input-group-text settings-social-name px-auto' style=''>
             <span class='medium-font settings-social-text p-0 socicon-$socialMediaRow->smedia'></span>
             $links[$smedia]
         </span>
     </div>
-    <div class='col-5 col-md-7'>
+    <div class='col-12 col-lg-7'>
         <input type='text' placeholder='Your ".$socialMediaRow->smedia." name' class='form-control' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
     </div>
 </div>

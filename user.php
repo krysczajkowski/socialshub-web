@@ -60,10 +60,10 @@
             <!-- RIGHT COLUMN -->
             <div class="col-md-8 col-sm-12">
                 <div class="pl-5">
-                    <h4 class='my-3 font-open-sans' style='letter-spacing: 0.5px; font-size: 1.7rem; text-transform: capitalize;'><?php echo $profileData->screenName; ?></h4>
+                    <h4 class='mt-3 font-open-sans mb-0 pb-0' style='letter-spacing: 0.5px; font-size: 1.7rem; text-transform: capitalize;'><?php echo $profileData->screenName; ?></h4>
 
-                    <div class="my-3">
-<pre>
+                    <div class="mb-3">
+<p style="white-space: pre-line; font-size: 1.05rem;">
 <?php 
     //BIO DISPLAY
     if(!empty($profileData->bio)) {
@@ -72,7 +72,7 @@
         echo 'No bio yet.';
     }
 ?>
-</pre>                 
+</p>                 
                     </div>                        
                                
                             <?php //FOOTER OF CARD - View counter ?>

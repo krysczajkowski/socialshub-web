@@ -119,22 +119,17 @@
 
        
         <!-- MESSAGE IF USER DELETED ACCOUNT -->
-        <?php if(isset($_COOKIE['account_deleted'])) { ?>
-            <div class='alert bg-danger text-white alert-dismissable mt-0 mb-4 p-2'>
-                <div class="container">
-                    <button type="button" class='close' data-dismiss='alert'>
-                        <span>&times;</span>
-                    </button>
-                   <span class='text-white' style='font-size: 1rem; color: #c0c0c0;'>Your account has been deleted. We hope you come back soon.</span>
-                </div>
-            </div>
-        <?php }  ?>
+        <?php 
+            if(isset($_COOKIE['account_deleted'])) { 
+                include 'includes/delete-account-popup.php';
+            }  
+        ?>
         
         
         <div class="container">
-            <div class="row d-flex justify-content-center mt-5">
-                <p class='text-center h2 px-2'>Use it for anything. <br class='d-md-none'> Link to everything.</p>
-            </div> 
+            <div class="d-flex justify-content-center">
+                <img src="socialshub-images/signUp-link.png" alt="Sign Up 'Your link' image by Ksawery Sokalski" class='img-fluid img-responsive mt-4 signUp-link'> 
+            </div>
 
             <div class="row">
                 <div class="col-md-5 medium-font mt-4 mb-4 order-md-1 order-2">
@@ -151,7 +146,7 @@
                             <div class="pt-2">
                                 <div class="font-open-sans">
                                     <p class='font-weight-bold my-0' style='font-size: 1.1rem;'>One link driving your followers to all your content.</p>
-                                    <p class='text-muted font-weight-bold my-1' style='font-size: 0.9rem;'>Tool for artists, bloggers or influencers.</p>
+                                    <p class='text-muted font-weight-bold my-1' style='font-size: 0.9rem;'>Tool for everyone.</p>
                                 </div>
 
                                 <form action="signUp.php" method="post" id='i-recaptcha'>
@@ -170,7 +165,7 @@
                                         <label class="custom-control-label" for="accept-privacy" style='font-size: 0.95rem;'>I agree to the <a href="privacy-policy.php" target="_blank" class='text-primary'>Privacy Policy</a>, including use of cookies</label>
                                     </div>
                                     <!-- We can't use any name or id on g-recaptcha button -->
-                                    <input type="submit" class='g-recaptcha btn btn-dark py-2 font-weight-bold btn-block mt-2' value = 'Create Account' data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit" >
+                                    <input type="submit" class='g-recaptcha btn btn-dark py-2 font-weight-bold btn-block mt-2' value = 'Create Account' data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit" id='signUp-submit'>
 
                                     <?php $functions->display_error_message($eRegister); $eRegister = '';?>
 </form>
@@ -202,6 +197,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src='js/search.js'></script>
     <script>
+        // Disable FB Button after click
         $("#fb-index-button").click(function(){
             if($('#accept-terms').is(':checked') && $('#accept-privacy').is(':checked')) {
                 $("#fb-index-button").addClass("btn disabled");
@@ -212,6 +208,13 @@
                 $("#terms-error-message").text("Please accept the terms & privacy policy.")
             }
         });
+
+        // Disable Register Button after click
+        $("#signUp-submit").click(function(){
+            if($('#accept-terms').is(':checked') && $('#accept-privacy').is(':checked')) {
+                $("#signUp-submit").addClass("btn disabled");
+            }
+        });        
     </script>
     </body>
 </html>

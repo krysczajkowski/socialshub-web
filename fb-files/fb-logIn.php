@@ -34,10 +34,10 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     $firstName = $functions->checkInput(preg_replace('/\s+/', '', $_SESSION['fb-userData']['first_name']));
     $lastName  = $functions->checkInput(preg_replace('/\s+/', '', $_SESSION['fb-userData']['last_name']));
     $validationCode = md5(microtime() . $lastName);
-    $randomNumber = rand(9,14);
+    $randomNumber = rand(3,5);
     
     //Making as unique as possibble screenName for new user
-    $screenName = substr($firstName, 0, 4) . substr($lastName, 0, 4) . substr($validationCode, 0, $randomNumber);
+    $screenName = $firstName . $lastName . substr($validationCode, 0, $randomNumber);
     
     
     $functions->register_user($email, '', $screenName, 1);

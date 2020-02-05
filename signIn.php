@@ -91,16 +91,11 @@ if(isset($_POST['forgot-password'])) {
     <?php include 'includes/nav.php'; ?>
 
         <!-- MESSAGE IF USER DELETED ACCOUNT -->
-        <?php if(isset($_COOKIE['account_deleted'])) { ?>
-            <div class='alert bg-danger text-white alert-dismissable mt-0 mb-4 p-2'>
-                <div class="container">
-                    <button type="button" class='close' data-dismiss='alert'>
-                        <span>&times;</span>
-                    </button>
-                   <span class='text-white' style='color: #c0c0c0;'>Your account has been deleted. <b>We hope you come back soon.</b></span>
-                </div>
-            </div>
-        <?php }  ?>
+        <?php 
+            if(isset($_COOKIE['account_deleted'])) { 
+                include 'includes/delete-account-popup.php';
+            }  
+        ?>
             
         <div class="container mt-3">
             <div class="row">

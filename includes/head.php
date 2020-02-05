@@ -1,8 +1,7 @@
-<?php include 'functions/init.php';
-?>
+<?php include 'functions/init.php'; ?>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name='description' content='SocialsHub - website with social media of your friends, celebrities and other people.'>
     <meta name='keywords' content='social media, social link, social links, socialhub, social hub, socials hub, friends, celebrity, instagram, twitter, facebook, snapchat, twitch, tiktok, discord, mail, poland, website, bio, book for social media, book, book of social media, wikipedia, socialshub, wroclaw, profile visits, search, social media search, social link search, social links, links hub, social network, network links, one url'>

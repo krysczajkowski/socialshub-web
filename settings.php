@@ -23,7 +23,7 @@ if(!$functions->loggedIn()) {
 
         //Links
         $links = [
-            'youtube' => 'https://youtube.com/',
+            'youtube' => 'https://youtube.com/user/',
             'facebook' => 'https://facebook.com/',
             'twitter' => 'https://twitter.com/', 
             'instagram' => 'https://instagram.com/',
@@ -78,7 +78,7 @@ if(!$functions->loggedIn()) {
                             $DBcoverImage = $profileRoot;
                         }
                     }   
-                    
+
                     //Updating user's data
                     $functions->update('users', $user->id, array('email' => $email, 'screenName' => $name, 'bio' => $bio, 'profileImage' => $DBprofImage, 'profileCover' => $DBcoverImage));                   
 
@@ -94,8 +94,21 @@ if(!$functions->loggedIn()) {
                         //Session to hold in input wrong (over 30 chars) social name
                         $_SESSION[$smedia . '-inputName'] = $smedia_name;
                         
-                        if((empty($smedia_name)) || (!empty($smedia_name) && strlen($smedia_name) < 30)) { 
-                            
+                        if((empty($smedia_name))) { 
+
+                            $smedia_link = '';
+
+                            // Setting #2 tutorial for new user
+                            if(isset($_SESSION['set-tut2'])) {
+                                setcookie('new-user-tut2', '1', time()+20);
+                                unset($_SESSION['set-tut2']);
+                            }
+
+                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
+                            $functions->addNewSocialMedia($user->id);
+                                                  
+                                      
+                        } else if(!empty($smedia_name) && strlen($smedia_name) < 40) {
 
                             $smedia_link = $links[$smedia] . $smedia_name;
 
@@ -108,17 +121,17 @@ if(!$functions->loggedIn()) {
 
                             $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
                             $functions->addNewSocialMedia($user->id);
-                                                
-                                      
+
+
                         } else {
                             $changes_success = 0;
-                            $_SESSION['eSettings'] = $smedia . ' name must be under 30 letters.';
+                            $_SESSION['eSettings'] = $smedia . ' name must be under 40 letters.';
                         } 
                                                 
                     }
  
                     if($changes_success) {
-                        echo("<script>location.href = '".BASE_URL."$user->screenName'</script>");
+                        echo("<script>location.href = '".BASE_URL."$name'</script>");
                     }
                 }
                 
@@ -288,7 +301,7 @@ if(!$functions->loggedIn()) {
         </span>
     </div>
     <div class='col-12 col-lg-7'>
-        <input type='text' placeholder='Your ".$socialMediaRow->smedia." name' class='form-control' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
+        <input type='text' placeholder='Your ".$socialMediaRow->smedia." username' class='form-control' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
     </div>
 </div>
 </div>";

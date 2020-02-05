@@ -11,6 +11,8 @@
     // Sign Up or Log In popup for new users
     if(!$functions->loggedIn()) {
         include 'includes/signUp-popup.php';
+    } else {
+        include 'includes/user-link-popup.php';
     }
 
     
@@ -45,7 +47,18 @@
                     <button type="button" class='close' data-dismiss='alert'>
                         <span>&times;</span>
                     </button>
-                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName?>, <b>it's time to get your Socialshub URL out there in the world!</b></span>
+                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName; ?>, <b>it's time to share your profile in instagram bio!</b></span>
+                </div>
+            </div>
+
+
+            <div class='alert bg-success text-white alert-dismissable p-2'>
+                <div class="container">
+                    <button type="button" class='close' data-dismiss='alert'>
+                        <span>&times;</span>
+                    </button>
+                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Please paste your SocialsHub profile URL in <u><a target='_blank' class='text-white link' href="https://www.instagram.com/accounts/edit/">instagram website area</a></u>
+                    </span>
                 </div>
             </div>
         </div>

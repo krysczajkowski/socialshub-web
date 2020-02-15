@@ -165,7 +165,7 @@
                                         <label class="custom-control-label" for="accept-privacy" style='font-size: 0.95rem;'>I agree to the <a href="privacy-policy.php" target="_blank" class='text-primary'>Privacy Policy</a>, including use of cookies</label>
                                     </div>
                                     <!-- We can't use any name or id on g-recaptcha button -->
-                                    <input type="submit" class='g-recaptcha btn btn-dark py-2 font-weight-bold btn-block mt-2' value = 'Create Account' data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit" id='signUp-submit'>
+                                    <input type="submit" class='g-recaptcha btn btn-dark py-2 font-weight-bold btn-block mt-2' value = "Sign Up - It's Free!" data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit" id='signUp-submit'>
 
                                     <?php $functions->display_error_message($eRegister); $eRegister = '';?>
 </form>

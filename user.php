@@ -6,12 +6,12 @@
 
 <body>
     <?php
-    include 'includes/nav.php';
 
-    // Sign Up or Log In popup for new users
+    // Different navs for logged in or not logged in users
     if(!$functions->loggedIn()) {
-        include 'includes/signUp-popup.php';
+        include 'includes/user-nav.php';
     } else {
+        include 'includes/nav.php';
         include 'includes/user-link-popup.php';
     }
 

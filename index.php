@@ -76,15 +76,6 @@
     </div>
     <!-- Including footer -->
     <?php include 'includes/footer.php'; ?>
-   
-
-    <?php 
-        //Setting cookie to not show cookie popup and we are refreshing page
-        if(isset($_GET['accept-cookies'])){
-            setcookie('accept-cookies', 'true', time() + 31556925);
-            echo("<script>location.href = '".BASE_URL.$profileData->screenName."'</script>");
-        }
-    ?>
     
     <!-- This website is using cookies information here -->
     <?php include 'includes/cookie-info.php' ?>
@@ -95,5 +86,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <?php include 'js/script.php' ?>
     <script src='js/search.js'></script>
+    <script src='js/accept-cookies.js'></script>
 </body>
 </html>

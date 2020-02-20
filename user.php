@@ -88,18 +88,25 @@
 </p>                 
                     </div>                        
                                
-                            <?php //FOOTER OF CARD - View counter ?>
-                                    <span class='text-muted'>
-                                        <strong class='grey-font'>
-                                            <?php echo $functions->showVisitors($profileId); ?>
-                                        </strong> Profile Visits 
-                                        <span class='mx-2'>|</span> 
-                                        <strong class='grey-font'>
-                                            <?php echo $functions->weekVisitors($profileId); ?>
-                                        </strong> Visits This Week
-                                    </span>
-                                                    
-<pre style='font-size: 1.2rem;' class='mt-3'>
+<?php 
+// View counter 
+if ($user->id === $profileId) {
+?>
+
+    <span class='text-muted'>
+        <strong class='grey-font'>
+            <?php echo $functions->showVisitors($profileId); ?>
+        </strong> Profile Visits 
+        <span class='mx-2'>|</span> 
+        <strong class='grey-font'>
+            <?php echo $functions->weekVisitors($profileId); ?>
+        </strong> Visits This Week
+    </span>
+
+<?php  } ?>
+
+<br>                                                    
+<div style='font-size: 1.2rem;' class='mt-1'>
 <?php
 
     if ($user->id === $profileId) {
@@ -107,7 +114,7 @@
     }
 
 ?>
-</pre>                
+</div>                
                 
                 
                 </div>
@@ -115,39 +122,12 @@
         </div>
 
   
-    <div class="container mt-2">
+    <div class="container mt-4">
         <div class="row">    
-
-            <div class='col-12 UserSocialLinksBox'>
+            <div class='col-12'>
                 <div class="my-3">
                     <div class="row">
-                        <div class="col-md-4 pl-2 pl-5 order-md-1 order-2 mt-5">
-                            <?php 
-                                $sm = $functions->showSocialMedia($profileId);
-                                //Displaying social links :D
-
-                                foreach ($sm as $socialMediaRow) {
-                                    if(!empty($socialMediaRow->smedia_name)) {
-                                        echo "<div class='row my-2'>";
-                                        echo "<a class='link d-flex border-0' "; 
-
-                                        if(!empty($socialMediaRow->smedia_link)) {
-                                            echo "href='$socialMediaRow->smedia_link'";
-                                        } else {
-                                            echo '';
-                                        }
-
-                                        echo " target='_blank' type='button' name='$socialMediaRow->smedia'>";
-                                        echo "<span class='socicon-$socialMediaRow->smedia mr-4' style='font-size: 1.35rem;'></span>";
-                                        echo "<p class='user-social-name' style='font-size: 1.15rem; color: #404040;' > $socialMediaRow->smedia_name </p>";
-                                        echo "</a>";
-                                        echo "</div>";
-                                    }
-                                }
-
-                            ?> 
-                        </div>
-                        <div class="col-md-8 order-md-2 order-1 mt-4">
+                        <div class="col-10 offset-1 mt-2">
                             <div class="row">
                                 <div class='col-md-10 offset-md-1'>
                                     <?php 
@@ -156,9 +136,7 @@
 
                                         foreach ($links as $link) {
                                             if(!empty($link->title)) {
-
-                                                echo "<a href='$link->link' class='btn btn-light btn-block font-weight-bold px-2 py-3 small-font mt-2 rounded-0' style='border-bottom: 2px solid #303030;' target='_blank'>$link->title</a>";
-
+                                                echo "<a href='$link->link' class='btn btn-dark btn-block px-2 py-2 font-weight-bold small-font mt-2' style='background-color: #111; opacity: 0.95;' target='_blank'>$link->title</a>";
                                             }
                                         }
 
@@ -171,7 +149,31 @@
                                     ?> 
                                 </div>
                             </div>
-                            
+                        </div>
+                        <div class="col-10 offset-1 mt-4">
+                            <div class="row my-2 d-flex justify-content-center">
+                                <?php 
+                                    $sm = $functions->showSocialMedia($profileId);
+                                    //Displaying social links :D
+
+                                    foreach ($sm as $socialMediaRow) {
+                                        if(!empty($socialMediaRow->smedia_name)) {
+                                            echo "<a class='link d-flex mt-1 mb-2 col-3 col-md-1' "; 
+
+                                            if(!empty($socialMediaRow->smedia_link)) {
+                                                echo "href='$socialMediaRow->smedia_link'";
+                                            } else {
+                                                echo '';
+                                            }
+
+                                            echo " target='_blank' type='button' name='$socialMediaRow->smedia'>";
+                                            echo "<span class='socicon-$socialMediaRow->smedia mx-auto' style='font-size: 1.7rem;'></span>";
+                                            echo "</a>";
+                                        }
+                                    }
+
+                                ?> 
+                            </div>
                         </div>
 
                     </div>

@@ -61,6 +61,7 @@ img.signUp-iphone-gif{
 
 img.signUp-link {
     width: 50%!important;
+    height: auto!important;
 }
 
 .signUp-container {
@@ -464,8 +465,9 @@ label:focus,
     }    
 
     img.signUp-link {
-        width: 90%!important;
+        width: 100%!important;
         height: auto!important;
+        max-height: 210px;
     }  
 
     .signUp-container {

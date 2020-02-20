@@ -127,8 +127,8 @@
         
         
         <div class="container">
-            <div class="d-flex justify-content-center">
-                <img src="socialshub-images/signUp-link.png" alt="Sign Up 'Your link' image by Ksawery Sokalski" class='img-fluid img-responsive mt-4 signUp-link'> 
+            <div class="d-flex justify-content-center" style='height: auto!important;'>
+                <img src="socialshub-images/signUp-link.png" alt="Sign Up 'Your link' image by Ksawery Sokalski" class='mt-4 signUp-link'> 
             </div>
 
             <div class="row">

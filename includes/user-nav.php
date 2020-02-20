@@ -19,7 +19,7 @@ if($functions->loggedIn()) {
             <img src="logo.png" alt="" style='width: 35px; height: 35px;' class='mx-auto'>
     </a>
     <a class="col-4 d-flex link" href='signUp.php'>
-        <span class='link font-weight-bold mx-auto'  style='color: rgba(250, 250, 250, 1);'>Create Your Link!</span>
+        <span class='link font-weight-bold mx-auto'  style='color: rgba(250, 250, 250, 1);'>Sign Up!</span>
     </a>    
 </nav>
 

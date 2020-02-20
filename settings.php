@@ -23,7 +23,7 @@ if(!$functions->loggedIn()) {
 
         //Links
         $links = [
-            'youtube' => 'https://youtube.com/user/',
+            'youtube' => 'https://youtube.com/',
             'facebook' => 'https://facebook.com/',
             'twitter' => 'https://twitter.com/', 
             'instagram' => 'https://instagram.com/',
@@ -32,7 +32,7 @@ if(!$functions->loggedIn()) {
             'twitch' => 'https://twitch.tv/',
             'soundcloud' => 'https://soundcloud.com/',
             'linkedin' => 'https://linkedin.com/in/',
-            'spotify' => 'https://open.spotify.com/artist/',
+            'spotify' => 'https://open.spotify.com/',
             'github' => 'https://github.com/',
             'pinterest' => 'https://pinterest.com/'
 

@@ -25,6 +25,25 @@ p {
                                   supported by Chrome, Opera and Firefox */
 }
 
+.custom-link {
+    background-color: #111;
+    opacity: 0.95;
+    border: none;
+}
+
+.custom-link:hover {
+    background-color: #202020;
+}
+
+.smedia-icon {
+    font-size: 1.7rem;
+    transition: transform .1s;
+}
+
+.smedia-icon:hover {
+    transform: rotate(20deg);
+}
+
 .lg-font {
     font-size: 1.7rem;
 }
@@ -511,6 +530,11 @@ label:focus,
     .settings-social-name {
         width: 123%!important;
         margin-top: 0!important;
+    }
+    
+    .only-lg-devices-margin {
+        margin-top: 1.4rem;
+        margin-bottom: 1.1rem;
     }
 }
 

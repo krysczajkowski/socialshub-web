@@ -122,21 +122,21 @@ if ($user->id === $profileId) {
         </div>
 
   
-    <div class="container mt-4">
+    <div class="container">
         <div class="row">    
             <div class='col-12'>
-                <div class="my-3">
+                <div class="only-lg-devices-margin">
                     <div class="row">
-                        <div class="col-10 offset-1 mt-2">
+                        <div class="col-12 col-md-10 offset-md-1 mt-2">
                             <div class="row">
-                                <div class='col-md-10 offset-md-1'>
+                                <div class='col-12 col-md-10 offset-md-1'>
                                     <?php 
                                         $links = $functions->showActiveLinks($profileId);
                                         //Displaying links :D
 
                                         foreach ($links as $link) {
                                             if(!empty($link->title)) {
-                                                echo "<a href='$link->link' class='btn btn-dark btn-block px-2 py-2 font-weight-bold small-font mt-2' style='background-color: #111; opacity: 0.95;' target='_blank'>$link->title</a>";
+                                                echo "<a href='$link->link' class='btn btn-dark btn-block px-2 py-2 font-weight-bold small-font mt-2 custom-link' target='_blank'>$link->title</a>";
                                             }
                                         }
 
@@ -167,7 +167,7 @@ if ($user->id === $profileId) {
                                             }
 
                                             echo " target='_blank' type='button' name='$socialMediaRow->smedia'>";
-                                            echo "<span class='socicon-$socialMediaRow->smedia mx-auto' style='font-size: 1.7rem;'></span>";
+                                            echo "<span class='socicon-$socialMediaRow->smedia mx-auto smedia-icon'></span>";
                                             echo "</a>";
                                         }
                                     }

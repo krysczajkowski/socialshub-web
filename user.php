@@ -66,17 +66,17 @@
 
         <div class="row d-flex mt-4">
             <!-- PROFILE IMAGE -->
-            <div class="col-md-4 col-sm-12">
+            <div class="col-12 col-md-5">
                 <div class='profileImage border rounded-circle shadow-sm'></div>
             </div>
             
             <!-- RIGHT COLUMN -->
-            <div class="col-md-8 col-sm-12">
-                <div class="pl-5">
-                    <h4 class='mt-3 font-open-sans mb-0 pb-0' style='letter-spacing: 0.5px; font-size: 1.7rem; text-transform: capitalize;'><?php echo $profileData->screenName; ?></h4>
+            <div class="col-12 col-md-7">
+                <div class="text-center text-md-left w-100">
+                    <h4 class='font-open-sans mt-3 mb-0 pb-0 user-screenName'>@<?php echo $profileData->screenName; ?></h4>
 
                     <div class="mb-3">
-<p style="white-space: pre-line; font-size: 1.05rem;">
+<p style="white-space: pre-line; font-size: 1rem;">
 <?php 
     //BIO DISPLAY
     if(!empty($profileData->bio)) {
@@ -106,7 +106,7 @@ if ($user->id === $profileId) {
 <?php  } ?>
 
 <br>                                                    
-<div style='font-size: 1.2rem;' class='mt-1'>
+<div style='font-size: 1.2rem;'>
 <?php
 
     if ($user->id === $profileId) {

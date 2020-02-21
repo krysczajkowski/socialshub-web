@@ -25,6 +25,10 @@ p {
                                   supported by Chrome, Opera and Firefox */
 }
 
+.user-screenName {
+    font-size: 1.3rem;
+}
+
 .custom-link {
     background-color: #111;
     opacity: 0.95;
@@ -360,10 +364,7 @@ label:focus,
     display:none;
 }
 
-.profileImage { 
-    left: 30px; 
-    width: 180px;
-    height: 180px;
+.profileImage {  
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -372,15 +373,6 @@ label:focus,
 .profileImage-sm {
     width: 30px;
     height: 30px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-
-.coverImage{
-    width: 100%;
-    height: 350px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -461,11 +453,6 @@ label:focus,
 /* Breakpoints */
 
 @media (max-width: 575px) {
-    .profileImage{
-        width: 150px;
-        height: 150px;
-        margin-left: 2rem;
-    }
 }
 
 @media (max-width: 767px) {
@@ -491,6 +478,17 @@ label:focus,
 
     .signUp-container {
         margin-top: 2rem;
+    }
+
+    .profileImage {
+        margin-left: auto!important;
+        margin-right: auto!important;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .user-screenName {
+        font-size: 1.1rem;
     }   
 }
 
@@ -521,6 +519,8 @@ label:focus,
 @media (min-width: 767px) {
     .profileImage {
         margin-left: auto;
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -542,7 +542,7 @@ label:focus,
 
 @media (min-width: 1200px) {
     .profileImage{
-        width: 200px;
-        height: 200px;
+        width: 130px;
+        height: 130px;
     }
 }

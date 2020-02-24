@@ -130,7 +130,7 @@
         if(!empty($username) || !empty($reg_email) || !empty($reg_password)) {
 
             if(!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
-                $eRegister = 'Invalid email.';
+                $eRegister = 'Sorry, the email is invalid.';
             } else if (strlen($reg_name) < 2 || strlen($reg_name) > 25) {
                 $eRegister = 'Name must be between 2 and 25 characters.';
             } else if ($functions->name_exist($reg_name)) {
@@ -213,7 +213,7 @@
           </div>
           <div class="col-md-5 relative align-self-center py-5">
 
-            <form action="signUp2.php" method="post" id='i-recaptcha' class="bg-white rounded pb_form_v1 my-5">
+            <form action="signUp.php" method="post" id='i-recaptcha' class="bg-white rounded pb_form_v1 my-5">
               <h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>
               <div class="form-group">
                 <input type="text" class="form-control pb_height-50 reverse" placeholder="Username" value='<?php if(isset($reg_name)) {echo $reg_name;} ?>' placeholder='Username' name='nameRegister'>
@@ -349,45 +349,12 @@
     <section class="pb_xl_py_cover overflow-hidden pb_slant-light pb_gradient_v1 cover-bg-opacity-8"  style="background-image: url(assets/images/1900x1200_img_5.jpg)">
       <div class="container">
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-5 justify-content-center">
+          <div class="col-12 justify-content-center">
             <h2 class="heading mb-5 pb_font-40">Create your most useful URL</h2>
-            <div class="sub-heading">
-              <p class="mb-4">and make your life much easier.</p>
-            </div>
+            <p class="mb-4 text-white justify-content-center">and make your life much easier.</p>
           </div>
-          <div class="col-md-1"></div>
-          <div class="col-md-5">
-            <form action="signUp2.php" method="post" id='i-recaptcha' class="bg-white rounded pb_form_v1 my-5">
-              <h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>
-              <div class="form-group">
-                <input type="text" class="form-control pb_height-50 reverse" placeholder="Username" value='<?php if(isset($reg_name)) {echo $reg_name;} ?>' placeholder='Username' name='nameRegister'>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control pb_height-50 reverse" placeholder="Email"  value='<?php if(isset($reg_email)) {echo $reg_email;} ?>' name='emailRegister'>
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control pb_height-50 reverse" placeholder="Password" value='<?php if(isset($reg_password)) {echo $reg_password;} ?>' name='passwordRegister'>
-              </div>
-              <!-- TERMS CHECKBOX -->
-              <div class="custom-control custom-checkbox mt-2">
-                  <input type="checkbox" class="custom-control-input" id="accept-terms2" name='accept-terms'>
-                  <label class="custom-control-label mt-1" for="accept-terms2" style='font-size: 0.95rem;'>I agree to <a href="terms.php" target="_blank" class='text-primary'>Terms of Use</a></label>
-              </div>
-              <!-- PRIVACY POLICY, COOKIES CHECKBOX -->
-              <div class="custom-control custom-checkbox mt-2">
-                  <input type="checkbox" class="custom-control-input" id="accept-privacy2" name='accept-privacy'>
-                  <label class="custom-control-label" for="accept-privacy2" style='font-size: 0.95rem;'>I agree to the <a href="privacy-policy.php" target="_blank" class='text-primary'>Privacy Policy</a>, including use of cookies</label>
-              </div>
-              <div class="form-group mt-2">
-                <input type="submit" class='g-recaptcha btn btn-primary btn-lg btn-block pb_btn-pill btn-shadow-blue' value = 'Create Account' data-sitekey="6LeSqqAUAAAAACHnB6-dJnds0awuHiG74jqecIcb" data-callback="onSubmit"  id='signUp-submit'>
-              </div>
-
-              <?php $functions->display_error_message($eRegister); $eRegister = '';?>
-
-              <!-- Continue With Facebook -->
-              <a class="fb connect mt-2 text-center w-100 text-white" id='fb-index-button'>Continue with Facebook</a>      
-              <div id="terms-error-message" class='text-danger'></div>
-            </form>
+          <div class="col-12 d-flex justify-content-center" id='get-started-section'>
+            <a href="#section-home" class='btn btn-primary font-weight-bold px-4 py-2' style='font-size: 1.4rem;'>GET STARTED FOR FREE</a>
           </div>
         </div>
       </div>
@@ -440,7 +407,27 @@
             if($('#accept-terms').is(':checked') && $('#accept-privacy').is(':checked')) {
                 $("#signUp-submit").addClass("btn disabled");
             }
-        });        
+        });   
+
+        // Smooth Scrolling
+        $('#get-started-section a').on('click', function(e) {
+          //Check for hash value
+          if(this.hash !== '') {
+            //Prevent the default behavior 
+            e.preventDefault();
+
+            //Store hash
+            const hash = this.hash;
+
+            //Animate smooth scroll
+            $('html, body').animate({
+              scrollTop: $(hash).offset().top
+            }, 900, function() {
+              //Add hash to URL after scroll
+              window.location.hash = hash;
+            });
+          }
+        })     
     </script>
 
 	</body>

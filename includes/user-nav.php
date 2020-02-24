@@ -10,7 +10,7 @@ if($functions->loggedIn()) {
 
 ?>
 
-<nav class="navbar navbar-expand-md navbar-dark py-2 shadow bg-dark sticky-top row" style='opacity: 0.95; background-color: #111!important;'>
+<nav class="navbar navbar-expand-md navbar-dark py-1 shadow bg-dark sticky-top row" style='opacity: 0.95; background-color: #111!important;'>
 
     <a class="col-4 d-flex link" href='signIn.php'>
         <span class='link font-weight-bold mx-auto'  style='color: rgba(250, 250, 250, 0.9);'>Log In</span>

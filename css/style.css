@@ -12,7 +12,7 @@ pre {
 }
 
 p {
-    word-break: break-all;
+    word-break: keep-all;
 }
 
 .noselect {

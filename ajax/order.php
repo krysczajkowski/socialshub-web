@@ -1,5 +1,5 @@
 <?php
-	include "db.php";	
+	include "../functions/db.php";	
 
 	$data = $_POST["choices"];
 

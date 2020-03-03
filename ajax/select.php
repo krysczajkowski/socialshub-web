@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include "db.php";
+	include "../functions/db.php";
 
 
 	if(isset($_COOKIE['user_id'])) {

@@ -171,7 +171,7 @@ h1 {
 
         // Get all active bookmark
         $.fn.selectable = function() {
-            $.post( "functions/select.php", function(data){
+            $.post( "ajax/select.php", function(data){
                 $("#sortable").html('');
                 $("#sortable").prepend(data);
                 $("#sortable").sortableli();
@@ -185,7 +185,7 @@ h1 {
             placeholder: "ui-state-highlight",
             update: function( event, ui ) {
                 var sorted = $( "#sortable" ).sortable( "serialize", { key: "sort" } );
-                $.post( "functions/order.php",{ 'choices[]': sorted});
+                $.post( "ajax/order.php",{ 'choices[]': sorted});
             }
         });
         $( "#sortable" ).disableSelection();
@@ -196,7 +196,7 @@ h1 {
 
             if($("#link").val().length > 0){
                 if(Validalink($("#link").val())){
-                    $.post( "functions/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val() }, function(data){
+                    $.post( "ajax/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val() }, function(data){
                         $( "#sortable" ).selectable();
                         $('#link').val('');
                     } );
@@ -225,7 +225,7 @@ h1 {
             // });
 			
 			
-            $.post( "functions/delete.php",{'choice':$(this).attr('id')}, function(data){
+            $.post( "ajax/delete.php",{'choice':$(this).attr('id')}, function(data){
                 $( "#sortable" ).selectable();
                 //$('#delete_button').addClass('display-none');
             } );

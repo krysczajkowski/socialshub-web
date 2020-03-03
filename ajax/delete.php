@@ -1,5 +1,5 @@
 <?php
-	include "db.php";
+	include "../functions/db.php";
 	
 	//$database = new cbSQLConnect($databaseSetup, cbSQLConnectVar::FETCH_ASSOC);
 

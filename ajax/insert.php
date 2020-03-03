@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include "db.php";
+	include "../functions/db.php";
 
 	$date = date('Y-m-d H:i:s');
 	

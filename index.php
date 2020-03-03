@@ -53,7 +53,7 @@
                         </p>
                     </div>
                     
-                    <div class="col-12">
+                    <div class="row">
                         <?php 
                              for($k=0; $k<3; $k++) {
                                  if(isset($rankingUserSM[$k]->smedia_link)) {
@@ -61,7 +61,7 @@
                                 
                             
                          ?>
-                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link' target='_blank'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> mx-3 ranking-social' style='font-size: 1.9rem;'>
+                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link col d-flex' target='_blank'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> smedia-icon' style='font-size: 1.9rem;'>
                             </span></a> 
                         <?php } } ?>  
                     </div>

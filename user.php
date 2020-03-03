@@ -7,11 +7,10 @@
 <body>
     <?php
 
-    // Different navs for logged in or not logged in users
-    if(!$functions->loggedIn()) {
-        include 'includes/user-nav.php';
-    } else {
-        include 'includes/nav.php';
+    include 'includes/user-nav.php';
+
+    // Including copy link popup
+    if($functions->loggedIn()) {
         include 'includes/user-link-popup.php';
     }
 
@@ -43,24 +42,14 @@
         <?php if(isset($_COOKIE['new-user-tut2'])) { ?>
         <div class="container">
             <div class='alert bg-success text-white alert-dismissable mt-3 p-2'>
-                <div class="container">
+                <div class="container text-center">
                     <button type="button" class='close' data-dismiss='alert'>
                         <span>&times;</span>
                     </button>
-                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName; ?>, <b>it's time to share your profile in instagram bio!</b></span>
+                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Hi <?php echo $user->screenName; ?>, <b>share your profile in <a href="https://www.instagram.com/accounts/edit/" target='_blank' class='text-white'><u>instagram bio here!</u></a></b></span>
                 </div>
             </div>
 
-
-            <div class='alert bg-success text-white alert-dismissable p-2'>
-                <div class="container">
-                    <button type="button" class='close' data-dismiss='alert'>
-                        <span>&times;</span>
-                    </button>
-                    <span class='text-white' style='font-size: 1.05rem; color: #c0c0c0;'>Please paste your SocialsHub profile URL in <u><a target='_blank' class='text-white link' href="https://www.instagram.com/accounts/edit/">instagram website area</a></u>
-                    </span>
-                </div>
-            </div>
         </div>
         <?php } ?>
 
@@ -104,17 +93,7 @@ if ($user->id === $profileId) {
     </span>
 
 <?php  } ?>
-
-<br>                                                    
-<div style='font-size: 1.2rem;'>
-<?php
-
-    if ($user->id === $profileId) {
-        echo "<a href='https://socialshub.net/settings.php' class='btn btn-light font-weight-bold py-1 px-3'>Edit Profile</a>";
-    }
-
-?>
-</div>                
+              
                 
                 
                 </div>
@@ -136,7 +115,7 @@ if ($user->id === $profileId) {
 
                                         foreach ($links as $link) {
                                             if(!empty($link->title)) {
-                                                echo "<a href='$link->link' class='btn btn-dark btn-block px-2 py-2 font-weight-bold small-font mt-2 custom-link' target='_blank'>$link->title</a>";
+                                                echo "<a href='$link->link' class='btn-block px-2 py-2 small-font mt-2 gradient-button gradient-button-1' target='_blank'>$link->title</a>";
                                             }
                                         }
 

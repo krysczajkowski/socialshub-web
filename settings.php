@@ -147,11 +147,11 @@ if(!$functions->loggedIn()) {
         <!-- MESSAGE IF USER IS NOT ACTIVE -->
         <?php if(!$functions->isUserActive($user->active)) { ?>
             <div class='alert bg-warning text-white alert-dismissable mt-2 p-2'>
-                <div class="container">
+                <div class="container text-center">
                     <button type="button" class='close' data-dismiss='alert'>
                         <span>&times;</span>
                     </button>
-                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'><b>Please activate your email - <?php echo $user->email; ?></b></span>
+                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'>Please activate your email - <?php echo $user->email; ?></span>
                 </div>
             </div>
         <?php }  ?>
@@ -163,11 +163,11 @@ if(!$functions->loggedIn()) {
 
             ?>
             <div class='alert bg-success text-white alert-dismissable mt-2 p-2'>
-                <div class="container">
+                <div class="container text-center">
                     <button type="button" class='close' data-dismiss='alert'>
                         <span>&times;</span>
                     </button>
-                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'>Hi <b><?php echo $user->screenName?></b>, it’s great to have you! <b>You are one step away from creating your most useful url🥰</b></span>
+                    <span class='text-white' style='font-size: 1.1rem; color: #c0c0c0;'>Hi <?php echo $user->screenName?>! <b>Please fill the names of your social profiles</b>🥰</span>
                 </div>
             </div>
         <?php }  ?>

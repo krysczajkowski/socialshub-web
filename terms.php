@@ -5,7 +5,7 @@
 <?php include 'includes/head.php'; ?>
  
 <body>
-   <?php include 'includes/index-nav.php'; ?>
+   <?php include 'includes/nav.php'; ?>
     <div class="bg-white my-5 border rounded container">
         <div class="row">
             <!-- LEFT SETTINGS PANEL -->

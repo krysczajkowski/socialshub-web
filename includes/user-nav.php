@@ -10,7 +10,7 @@ if($functions->loggedIn()) {
 
 ?>
 
-<nav class="navbar navbar-expand-md navbar-light py-1 shadow-sm sticky-top row" style='opacity: 0.95; background-color: #fff!important;'>
+<nav class="navbar px-0 mx-0 navbar-expand-md navbar-light py-1 shadow-sm sticky-top row" style='opacity: 0.95; background-color: #fff!important;'>
 
     <!-- Log In or Logout part -->
     <?php if(!$functions->loggedIn()) { ?>
@@ -25,7 +25,7 @@ if($functions->loggedIn()) {
 
     <!-- Logo Part -->
     <a class="col-4 d-flex" href="index.php">
-        <img src="logo.png" alt="" style='width: 35px; height: 35px;' class='mx-auto'>
+        <img src="logo/logo.png" alt="" style='width: auto!important!; height: 35px;' class='mx-auto'>
     </a>
 
     <!-- Sign In or Settings part -->

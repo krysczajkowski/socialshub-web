@@ -44,7 +44,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" href="logo.png">
+    <link rel="icon" href="logo/logo-little.png">
 		<title>Sign Up | SocialsHub.net</title>
     <meta name='description' content='SocialsHub - website with social media of your friends, celebrities and other people.'>
     <meta name='keywords' content='social media, social link, social links, socialhub, social hub, socials hub, friends, celebrity, instagram, twitter, facebook, snapchat, twitch, tiktok, discord, mail, poland, website, bio, book for social media, book, book of social media, wikipedia, socialshub, wroclaw, profile visits, search, social media search, social link search, social links, links hub, social network, network links, one url'>
@@ -173,7 +173,9 @@
 
     <nav class="navbar navbar-dark pb_navbar pb_scrolled-light" id="pb-navbar">
       <div class="container">
-        <a class="navbar-brand font-weight-bold" href="index.php">SocialsHub.net</a> 
+        <a href="index.php">
+          <img class="img-fluid" src="logo/logo.png" style="width:auto!important;height:35px;" href="index.php">
+        </a>
         <span class='ml-auto'>
           <a class='btn btn-success font-weight-bold px-4' href='https://socialshub.net/signIn.php'>Log In</a>
         </span>

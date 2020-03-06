@@ -36,7 +36,6 @@ p {
     cursor: pointer;
     display: inline-block;
     border-radius: 25px;
-    text-shadow: 1px 1px 0px #898999;
     font-family: 'Montserrat';
     font-weight: 800;
 }

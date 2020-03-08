@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include "../functions/db.php";
+	include "../functions/init.php";
 
 
 	if(isset($_COOKIE['user_id'])) {
@@ -15,20 +15,18 @@
 	
 	$var = '';
 	foreach ($datas as $value) {
-		// $var .= "
-		// <li class='list-group-item' id='order-".$value['id']."'>
-		// <input type='checkbox' class='checkbox' id='cb-".$value['id']."'>
-		// <span class='badge badge-success'>".$value['title']."</span>
-		// <a href='".$value['link']."' target='_blank'>".$value['link']."</a>
-		// <i class='fa fa-edit' id='img-".$value['id']."' data='".$value['title']."'></i>	
 		
+		$linkId = $value['id'];
+
+		$clicks = $functions->showCustomLinksClickCounter($account_id, $linkId);
+
 		$var .= "
 		<li class='list-group-item bg-white noselect' id='order-".$value['id']."'>		
 		<span class='h5 font-weight-bold'>".$value['title']."</span><br>
 		<a href='".$value['link']."' target='_blank'>".$value['link']."</a>
 		<i class='fa fa-edit ml-2' id='img-".$value['id']."' data='".$value['title']."'></i>
 		<i class='fa fa-trash text-danger mr-3' id='img-".$value['id']."' data='".$value['title']."'></i>		
-		
+		<br> Your link has been clicked <span class='font-weight-bold'>".$clicks."</span> times.
 		</li>";
 	}
 

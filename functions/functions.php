@@ -620,6 +620,21 @@ class Functions {
         return $stmt->fetch(PDO::FETCH_OBJ)->weekVisits;
     }    
  
+     public function addClick($link_id, $table) {
+        $stmt = $this->pdo->prepare("INSERT INTO $table (id, clickOn) VALUES (NULL, :link_id)");
+        $stmt->bindParam(':link_id', $link_id);
+        $stmt->execute();
+    }
+
+    public function showClickCounter($account_id, $link_id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM social_links, social_links_clicks WHERE social_links.account_id = :account_id and social_links.id = :link_id and social_links.id = social_links_clicks.clickOn");
+        $stmt->bindParam(':account_id', $account_id);
+        $stmt->bindParam('link_id', $link_id);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+
+    }
 
     //       CUSTOM LINKS FUNCTIONS  
 
@@ -639,6 +654,15 @@ class Functions {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function showCustomLinksClickCounter($account_id, $link_id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM links, custom_links_clicks WHERE links.account_id = :account_id and links.id = :link_id and links.id = custom_links_clicks.clickOn");
+        $stmt->bindParam(':account_id', $account_id);
+        $stmt->bindParam('link_id', $link_id);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+
+    }
 
     //       RANKING FUNCTIONS 
 

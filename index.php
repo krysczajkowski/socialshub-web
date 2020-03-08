@@ -61,7 +61,7 @@
                                 
                             
                          ?>
-                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link col d-flex' target='_blank'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> smedia-icon' style='font-size: 1.9rem;'>
+                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link col d-flex social-link-click' target='_blank' data-sociallink='<?php echo $rankingUserSM[$k]->id ?>'><span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> smedia-icon' style='font-size: 1.9rem;'>
                             </span></a> 
                         <?php } } ?>  
                     </div>
@@ -86,6 +86,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <?php include 'js/script.php' ?>
     <script src='js/search.js'></script>
+    <script src='js/click.js'></script>
     <script src='js/accept-cookies.js'></script>
 </body>
 </html>

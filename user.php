@@ -115,7 +115,7 @@ if ($user->id === $profileId) {
 
                                         foreach ($links as $link) {
                                             if(!empty($link->title)) {
-                                                echo "<a href='$link->link' class='btn-block px-2 py-2 small-font mt-2 gradient-button gradient-button-1' target='_blank'>$link->title</a>";
+                                                echo "<a href='$link->link' class='btn-block custom-link-click px-2 py-2 small-font mt-2 gradient-button gradient-button-1' target='_blank' data-customlink='$link->id'>$link->title</a>";
                                             }
                                         }
 
@@ -137,7 +137,7 @@ if ($user->id === $profileId) {
 
                                     foreach ($sm as $socialMediaRow) {
                                         if(!empty($socialMediaRow->smedia_name)) {
-                                            echo "<a class='link d-flex mt-1 mb-2 col-3 col-md-1' "; 
+                                            echo "<a class='link d-flex social-link-click mt-1 mb-2 col-3 col-md-1' data-sociallink='$socialMediaRow->id'"; 
 
                                             if(!empty($socialMediaRow->smedia_link)) {
                                                 echo "href='$socialMediaRow->smedia_link'";
@@ -173,6 +173,7 @@ if ($user->id === $profileId) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src='js/search.js'></script>
+    <script src='js/click.js'></script>
     <?php include 'js/script.php' ?>
     <script src='js/accept-cookies.js'></script>
 </body>

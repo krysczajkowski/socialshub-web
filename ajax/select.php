@@ -26,7 +26,8 @@
 		<a href='".$value['link']."' target='_blank'>".$value['link']."</a>
 		<i class='fa fa-edit ml-2' id='img-".$value['id']."' data='".$value['title']."'></i>
 		<i class='fa fa-trash text-danger mr-3' id='img-".$value['id']."' data='".$value['title']."'></i>		
-		<br> Your link has been clicked <span class='font-weight-bold'>".$clicks."</span> times.
+		<br> 
+		<span>This link has been clicked <span class='font-weight-bold'>".$clicks."</span> times.</span>
 		</li>";
 	}
 

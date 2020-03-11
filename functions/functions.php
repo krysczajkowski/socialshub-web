@@ -433,7 +433,7 @@ class Functions {
 
     //      SEARCH FUNCTIONS
     public function search($search) {
-        $stmt = $this->pdo->prepare("SELECT id, screenName, profileImage, profileCover FROM users WHERE email LIKE ? OR screenName LIKE ? LIMIT 6");
+        $stmt = $this->pdo->prepare("SELECT id, screenName, profileImage, profileCover, bio FROM users WHERE email LIKE ? OR screenName LIKE ? LIMIT 6");
         $stmt->bindValue(1, $search."%", PDO::PARAM_STR);
         $stmt->bindValue(2, $search."%", PDO::PARAM_STR);
         $stmt->execute();

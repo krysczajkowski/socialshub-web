@@ -7,7 +7,6 @@ if(isset($_GET['username'])) {
     
 <script>
     $('.profileImage').css('background-image', 'url(<?php echo $profileData->profileImage ?>)');
-    $('.coverImage').css('background-image', 'url(<?php echo $profileData->profileCover ?>)');
 </script>
 
 <?php 

@@ -4,15 +4,15 @@ error_reporting(E_ALL & ~E_WARNING);
 include '../functions/init.php';
 
 if(isset($_POST['search']) && !empty($_POST['search'])) {
-     $search = $functions->checkInput($_POST['search']);
-     $result = $functions->search($search);
+    $search = $functions->checkInput($_POST['search']);
+    $result = $functions->search($search);
 
-
-     if(!empty($result)) {
+    if(!empty($result)) {
 
     $i=0;   
-     //Robimy obiekt każdego wyszukanego usera w html
-     foreach($result as $user){ 
+    //Robimy obiekt każdego wyszukanego usera w html
+    foreach($result as $user){
+    $userSM = $functions->showNotEmptySocialMedia($user->id); 
     $i++;
     ?>
         <div class='p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary search-result'>
@@ -36,7 +36,21 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
                             <?php echo substr($user->bio, 0, 45) . ' ... ' ?>
                         </p>
                     </div>
-                    
+
+                    <div class="col-12 row">
+                        <?php 
+                             for($k=0; $k<3; $k++) {
+                                 if(isset($userSM[$k]->smedia_link)) {
+                                     $smedia_link = $userSM[$k]->smedia_link;
+                                
+                            
+                         ?>
+                            <a href="<?php echo $userSM[$k]->smedia_link ?>" class='link d-flex social-link-click' data-sociallink='<?php echo $userSM[$k]->id ?>' target='_blank'>
+                                <span class='socicon-<?php echo $userSM[$k]->smedia ?> mx-3 smedia-icon ranking-social' style='font-size: 1.9rem;'>
+                            </span>
+                        </a> 
+                        <?php } } ?>  
+                    </div>
 
                 </div>
             </div>
@@ -86,7 +100,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
                         </p>
                     </div>
                     
-                    <div class="col-12">
+                    <div class="col-12 row">
                         <?php 
                              for($k=0; $k<3; $k++) {
                                  if(isset($rankingUserSM[$k]->smedia_link)) {
@@ -94,8 +108,8 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
                                 
                             
                          ?>
-                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link social-link-click' data-sociallink='<?php echo $rankingUserSM[$k]->id ?>' target='_blank'>
-                                <span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> mx-3 ranking-social' style='font-size: 1.9rem;'>
+                            <a href="<?php echo $rankingUserSM[$k]->smedia_link ?>" class='link d-flex social-link-click' data-sociallink='<?php echo $rankingUserSM[$k]->id ?>' target='_blank'>
+                                <span class='socicon-<?php echo $rankingUserSM[$k]->smedia ?> mx-3 smedia-icon ranking-social' style='font-size: 1.9rem;'>
                             </span>
                         </a> 
                         <?php } } ?>  

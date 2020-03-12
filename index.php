@@ -15,7 +15,7 @@
     ?>
 
 
-     <div class="p-3 row col-md-8 offset-md-2 mt-3">
+     <div class="p-3 row col-10 offset-1 col-md-8 offset-md-2 mt-3">
         <!-- <h3 class='ml-2 font-weight-bold'>The Most Interesting Profiles</h3> -->
         <input type="text" class='form-control form-control-lg search w-100' placeholder='Search users by name, email'>
      </div>

@@ -7,7 +7,7 @@
 <body>
     <?php
 
-    include 'includes/user-nav.php';
+    include 'includes/nav.php';
 
     // Including copy link popup
     if($functions->loggedIn()) {
@@ -146,7 +146,7 @@ if ($user->id === $profileId) {
                                             }
 
                                             echo " target='_blank' type='button' name='$socialMediaRow->smedia'>";
-                                            echo "<span class='socicon-$socialMediaRow->smedia mx-auto smedia-icon'></span>";
+                                            echo "<img src='socialmedia-icons/$socialMediaRow->smedia.svg' class='smedia-icon'>";
                                             echo "</a>";
                                         }
                                     }

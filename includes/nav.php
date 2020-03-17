@@ -18,8 +18,8 @@ if($functions->loggedIn()) {
             <span class='link font-weight-bold mx-auto text-dark'>Log In</span>
         </a>  
     <?php } else { ?>
-        <a class="col-4 d-flex link" href='logout.php'>
-            <span class='link font-weight-bold mx-auto text-dark'>Logout</span>
+        <a class="col-4 d-flex link" href='settings.php'>
+            <span class='link font-weight-bold mx-auto text-dark'>Settings</span>
         </a>  
     <?php } ?>
 

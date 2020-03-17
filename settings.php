@@ -305,7 +305,7 @@ if(!$functions->loggedIn()) {
 <div class='input-group row col-12 col-md-10 no-gutters mb-1' id='accordion-".$socialMediaRow->smedia."'>
     <div class='input-group-prepend col-12 col-lg-5 mx-0'>
         <span id='' class='input-group-text settings-social-name w-100'>
-            <span class='medium-font settings-social-text p-0 socicon-$socialMediaRow->smedia'></span>
+            <img src='socialmedia-icons/$socialMediaRow->smedia.svg' class='smedia-icon-settings mr-2'>
             $links[$smedia]
         </span>
     </div>

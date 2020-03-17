@@ -73,8 +73,24 @@ p {
     background-color: #202020;
 }
 
+.smedia-icon-settings {
+    height: 20px;
+    width: auto;
+}
+
+.smedia-icon-index {
+    height: 28px;
+    width: auto;
+    transition: transform .1s;
+}
+
+.smedia-icon-index:hover {
+    transform: rotate(20deg);
+}
+
 .smedia-icon {
-    font-size: 1.7rem;
+    height: 32px;
+    width: auto;
     transition: transform .1s;
 }
 

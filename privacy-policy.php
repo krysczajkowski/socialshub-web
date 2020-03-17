@@ -109,6 +109,10 @@
     <li class='font-weight-bold li-first mt-3'>Privacy policy updates</li>
     We may need to update our privacy policy in the future. Its latest version will always be available on socialshub.net. You will always be notified of changes, including a change in the purpose of processing personal data or a change in your rights.   
 </ol>
+
+<div>Social media icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik" target='_blank'>Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon" target='_blank'>www.flaticon.com</a></div>
+
+
                 </div>
             </div>
         </div>

@@ -91,6 +91,9 @@ $eDeleteA = '';
                     <div class="col-12 my-3 pl-4 border-left border-dark">
                         <a href="privacy_and_security.php" class='text-dark h5 none-decoration'>Privacy and Security</a>
                     </div>
+                    <div class="col-12 my-3 pl-4">
+                        <a href="logout.php" class='text-dark h5 none-decoration'>Logout</a>
+                    </div>
                 </div>
             </div>
             

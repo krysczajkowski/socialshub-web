@@ -369,6 +369,7 @@ class Functions {
         // Is it an image?
         if( ( strtolower( $uploaded_ext ) == 'jpg' || strtolower( $uploaded_ext ) == 'jpeg' || strtolower( $uploaded_ext ) == 'png' ) &&          
             ( $uploaded_size < 4192751 ) &&
+                               500000
             ( $uploaded_type == 'image/jpeg' || $uploaded_type == 'image/png' ) &&
             getimagesize( $uploaded_tmp ) ) {
             // Strip any metadata, by re-encoding image (Note, using php-Imagick is recommended over php-GD)

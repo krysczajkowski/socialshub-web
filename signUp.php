@@ -158,7 +158,7 @@
                     setcookie('new-user-tut1', '1', time()+20); 
 
                     $functions->register_user($reg_email, $reg_password, $reg_name, 0);
-                    echo("<script>location.href = '".BASE_URL."settings.php';</script>");              
+                    echo("<script>location.href = '".BASE_URL."smedia-tutorial.php';</script>");           
                 }
             }
 

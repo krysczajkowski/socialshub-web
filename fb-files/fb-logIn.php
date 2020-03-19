@@ -51,7 +51,7 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     
     $_SESSION['user_id'] = $userId;
     
-    header('Location: '. BASE_URL .'settings.php');
+    header('Location: '. BASE_URL .'smedia-tutorial.php');
 
     exit();
 

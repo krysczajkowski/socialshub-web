@@ -110,7 +110,8 @@
     We may need to update our privacy policy in the future. Its latest version will always be available on socialshub.net. You will always be notified of changes, including a change in the purpose of processing personal data or a change in your rights.   
 </ol>
 
-<div>Social media icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik" target='_blank'>Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon" target='_blank'>www.flaticon.com</a></div>
+<div style='font-size: 0.8rem;'>Social media icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik" target='_blank'>Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon" target='_blank'>www.flaticon.com</a></div>
+<a href="https://www.freepik.com/free-photos-vectors/business" style='font-size: 0.8rem;' target='_blank'>Business vector created by stories - www.freepik.com</a>
 
 
                 </div>

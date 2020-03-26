@@ -313,7 +313,7 @@ if(!$functions->loggedIn()) {
     </div>
 
     <div class='col-10 col-lg-6 mx-0'>
-        <input type='text' placeholder='Your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
+        <input type='text' placeholder='Rest of your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
     </div>
     <div class='input-group-append col-2 col-lg-1 mx-0'>
         <a id='' class='input-group-text w-100 px-auto link' href='#collapse-".$socialMediaRow->smedia."' data-parent='#accordion-".$socialMediaRow->smedia."' data-toggle='collapse' aria-expanded='true'>

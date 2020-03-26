@@ -92,7 +92,7 @@
                 <p class="h3 font-weight-bold">
                     Track Your Links's Clicks
                 </p>
-                <p>Track where your followers are clicking :)</p>
+                <p>Track where your followers are clicking, post it more often and skyrocket 🚀</p>
             </div>
         </div>
     </section>

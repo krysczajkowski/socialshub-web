@@ -83,7 +83,7 @@ if(!$functions->loggedIn()) {
     <div class="container text-center pt-4 mb-3">
         <span class='font-weight-bold h4'>FILL YOUR LINKS</span>
         <br>
-        <span class='text-muted'>Please fill facebook, spotify, youtube with URL (not username)</span>
+        <span class='text-muted'>Please fill rest of the URL (not username)</span>
     </div>
     <!-- FORM -->
     <form action="" method='POST' enctype="multipart/form-data">
@@ -108,7 +108,7 @@ if(!$functions->loggedIn()) {
         </div>
 
         <div class='col-12 col-lg-7 mx-0'>
-        <input type='text' placeholder='Your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
+        <input type='text' placeholder='Rest of your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
         </div>
         </div>";
 

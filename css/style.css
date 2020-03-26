@@ -1,6 +1,7 @@
 body {
     background-color: #fff;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat';
+    font-weight: 400;
     padding: 0;
     margin: 0;
 }
@@ -37,7 +38,7 @@ p {
     display: inline-block;
     border-radius: 25px;
     font-family: 'Montserrat';
-    font-weight: 800;
+    font-weight: 700!important;
 }
 
 .gradient-button:hover {
@@ -219,14 +220,6 @@ a, [type="button"] {
     font-weight: 700;
 }
 
-.font-arial {
-    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-}
-
-.font-open-sans {
-    font-family: 'Open Sans', sans-serif;
-    letter-spacing: -0.5px;
-}
 
 
 /*   HOME RANKING STYLES   */

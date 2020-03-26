@@ -21,7 +21,7 @@
         $profileData = $functions->user_data($profileId);
 
         if(!$profileData) {
-            echo("<script>location.href = '".BASE_URL."'</script>");
+            echo("<script>location.href = '".BASE_URL."page404.html'</script>");
             exit();
         } else {
 //            $functions->addView($profileId);
@@ -121,7 +121,7 @@ if ($user->id === $profileId) {
 
                                         if($user->id === $profileId && empty($links)) {
                                             echo "<div class='text-center mt-4'>";
-                                            echo "<a class='link font-weight-bold small-font' href='settings-links.php'>[Add Your Custom Links]</a>";
+                                            echo "<a style='font-size: 1.1rem' class='btn btn-outline-dark font-weight-bold px-5 py-2' href='settings-links.php'>Hey! Click here to add your own links</a>";
                                             echo "</div>";
                                         }
 

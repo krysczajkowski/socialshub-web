@@ -62,7 +62,7 @@
             <!-- RIGHT COLUMN -->
             <div class="col-12 col-md-7">
                 <div class="text-center text-md-left w-100">
-                    <h4 class='font-open-sans mt-3 mb-0 pb-0 user-screenName'>@<?php echo $profileData->screenName; ?></h4>
+                    <h4 class='font-weight-bold mt-3 mb-0 pb-0 user-screenName'>@<?php echo $profileData->screenName; ?></h4>
 
                     <div class="mb-3">
 <p style="white-space: pre-line; font-size: 1rem;">
@@ -136,8 +136,15 @@ if ($user->id === $profileId) {
                                     //Displaying social links :D
 
                                     foreach ($sm as $socialMediaRow) {
+
+                                        if($socialMediaRow->isBouncing == 1) {
+                                            $bouncingClass = 'bounce';
+                                        } else {
+                                            $bouncingClass = '';
+                                        }
+
                                         if(!empty($socialMediaRow->smedia_name)) {
-                                            echo "<a class='link d-flex social-link-click mt-1 mb-2 col-3 col-md-1' data-sociallink='$socialMediaRow->id'"; 
+                                            echo "<a class='link d-flex social-link-click mt-1 mb-2 col-3 col-md-1 $bouncingClass' data-sociallink='$socialMediaRow->id'"; 
 
                                             if(!empty($socialMediaRow->smedia_link)) {
                                                 echo "href='$socialMediaRow->smedia_link'";

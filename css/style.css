@@ -1,6 +1,6 @@
 body {
     background-color: #fff;
-    font-family: 'Montserrat';
+    font-family: 'Lato'!important;
     font-weight: 400;
     padding: 0;
     margin: 0;
@@ -140,6 +140,54 @@ img.signUp-link {
 
 .signUp-container {
     margin-top: 3.5rem;
+}
+
+/* Bouncing Icon Class */ 
+
+
+.bounce {
+    -webkit-animation: bounce 2s;
+            animation: bounce 2s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes bounce {
+    0%,
+    25%,
+    50%,
+    75%,
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+    40% {
+        -webkit-transform: translateY(-25px);
+                transform: translateY(-25px);
+    }
+    60% {
+        -webkit-transform: translateY(-12px);
+                transform: translateY(-12px);
+    }
+}
+
+@keyframes bounce {
+    0%,
+    25%,
+    50%,
+    75%,
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+    40% {
+        -webkit-transform: translateY(-25px);
+                transform: translateY(-25px);
+    }
+    60% {
+        -webkit-transform: translateY(-12px);
+                transform: translateY(-12px);
+    }
 }
 
 /* Facebook button */

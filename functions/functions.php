@@ -369,7 +369,6 @@ class Functions {
         // Is it an image?
         if( ( strtolower( $uploaded_ext ) == 'jpg' || strtolower( $uploaded_ext ) == 'jpeg' || strtolower( $uploaded_ext ) == 'png' ) &&          
             ( $uploaded_size < 4192751 ) &&
-                               500000
             ( $uploaded_type == 'image/jpeg' || $uploaded_type == 'image/png' ) &&
             getimagesize( $uploaded_tmp ) ) {
             // Strip any metadata, by re-encoding image (Note, using php-Imagick is recommended over php-GD)
@@ -554,14 +553,15 @@ class Functions {
     
     //       SOCIAL MEDIA FUNCTIONS 
 
-    public function updateSocialLinks ($account_id, $socialmedia, $name, $link) {
-        $stmt = $this->pdo->prepare("UPDATE social_links SET smedia_name = :smedia_name , smedia_link = :smedia_link WHERE account_id = :account_id AND smedia = :smedia");
+    public function updateSocialLinks ($account_id, $socialmedia, $name, $link, $isBouncing) {
+        $stmt = $this->pdo->prepare("UPDATE social_links SET smedia_name = :smedia_name , smedia_link = :smedia_link , isBouncing = :isBouncing WHERE account_id = :account_id AND smedia = :smedia");
         
         $stmt->bindParam(':smedia_name', $name);
         $stmt->bindParam(':smedia_link', $link);
         $stmt->bindParam(':account_id', $account_id);
         $stmt->bindParam(':smedia', $socialmedia);
-        $stmt->execute();           
+        $stmt->bindParam(':isBouncing', $isBouncing);
+        $stmt->execute();
     }
 
     public function addNewSocialMedia ($account_id) {

@@ -93,6 +93,15 @@ if(!$functions->loggedIn()) {
                         //Session to hold in input wrong (over 30 chars) social name
                         $_SESSION[$smedia . '-inputName'] = $smedia_name;
                         
+
+                        //Checking if social media checkbox is checked 
+                        if(isset($_POST['checkbox-'.$smedia])) {
+                            $isBouncing = 1;
+                        } else {
+                            $isBouncing = 0;
+                        }
+
+
                         if((empty($smedia_name))) { 
 
                             $smedia_link = '';
@@ -103,7 +112,7 @@ if(!$functions->loggedIn()) {
                                 unset($_SESSION['set-tut2']);
                             }
 
-                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
+                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, $isBouncing);
                             $functions->addNewSocialMedia($user->id);
                                                   
                                       
@@ -118,7 +127,7 @@ if(!$functions->loggedIn()) {
                             }
 
 
-                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link);
+                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, $isBouncing);
                             $functions->addNewSocialMedia($user->id);
 
 
@@ -302,6 +311,12 @@ if(!$functions->loggedIn()) {
                                             $clickCounter = "<p class='container mt-0 mb-1 py-0'>".$socialMediaRow->smedia." has been clicked <span class='font-weight-bold'>". $clicks ."</span> times</p>";
                                         }
 
+                                        if($socialMediaRow->isBouncing == 1) {
+                                            $isChecked = 'Checked';
+                                        } else {
+                                            $isChecked = '';
+                                        }
+
 
                                         echo "
 <div class='input-group row col-12 col-md-10 no-gutters mb-1' id='accordion-".$socialMediaRow->smedia."'>
@@ -321,7 +336,14 @@ if(!$functions->loggedIn()) {
         </a>
     </div>
 
-    <div class='collapse mt-2 mb-2' id='collapse-".$socialMediaRow->smedia."'>".$clickCounter."</div>
+    <div class='collapse mt-2 mb-2' id='collapse-".$socialMediaRow->smedia."'>".$clickCounter."
+
+    <div class='custom-control custom-checkbox mb-2'>
+        <input type='checkbox' class='custom-control-input' id='checkbox-".$socialMediaRow->smedia."' name='checkbox-".$socialMediaRow->smedia."' value='1' ".$isChecked.">
+        <label for='checkbox-".$socialMediaRow->smedia."' class='custom-control-label mt-1'><b> Make ".$socialMediaRow->smedia." icon bounce </b>- it forces users to click it</label><br>
+    </div>
+
+    </div>
 </div>";
 
                                         unset($_SESSION[$socialMediaRow->smedia . '-inputName']);

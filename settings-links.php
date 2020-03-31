@@ -18,26 +18,6 @@ h1 {
 	list-style-type: none;
 }
 
-.fa-trash {
-	position: relative;
-	float: right;
-	border: 0;
-	cursor: pointer;
-}
-
-.fa-edit {
-	position: relative;
-	float: right;
-	border: 0;
-	cursor: pointer;
-}
-.display-show {
-	display: block;
-}
-
-.display-none {
-	display: none !important;
-}
 </style>
  
 <body>
@@ -95,7 +75,7 @@ h1 {
     						</div>
     						<div class="form-group">
     							<input type="text" id="link" class="form-control" placeholder="https://url" id="link">
-    							<div class="error display-none error-message alert alert-danger alert-dismissible mt-2">
+    							<div class="error d-none error-message alert alert-danger alert-dismissible mt-2">
     							</div>
     							<input type="hidden" id="id_link">
     						</div>						
@@ -110,7 +90,7 @@ h1 {
     								<ul id="sortable" class="list-group">
     								</ul>
     							</form>
-    							<a href="#" id="delete_button" class="mt-2 btn btn-danger btn-lg btn-block display-none">Delete selected</a>
+    							<a href="#" id="delete_button" class="mt-2 btn btn-danger btn-lg btn-block d-none">Delete selected</a>
     						</div>
     					</div>
     				</div>
@@ -162,10 +142,10 @@ h1 {
             });
 
             $(this).find(":checkbox").click(function(){
-                $('#delete_button').addClass('display-none');
+                $('#delete_button').addClass('d-none');
                 $(".checkbox").each(function(index){
                     if($(this).is(':checked')){
-                        $('#delete_button').removeClass('display-none');
+                        $('#delete_button').removeClass('d-none');
                     }
                 });
             });
@@ -195,7 +175,7 @@ h1 {
 
         // Insert new link
         $("#save_button").click(function(){
-            $(".error-message").addClass("display-none");
+            $(".error-message").addClass("d-none");
 
             if($("#link").val().length > 0){
                 if(Validalink($("#link").val())){
@@ -207,11 +187,11 @@ h1 {
 					$("#title").val('');
                 }else{
                     $(".error-message").html("Please provide a valid link.");
-                    $(".error-message").removeClass("display-none");
+                    $(".error-message").removeClass("d-none");
                 }
             }else{
                 $(".error-message").html("Please enter your link.");
-                $(".error-message").removeClass("display-none");
+                $(".error-message").removeClass("d-none");
             }
             return false;
         });

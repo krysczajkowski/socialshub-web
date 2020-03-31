@@ -639,8 +639,8 @@ class Functions {
 
     }
 
-    public function getClickFromLastMonth($id) {
-        $stmt = $this->pdo->prepare("SELECT date, clickOn, COUNT(date) amount FROM social_links_clicks WHERE date BETWEEN date_sub(now(),INTERVAL 1 MONTH) AND now() AND clickOn = :id GROUP BY date");
+    public function getClickFromLastMonth($id, $table) {
+        $stmt = $this->pdo->prepare("SELECT date, clickOn, COUNT(date) amount FROM $table WHERE date BETWEEN date_sub(now(),INTERVAL 1 MONTH) AND now() AND clickOn = :id GROUP BY date");
 
         $stmt->bindParam(':id', $id);
         $stmt->execute();

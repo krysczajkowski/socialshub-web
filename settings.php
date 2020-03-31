@@ -306,9 +306,9 @@ if(!$functions->loggedIn()) {
                                         $clicks = $functions->showClickCounter($user->id, $socialMediaRow->id);
                                         
                                         if($clicks == 1) {
-                                            $clickCounter = "<p class='container mt-0 mb-1 py-0'>".$socialMediaRow->smedia." has been clicked 1 time</p>";
+                                            $clickCounter = "<p class='small-font container mt-0 mb-1 py-0'><span class='font-weight-bold text-capitalize'>".$socialMediaRow->smedia."</span> has been clicked 1 time</p>";
                                         } else {
-                                            $clickCounter = "<p class='container mt-0 mb-1 py-0'>".$socialMediaRow->smedia." has been clicked <span class='font-weight-bold'>". $clicks ."</span> times</p>";
+                                            $clickCounter = "<p class='small-font mt-0 mb-1 py-0'><span class='font-weight-bold text-capitalize'>".$socialMediaRow->smedia."</span> has been clicked <span class='font-weight-bold'>". $clicks ."</span> times</p>";
                                         }
 
                                         if($socialMediaRow->isBouncing == 1) {
@@ -318,7 +318,7 @@ if(!$functions->loggedIn()) {
                                         }
 
                                         //Getting information for the chart
-                                        $getClickFromLastMonth = $functions->getClickFromLastMonth($socialMediaRow->id);
+                                        $getClickFromLastMonth = $functions->getClickFromLastMonth($socialMediaRow->id, 'social_links_clicks');
 
                                         //Getting chart
                                         if(!empty($getClickFromLastMonth)) {
@@ -359,14 +359,17 @@ if(!$functions->loggedIn()) {
         </a>
     </div>
 
-    <div class='collapse mt-2 mb-2' id='collapse-".$socialMediaRow->smedia."'>".$clickCounter."
 
-    ".$table."
+    <div class='collapse mt-2 mb-2' id='collapse-".$socialMediaRow->smedia."'>
 
-    <div class='custom-control custom-checkbox mb-2'>
+    <div class='custom-control custom-checkbox mb-3 pb-3 border-bottom mt-1'>
         <input type='checkbox' class='custom-control-input' id='checkbox-".$socialMediaRow->smedia."' name='checkbox-".$socialMediaRow->smedia."' value='1' ".$isChecked.">
         <label for='checkbox-".$socialMediaRow->smedia."' class='custom-control-label mt-1'><b> Make ".$socialMediaRow->smedia." icon bounce </b>- it forces users to click it</label><br>
     </div>
+
+    ".$clickCounter."
+
+    ".$table."
 
     </div>
 </div>";

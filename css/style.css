@@ -16,6 +16,10 @@ p {
     word-break: keep-all;
 }
 
+.cursor-pointer {
+    cursor: pointer!important;
+}
+
 #clickToCopyDiv {
     transition: all .1s;
 }
@@ -357,67 +361,6 @@ a, [type="button"] {
     color: #1da1f2;
 }
 
-/* SOCICONS CHANGES*/
-
-.socicon-instagram {
-    color: #E1306C;
-}
-
-.socicon-tiktok {
-    color: #000;
-}
-
-.socicon-facebook {
-    color: #3b5998;
-}
-
-.socicon-twitch {
-    color: #6441a5;
-}
-
-.socicon-twitter {
-    color: #1da1f2;
-}
-
-.socicon-youtube {
-    color: #ff0000;
-}
-
-.socicon-discord {
-    color: #7289da;
-}
-
-.socicon-snapchat {
-    color: #fffc00;
-}
-
-.socicon-mail {
-    color: #168de2;
-}
-
-.socicon-github {
-    color: #bd2c00;
-}
-
-.socicon-linkedin {
-    color: #0077b5;
-}
-
-.socicon-pinterest {
-    color: #bd081c;
-}
-
-.socicon-spotify {
-    color: #1db954;
-}
-
-.socicon-soundcloud {
-    color: #ff3300;
-}
-
-
-
-
 .index-list-header {
     font-weight: 700!important;
     font-size: 1.3rem;
@@ -505,32 +448,6 @@ label:focus,
 
 
 /* Settings-links.php */
-
-#sortable {
-    list-style-type: none;
-}
-
-.fa-trash {
-    position: relative;
-    float: right;
-    border: 0;
-    cursor: pointer;
-}
-
-.fa-edit {
-    position: relative;
-    float: right;
-    border: 0;
-    cursor: pointer;
-}
-.display-show {
-    display: block;
-}
-
-.display-none {
-    display: none !important;
-}
-
 .custom-links-container {
     padding: 1.5rem 3rem;
 }

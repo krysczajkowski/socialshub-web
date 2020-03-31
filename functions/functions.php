@@ -622,8 +622,10 @@ class Functions {
     }    
  
      public function addClick($link_id, $table) {
-        $stmt = $this->pdo->prepare("INSERT INTO $table (id, clickOn) VALUES (NULL, :link_id)");
+        $date = date("Y-m-d");
+        $stmt = $this->pdo->prepare("INSERT INTO $table (id, clickOn, date) VALUES (NULL, :link_id, :date)");
         $stmt->bindParam(':link_id', $link_id);
+        $stmt->bindParam(':date', $date);
         $stmt->execute();
     }
 
@@ -634,6 +636,22 @@ class Functions {
         $stmt->execute();
 
         return $stmt->rowCount();
+
+    }
+
+    public function getClickFromLastMonth($id) {
+        $stmt = $this->pdo->prepare("SELECT date, clickOn, COUNT(date) amount FROM social_links_clicks WHERE date BETWEEN date_sub(now(),INTERVAL 1 MONTH) AND now() AND clickOn = :id GROUP BY date");
+
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $result = "";
+
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $result .= "<tr><td>" . $row['date'] ."</td><td>" . $row['amount'] . "</td></tr>";
+        }
+
+        return $result;
 
     }
 

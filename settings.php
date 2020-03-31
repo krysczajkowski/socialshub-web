@@ -317,6 +317,29 @@ if(!$functions->loggedIn()) {
                                             $isChecked = '';
                                         }
 
+                                        //Getting information for the chart
+                                        $getClickFromLastMonth = $functions->getClickFromLastMonth($socialMediaRow->id);
+
+                                        //Getting chart
+                                        if(!empty($getClickFromLastMonth)) {
+                                            $table = "
+                                            <div class='table-responsive'>
+                                                <table class='table table-sm table-bordered table-striped table-hover mt-2 mb-4'>
+                                                    <thead class='thead-dark'>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Clicks</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        ".$getClickFromLastMonth."
+                                                    </tbody>
+                                                </table>
+                                            </div>";
+                                        } else {
+                                            $table = "";
+                                        }
+
 
                                         echo "
 <div class='input-group row col-12 col-md-10 no-gutters mb-1' id='accordion-".$socialMediaRow->smedia."'>
@@ -337,6 +360,8 @@ if(!$functions->loggedIn()) {
     </div>
 
     <div class='collapse mt-2 mb-2' id='collapse-".$socialMediaRow->smedia."'>".$clickCounter."
+
+    ".$table."
 
     <div class='custom-control custom-checkbox mb-2'>
         <input type='checkbox' class='custom-control-input' id='checkbox-".$socialMediaRow->smedia."' name='checkbox-".$socialMediaRow->smedia."' value='1' ".$isChecked.">

@@ -138,7 +138,7 @@ if ($user->id === $profileId) {
                                     foreach ($sm as $socialMediaRow) {
 
                                         if($socialMediaRow->isBouncing == 1) {
-                                            $bouncingClass = 'bounce';
+                                            $bouncingClass = 'pulse';
                                         } else {
                                             $bouncingClass = '';
                                         }

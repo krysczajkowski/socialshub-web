@@ -90,7 +90,7 @@ p {
 }
 
 .smedia-icon-index:hover {
-    transform: rotate(20deg);
+    transform: scale(1.15); 
 }
 
 .smedia-icon {
@@ -100,7 +100,7 @@ p {
 }
 
 .smedia-icon:hover {
-    transform: rotate(20deg);
+    transform: scale(1.15); 
 }
 
 .lg-font {
@@ -146,52 +146,43 @@ img.signUp-link {
     margin-top: 3.5rem;
 }
 
-/* Bouncing Icon Class */ 
+/* Pulsing Icon Class */ 
 
-
-.bounce {
-    -webkit-animation: bounce 2s;
-            animation: bounce 2s;
+.pulse {
+  animation: pulse 1.2s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
     -webkit-animation-iteration-count: infinite;
             animation-iteration-count: infinite;
 }
 
-@-webkit-keyframes bounce {
-    0%,
-    25%,
-    50%,
-    75%,
-    100% {
-        -webkit-transform: translateY(0);
-                transform: translateY(0);
-    }
-    40% {
-        -webkit-transform: translateY(-25px);
-                transform: translateY(-25px);
-    }
-    60% {
-        -webkit-transform: translateY(-12px);
-                transform: translateY(-12px);
-    }
+@-webkit-keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
-@keyframes bounce {
-    0%,
-    25%,
-    50%,
-    75%,
-    100% {
-        -webkit-transform: translateY(0);
-                transform: translateY(0);
-    }
-    40% {
-        -webkit-transform: translateY(-25px);
-                transform: translateY(-25px);
-    }
-    60% {
-        -webkit-transform: translateY(-12px);
-                transform: translateY(-12px);
-    }
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
 /* Facebook button */

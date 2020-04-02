@@ -116,7 +116,7 @@ if(!$functions->loggedIn()) {
                             $functions->addNewSocialMedia($user->id);
                                                   
                                       
-                        } else if(!empty($smedia_name) && strlen($smedia_name) < 40) {
+                        } else if(!empty($smedia_name) && strlen($smedia_name) < 100) {
 
                             $smedia_link = $links[$smedia] . $smedia_name;
 
@@ -133,7 +133,7 @@ if(!$functions->loggedIn()) {
 
                         } else {
                             $changes_success = 0;
-                            $_SESSION['eSettings'] = $smedia . ' name must be under 40 letters.';
+                            $_SESSION['eSettings'] = $smedia . ' name must be under 100 letters.';
                         } 
                                                 
                     }
@@ -364,7 +364,7 @@ if(!$functions->loggedIn()) {
 
     <div class='custom-control custom-checkbox mb-3 pb-3 border-bottom mt-1'>
         <input type='checkbox' class='custom-control-input' id='checkbox-".$socialMediaRow->smedia."' name='checkbox-".$socialMediaRow->smedia."' value='1' ".$isChecked.">
-        <label for='checkbox-".$socialMediaRow->smedia."' class='custom-control-label mt-1'><b> Make ".$socialMediaRow->smedia." icon bounce </b>- it forces users to click it</label><br>
+        <label for='checkbox-".$socialMediaRow->smedia."' class='custom-control-label mt-1'><b> Make ".$socialMediaRow->smedia." icon pulse </b>- it forces users to click it</label><br>
     </div>
 
     ".$clickCounter."

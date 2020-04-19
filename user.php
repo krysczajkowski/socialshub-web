@@ -113,9 +113,15 @@ if ($user->id === $profileId) {
                                         $links = $functions->showActiveLinks($profileId);
                                         //Displaying links :D
 
+                                        $theme = $functions->getLinkTheme($profileId);
+
+                                        if(empty($theme)) {
+                                            $theme = 'gradient-button-1';
+                                        }
+
                                         foreach ($links as $link) {
                                             if(!empty($link->title)) {
-                                                echo "<a href='$link->link' class='btn-block custom-link-click px-2 py-2 small-font mt-2 gradient-button gradient-button-1' target='_blank' data-customlink='$link->id'>$link->title</a>";
+                                                echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button $theme' target='_blank' data-customlink='$link->id'>$link->title</a>";
                                             }
                                         }
 

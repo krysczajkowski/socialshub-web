@@ -61,6 +61,9 @@ if(isset($_POST['oldPassword']) && isset($_POST['newPassword']) && isset($_POST[
                     <div class="col-12 my-3 pl-4">
                         <a href="settings-links.php" class='text-dark h5 none-decoration'>My Links</a>
                     </div>
+                    <div class="col-12 my-3 pl-4">
+                        <a href="settings-theme.php" class='text-dark h5 none-decoration'>Links Theme</a>
+                    </div>
                     <?php if(!$functions->isUserFbUser($user->id)) {?>
                     <div class="col-12 my-3 pl-4 border-left border-dark">
                         <a href="edit-password.php" class='text-dark h5 none-decoration'>Change Password</a>

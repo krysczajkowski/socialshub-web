@@ -118,6 +118,11 @@ if(!$functions->loggedIn()) {
                                       
                         } else if(!empty($smedia_name) && strlen($smedia_name) < 100) {
 
+                            //If user write all url (instead of rest) we delete unnecessary part
+                            if (strpos($smedia_name, $links[$smedia]) !== false) {
+                                $smedia_name = str_replace($links[$smedia], '', $smedia_name);
+                            }
+
                             $smedia_link = $links[$smedia] . $smedia_name;
 
                             // Setting #2 tutorial for new user
@@ -190,6 +195,9 @@ if(!$functions->loggedIn()) {
                     </div>
                     <div class="col-12 my-3 pl-4">
                         <a href="settings-links.php" class='text-dark h5 none-decoration'>My Links</a>
+                    </div>
+                    <div class="col-12 my-3 pl-4">
+                        <a href="settings-theme.php" class='text-dark h5 none-decoration'>Links Theme</a>
                     </div>
                     <?php if(!$functions->isUserFbUser($user->id)) {?>
                     <div class="col-12 my-3 pl-4">

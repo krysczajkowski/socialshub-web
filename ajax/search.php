@@ -17,7 +17,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
     ?>
         <div class='p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary search-result'>
             <div class='col-2 pt-3'>
-                <h3 class='font-weight-bold ranking-number'>#<?php echo $i ?></h3>
+                <h3 class='font-weight-bold font-montserrat'>#<?php echo $i ?></h3>
             </div>
 
             <div class='col-2'>
@@ -80,7 +80,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
 
         <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
             <div class="col-2 pt-3">
-                <h3 class='font-weight-bold ranking-number'><?php echo '#'.$rankingPosition; ?></h3>
+                <h3 class='font-weight-bold ranking-number font-montserrat'><?php echo '#'.$rankingPosition; ?></h3>
             </div>
 
             <div class="col-2">

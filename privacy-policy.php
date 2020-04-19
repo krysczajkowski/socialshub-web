@@ -30,7 +30,6 @@
     <div>
         Krystian Czajkowski<br>
         Poland <br>
-        Kleczkowska 47/31<br>
         52-129 Wroclaw <br>
         kczajkowski@socialshub.net<br>
         nr tel.: ---

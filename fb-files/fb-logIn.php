@@ -23,22 +23,24 @@ if($functions->userIdByEmail($_SESSION['fb-userData']['email'])) {
     
     exit();
 } else {
-    //User does not exist, make him an account
+    // User does not exist, make him an account
     
     // Setting mini tutorial for user
     setcookie('new-user-tut1', '1', time()+20, '/'); 
 
     $email = $_SESSION['fb-userData']['email'];
     
-    //Filtering and deleting whitespace characters from first name and last name
+    // Filtering and deleting whitespace characters from first name and last name
     $firstName = $functions->checkInput(preg_replace('/\s+/', '', $_SESSION['fb-userData']['first_name']));
     $lastName  = $functions->checkInput(preg_replace('/\s+/', '', $_SESSION['fb-userData']['last_name']));
     $validationCode = md5(microtime() . $lastName);
     $randomNumber = rand(3,5);
     
-    //Making as unique as possibble screenName for new user
+    // Making as unique as possibble screenName for new user
     $screenName = $firstName . $lastName . substr($validationCode, 0, $randomNumber);
-    
+
+    // Translate screenName
+    $screenName = $functions->transliterateString($screenName);
     
     $functions->register_user($email, '', $screenName, 1);
     

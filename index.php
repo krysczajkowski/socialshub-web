@@ -14,6 +14,10 @@
     
     ?>
 
+    <div class='w-100 text-center index-gradient p-5'>
+        <h2 class='text-white text-shadow font-montserrat font-weigt-bold'>SOCIALSHUB'S TOP 10</h2>
+        <p class='text-white font-montserrat'>Hey! Check out SocialsHub's most popular profiles!</p>
+    </div>
 
      <div class="p-3 row col-10 offset-1 col-md-8 offset-md-2 mt-3">
         <!-- <h3 class='ml-2 font-weight-bold'>The Most Interesting Profiles</h3> -->

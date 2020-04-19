@@ -29,29 +29,6 @@ p {
     cursor: pointer;
 }
 
-.gradient-button {
-    text-align: center;
-    margin: 10px;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: #FFF;
-    box-shadow: 0 0 20px #eee;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    cursor: pointer;
-    display: inline-block;
-    border-radius: 25px;
-    font-family: 'Montserrat';
-    font-weight: 700!important;
-}
-
-.gradient-button:hover {
-    color: #fff;
-    text-decoration: none;
-}
-
-.gradient-button-1 {background-image: linear-gradient(to right, #000 0%,#444 50%, #666 100%);}
-.gradient-button-1:hover { background-position: right center; }
 
 
 .noselect {
@@ -184,6 +161,187 @@ img.signUp-link {
     transform: scale3d(1, 1, 1);
   }
 }
+
+.font-montserrat {
+	font-family: 'Montserrat', sans-serif!important;
+}
+
+/* INDEX GRADIENT */
+.index-gradient {
+    background-image: -webkit-linear-gradient(bottom left, #d7816a, #d27469, #cd6769, #c65b6a, #bd4f6c);
+}						
+
+.index-gradient .text-shadow {
+	text-shadow: 2px 2px 0px #5f5f6d!important;
+}
+
+/* LINKS BUTTONS */
+.gradient-button {
+    text-align: center;
+    margin: 10px;
+    transition: 0.5s;
+    background-size: 200% auto;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 25px;
+    font-family: 'Montserrat';
+    font-weight: 700!important;
+    padding-right: 1rem!important;
+    padding-left: 1rem!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+}
+
+.gradient-button:hover {
+    text-decoration: none;
+}
+
+.button-1 {
+    border: 2px solid #000!important;
+    color: #000!important;
+}
+
+.button-1:hover {
+    background-color: #222;
+    color: #fff!important;
+}
+
+.button-2 {
+    background-color: #7c87ea!important;
+    border: 2px solid #6572e6;
+    color: #fff!important;
+}
+
+.button-2:hover {
+    background-color: #6572e6!important;
+}
+
+.button-3 {
+    background-color: #a87cea!important;
+    border: 2px solid #9965e6;
+    color: #fff!important;
+}
+
+.button-3:hover {
+    background-color: #9965e6!important;
+}
+
+.button-4 {
+    border: 2px solid #000!important;
+    color: #000!important;
+}
+
+.button-4:hover {
+    background-color: #f2f2f2;
+}
+
+.button-5 {
+    border: 2px solid #222!important;
+    background-color: #222;
+    color: #fff!important;
+}
+
+.button-5:hover {
+    background-color: #fff;
+    color: #222!important;
+}
+
+.button-6 {
+    border: 2px solid #4169E1!important;
+    background-color: #4169E1;
+    color: #fff!important;
+}
+
+.button-6:hover {
+    background-color: #fff!important;
+    color: #4169E1!important;
+}
+
+.button-7 {
+    background-color: #9965e6!important;
+    border: 2px solid #9965e6;
+    color: #fff!important;
+}
+
+.button-7:hover {
+    background-color: #fff!important;
+    color: #9965e6!important;
+}
+
+.button-8 {
+    background-color: #33ccff!important;
+    border: 2px solid #33ccff;
+    color: #fff!important;
+}
+
+.button-8:hover {
+    background-color: #fff!important;
+    color: #33ccff!important;
+}
+
+.button-9 {
+    background-color: #00e600!important;
+    border: 2px solid #00e600;
+    color: #fff!important;
+}
+
+.button-9:hover {
+    background-color: #fff!important;
+    color: #00e600!important;
+}
+
+.button-10 {
+    background-color: #ffc107!important;
+    border: 2px solid #ffc107;
+    color: #fff!important;
+}
+
+.button-10:hover {
+    background-color: #fff!important;
+    color: #ffc107!important;
+}
+
+.button-11 {
+    background-color: #ff9900!important;
+    border: 2px solid #ff9900;
+    color: #fff!important;
+}
+
+.button-11:hover {
+    background-color: #fff!important;
+    color: #ff9900!important;
+}
+
+.button-12 {
+    background-color: #ff3300!important;
+    border: 2px solid #ff3300;
+    color: #fff!important;
+}
+
+.button-12:hover {
+    background-color: #fff!important;
+    color: #ff3300!important;
+}
+
+.gradient-button-1 {background-image: linear-gradient(to right, #000 0%,#444 50%, #666 100%);color: #FFF!important;}
+.gradient-button-1:hover { background-position: right center; color: #fff!important;}
+
+.gradient-button-2 {
+    background-image: linear-gradient(to right, #D31027 0%, #EA384D 51%, #D31027 100%)!important;
+    border: 2px solid #D31027;
+    color: #fff!important;
+}
+.gradient-button-2:hover { background-position: right center; }
+
+.gradient-button-3 {
+    background-image: linear-gradient(to right, #1FA2FF 0%, #05c0e1 51%, #1FA2FF 100%)!important;
+    border: 2px solid #1FA2FF;
+    color: #fff!important;
+}
+.gradient-button-3:hover { background-position: right center; }
+
+
 
 /* Facebook button */
 a.fb {

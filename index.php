@@ -5,12 +5,21 @@
 <?php include 'includes/head.php'; ?>
  
 <body> 
+    <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>  
+    <script>kofiwidget2.init('Support Me on Ko-fi', '#cd6769', 'W7W11MI6Y'); </script> 
     <?php include 'includes/nav.php'; 
 
     // Sign Up or Log In popup for new users
     if(!$functions->loggedIn()) {
         include 'includes/signUp-popup.php';
     }
+
+    if($functions->loggedIn()) {
+        $name = '@'.$user->screenName;
+    } else {
+        $name = 'you';
+    }
+
     
     ?>
 
@@ -19,7 +28,7 @@
         <p class='text-white font-montserrat'>Hey! Check out SocialsHub's most popular profiles!</p>
     </div>
 
-     <div class="p-3 row col-10 offset-1 col-md-8 offset-md-2 mt-3">
+     <div class="p-3 row col-10 offset-1 col-md-8 offset-md-0 px-5 mt-3">
         <!-- <h3 class='ml-2 font-weight-bold'>The Most Interesting Profiles</h3> -->
         <input type="text" class='form-control form-control-lg search w-100' placeholder='Search users by name, email'>
      </div>
@@ -28,6 +37,29 @@
         <div class="row search-result">  
 
         <?php include 'ajax/search.php'; ?>
+    
+
+        <div class='d-none d-lg-block col-lg-3 offset-lg-1'>
+            <div class="card p-0" style='border: 2px solid #cd6769; margin-top: -50px;'>
+                <div class="card-body text-center">
+                    <img src="socialshub-images/me.jpg" alt="" class=' rounded-circle img-fluid' style='width: 60px;'>
+                    <br>
+                    <p class='mt-3 mb-3'>
+
+                        <p>Hey <?php echo $name; ?>!</p>
+                        <p>My name is Krystian Czajkowski, I’m 16 and I am the creator of SocialsHub.net. </p>
+
+                        <p>I know people hate ads, so if you find the site helpful or useful then please consider throwing a coffee my way to help support my work 😊</p>
+                    </p>
+                    <script type='text/javascript'>kofiwidget2.draw();</script>
+
+                </div>
+                <!-- <div class="card-footer text-center bg-white py-1">
+                    Close
+                </div>  -->
+            </div>
+        </div> 
+
 
     </div>
     <!-- Including footer -->

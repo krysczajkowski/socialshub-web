@@ -4,6 +4,24 @@
     <?php 
     include 'includes/head.php'; 
     
+    if($functions->loggedIn()) {
+        if(isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+        } else if (isset($_COOKIE['user_id'])) {
+            $user_id = $_COOKIE['user_id'];
+        }
+        
+        $user = $functions->user_data($user_id);
+
+        header('Location: '.$user->screenName);
+        exit(); 
+    }
+
+    // Creating token
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+
     $eReset = '';
     
     if(isset($_COOKIE['reset_password_cookie'])) {
@@ -11,20 +29,26 @@
         if(isset($_GET['email']) && isset($_GET['code'])) {
             
             if(isset($_POST['submit'])) {
-                $newPassword    = $functions->checkInput($_POST['newPassword']);
-                $confPassword   = $functions->checkInput($_POST['confirmPassword']);
-                $email          = $functions->checkInput($_GET['email']);
-                $validationCode = $functions->checkInput($_GET['code']);
-                
-                
-                if(strlen($newPassword) < 5 || strlen($newPassword) > 20) {
-                    $eReset = 'Password must be between 5 and 20 characters.';
-                } else if($newPassword != $confPassword) {
-                    $eReset = "You must enter the same password twice in order to confirm it.";
+
+                // Checking if tokens match
+                if(hash_equals($_POST['token'], $_SESSION['token'])) {
+
+                    $newPassword    = $functions->checkInput($_POST['newPassword']);
+                    $confPassword   = $functions->checkInput($_POST['confirmPassword']);
+                    $email          = $functions->checkInput($_GET['email']);
+                    $validationCode = $functions->checkInput($_GET['code']);
+                    
+                    
+                    if(strlen($newPassword) < 5 || strlen($newPassword) > 20) {
+                        $eReset = 'Password must be between 5 and 20 characters.';
+                    } else if($newPassword != $confPassword) {
+                        $eReset = "You must enter the same password twice in order to confirm it.";
+                    } else {
+                        $functions->reset_password($newPassword, $email, $validationCode);
+                    }
                 } else {
-                    $functions->reset_password($newPassword, $email, $validationCode);
+                    $eReset = 'Sorry. Server problem. Please try again later.';
                 }
-            
             } 
         } else {
             echo("<script>location.href = '".BASE_URL."'</script>");
@@ -44,6 +68,7 @@
                            <div class="card-title text-center mb-3"><h2><strong style='letter-spacing: 1px;'>Reset Password</strong></h2></div>
                            <!-- FORM -->
                            <form method='post' autocomplete="off">
+                            <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                                <input type="password" placeholder='New Password' class='form-control mt-2' name='newPassword'>                            
                                <input type="password" placeholder='Confirm Password' class='form-control mt-2' name='confirmPassword'>                            
                                <div class="form-group mt-3">

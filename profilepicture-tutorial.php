@@ -4,6 +4,10 @@
 
 <?php include 'includes/head.php'; 
 
+// Creating token
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
     
 ?>
  
@@ -15,26 +19,32 @@
 
 
         if(isset($_POST['submit'])) {
-            $bio = $functions->checkInput($_POST['bio']);
 
-            //Old names of images
-            $DBprofImage = $user->profileImage;
-            
-            //Checking profile image
-            if(!empty($_FILES['uploadProfile']['name'][0])) {
-                $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id);
-                if(!empty($profileRoot)) {
-                    $DBprofImage = $profileRoot;
+            // Checking if tokens match
+            if(hash_equals($_POST['token'], $_SESSION['token'])) {
+
+                $bio = $functions->checkInput($_POST['bio']);
+
+                //Old names of images
+                $DBprofImage = $user->profileImage;
+                
+                //Checking profile image
+                if(!empty($_FILES['uploadProfile']['name'][0])) {
+                    $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id);
+                    if(!empty($profileRoot)) {
+                        $DBprofImage = $profileRoot;
+                    }
                 }
+                
+                //Updating user's data
+                $functions->update('users', $user->id, array('bio' => $bio, 'profileImage' => $DBprofImage));                   
+                
+                if($changes_success) {
+                    echo("<script>location.replace('".$user->screenName."')</script>");
+                }
+            } else {
+                echo "<p class='text-danger'>Sorry. Server problem. Please try again later.</p>";
             }
-            
-            //Updating user's data
-            $functions->update('users', $user->id, array('bio' => $bio, 'profileImage' => $DBprofImage));                   
-            
-            if($changes_success) {
-                echo("<script>location.replace('".$user->screenName."')</script>");
-            }
-            
         }
         
     ?>
@@ -44,6 +54,7 @@
         <div class="row">
             <div class="col-10 col-md-6 col-lg-4 offset-1 offset-md-3 offset-lg-4 border mt-5 p-4">
                 <form action="" method='POST' enctype='multipart/form-data'>
+                    <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                     <h3 class='text-center'>Create Profile</h3>
 
                     <div class="form-group text-center">

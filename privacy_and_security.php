@@ -8,6 +8,11 @@
 if(!$functions->loggedIn()) {
     header('Location: index.php');
 }
+
+// Creating token
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
     
 //Setting empty error for incorrect password in delete account form
 $eDeleteA = '';   
@@ -22,50 +27,58 @@ $eDeleteA = '';
        
         // DELETE ACCOUNT CODE
         if(isset($_POST['delete-account'])) {
-            // If user was registered with no facebook
-            if(isset($_POST['password'])) {
-                $password = $functions->checkInput($_POST['password']);
-                $correctPassword  = $user->password;
 
-                //Hashing pass from input
+            // Checking if tokens match
+            if(hash_equals($_POST['token'], $_SESSION['token'])) {
 
-                $hash = md5($password);
+                // If user was registered with no facebook
+                if(isset($_POST['password'])) {
+                    $password = $functions->checkInput($_POST['password']);
+                    $correctPassword  = $user->password;
 
-                if($correctPassword === $hash) {
+                    //Hashing pass from input
 
-                    //Usun konto, napisz to w logowaniu ze konto zostalo ususniete, wyslij maila z tym ze konto zostalo usuniete
-                    $functions->delete_account($user->id);
+                    $hash = md5($password);
 
-                    setcookie('account_deleted', '1', time()+15);
+                    if($correctPassword === $hash) {
 
-                } else {
-                    $eDeleteA = 'Your password is incorrect.';
-                }
-            }
-            
-            //If user was registered by facebook
-            if(isset($_POST['email-confirm'])) {
-                
-                $email = $_POST['email-confirm'];
-                
-                if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $eDeleteA = 'Invalid Email.';
-                } else {
-                    $correctEmail  = $user->email;
-
-                    if($correctEmail === $email) {
-
-                        //Deleting Account 
+                        //Usun konto, napisz to w logowaniu ze konto zostalo ususniete, wyslij maila z tym ze konto zostalo usuniete
                         $functions->delete_account($user->id);
 
                         setcookie('account_deleted', '1', time()+15);
 
                     } else {
-                        $eDeleteA = 'Your email is incorrect.';
-                    } 
+                        $eDeleteA = 'Your password is incorrect.';
+                    }
                 }
                 
+                //If user was registered by facebook
+                if(isset($_POST['email-confirm'])) {
+                    
+                    $email = $_POST['email-confirm'];
+                    
+                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $eDeleteA = 'Invalid Email.';
+                    } else {
+                        $correctEmail  = $user->email;
 
+                        if($correctEmail === $email) {
+
+                            //Deleting Account 
+                            $functions->delete_account($user->id);
+
+                            setcookie('account_deleted', '1', time()+15);
+
+                        } else {
+                            $eDeleteA = 'Your email is incorrect.';
+                        } 
+                    }
+                    
+
+                }
+
+            } else {
+                $eDeleteA = 'Sorry! Server problem. Please try again later.';
             }
         }  
     
@@ -119,6 +132,7 @@ $eDeleteA = '';
                             <!-- COLLAPSE -->
                             <div class='collapse' id='delete-account-collapse'>
                                 <form method='post'>
+                                    <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                                     <div class="card card-body mb-4 border"> 
                                     <div class="card-title h4 mb-4">Permanently Delete Account</div>   
                                        

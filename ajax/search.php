@@ -1,11 +1,12 @@
 <?php
-error_reporting(E_ALL & ~E_WARNING);
 
 include '../functions/init.php';
+
 
 if(isset($_POST['search']) && !empty($_POST['search'])) {
     $search = $functions->checkInput($_POST['search']);
     $result = $functions->search($search);
+
 
     if(!empty($result)) {
 
@@ -15,9 +16,9 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
     $userSM = $functions->showNotEmptySocialMedia($user->id); 
     $i++;
     ?>
-        <div class='p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary search-result'>
+        <div class='p-3 row col-md-8 offset-md-0 mt-3 border-bottom border-secondary search-result'>
             <div class='col-2 pt-3'>
-                <h3 class='font-weight-bold font-montserrat'>#<?php echo $i ?></h3>
+                <h3 class='font-weight-bold ranking-number'>#<?php echo $i ?></h3>
             </div>
 
             <div class='col-2'>
@@ -56,17 +57,17 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
             </div>
         </div>
 
+    <?php } 
+
+    } else {
+
+        echo "<div class='p-3 row col-md-8 offset-md-2 mt-3 lg-font'>No matches.</div>";
+    }
+
+} else { ?>
+
+    <div class='col-md-8 offset-md-0'>
     <?php
-         }
-
-
-
-} else {
-
-    echo "<div class='p-3 row col-md-8 offset-md-2 mt-3 lg-font'>No matches.</div>";
-}
-
-} else {
     
     // Dodaj tego javascripta ale przed praca na obrazkach sprawdź czy uploadProfile itp w ogole istnieje, jeżeli tak to zacznij prace, jak ją skończysz to obowiązkowo po próbuj hackować strone 
         $ranking = $functions->rankingGenerator();
@@ -78,7 +79,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
             $rankingPosition = $i + 1;     
     ?>
 
-        <div class="p-3 row col-md-8 offset-md-2 mt-3 border-bottom border-secondary">
+        <div class="p-3 row mt-3 border-bottom search-result">
             <div class="col-2 pt-3">
                 <h3 class='font-weight-bold ranking-number font-montserrat'><?php echo '#'.$rankingPosition; ?></h3>
             </div>
@@ -120,5 +121,10 @@ if(isset($_POST['search']) && !empty($_POST['search'])) {
         </div>
 
 
-    <?php } // END OF THE LOOP
-}
+    <?php } // END OF THE LOOP ?>
+
+    </div>
+
+<?php } ?>
+
+

@@ -14,6 +14,11 @@
     $permissions = ['email'];
     $loginURL = $helper->getLoginUrl($redirectURL, $permissions);
 
+    // Creating token
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -43,55 +48,60 @@
     //Register Code
     $eRegister = '';
 
-    //Register Code
-    $eRegister = '';
 
     if(isset($_POST['nameRegister']) && isset($_POST['emailRegister']) && isset($_POST['passwordRegister'])) {
-        //VALIDATE VARIABLES
-        $reg_name     = $functions->checkInput($_POST['nameRegister']);
-        $reg_email    = $functions->checkInput($_POST['emailRegister']);
-        $reg_password = $functions->checkInput($_POST['passwordRegister']);
-        $terms    = isset($_POST['accept-terms']);
-        $privacy  = isset($_POST['accept-privacy']);
+
+        // Checking if tokens match
+        if(hash_equals($_POST['token'], $_SESSION['token'])) {
+
+            //VALIDATE VARIABLES
+            $reg_name     = $functions->checkInput($_POST['nameRegister']);
+            $reg_email    = $functions->checkInput($_POST['emailRegister']);
+            $reg_password = $functions->checkInput($_POST['passwordRegister']);
+            $terms    = isset($_POST['accept-terms']);
+            $privacy  = isset($_POST['accept-privacy']);
 
 
-        if(!empty($username) || !empty($reg_email) || !empty($reg_password)) {
+            if(!empty($username) || !empty($reg_email) || !empty($reg_password)) {
 
-            if(!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
-                $eRegister = 'Invalid email.';
-            } else if (strlen($reg_name) < 2 || strlen($reg_name) > 25) {
-                $eRegister = 'Name must be between 2 and 25 characters.';
-            } else if ($functions->name_exist($reg_name)) {
-                $eRegister = 'Sorry, this name is already taken.';
-            } else if(!preg_match('/^[a-zA-Z0-9]+$/', $reg_name)) {
-                $eRegister = 'Only letters, numbers and white space allowed in name field.';
-            } else if ($functions->email_exist($reg_email)) {
-                $eRegister = 'This email is already in use.';
-            } else if (strlen($reg_password) < 5 || strlen($reg_password) > 25) {
-                $eRegister = 'Password must be between 5 and 25 characters';
-            }else if ($terms != 'on' || $privacy != 'on'){
-                $eRegister = 'All checkbox are required';
-            } else {
-
-                // Call the function post_captcha
-                $res = $functions->post_captcha($_POST['g-recaptcha-response']);
-
-                if (!$res['success']) {
-                    // What happens when the reCAPTCHA is not properly set up
-                    $_SESSION['reg_password'] = "Sorry you can't be registered now.";
+                if(!filter_var($reg_email, FILTER_VALIDATE_EMAIL)) {
+                    $eRegister = 'Invalid email.';
+                } else if (strlen($reg_name) < 2 || strlen($reg_name) > 25) {
+                    $eRegister = 'Name must be between 2 and 25 characters.';
+                } else if ($functions->name_exist($reg_name)) {
+                    $eRegister = 'Sorry, this name is already taken.';
+                } else if(!preg_match('/^[a-zA-Z0-9]+$/', $reg_name)) {
+                    $eRegister = 'Only letters, numbers and white space allowed in name field.';
+                } else if ($functions->email_exist($reg_email)) {
+                    $eRegister = 'This email is already in use.';
+                } else if (strlen($reg_password) < 5 || strlen($reg_password) > 25) {
+                    $eRegister = 'Password must be between 5 and 25 characters';
+                }else if ($terms != 'on' || $privacy != 'on'){
+                    $eRegister = 'All checkbox are required';
                 } else {
-                    //Adding user to database
-                                 
-                    // Setting mini tutorial for user
-                    setcookie('new-user-tut1', '1', time()+20); 
 
-                    $functions->register_user($reg_email, $reg_password, $reg_name, 0);
-                    echo("<script>location.href = '".BASE_URL."smedia-tutorial.php';</script>");              
+                    // Call the function post_captcha
+                    $res = $functions->post_captcha($_POST['g-recaptcha-response']);
+
+                    if (!$res['success']) {
+                        // What happens when the reCAPTCHA is not properly set up
+                        $_SESSION['reg_password'] = "Sorry you can't be registered now.";
+                    } else {
+                        //Adding user to database
+                                    
+                        // Setting mini tutorial for user
+                        setcookie('new-user-tut1', '1', time()+20); 
+
+                        $functions->register_user($reg_email, $reg_password, $reg_name, 0);
+                        echo("<script>location.href = '".BASE_URL."smedia-tutorial.php';</script>");              
+                    }
                 }
-            }
 
+            } else {
+                $eRegister = 'All fields are required.';
+            }
         } else {
-            $eRegister = 'All fields are required.';
+            $eRegister = 'Sorry. Server problem. Please try again later.';
         }
     }
 
@@ -114,6 +124,7 @@
                                 
                             <div class=''> 
                                 <form action="" method="post" id='i-recaptcha'>
+                                    <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                                     <input type="text" value='<?php if(isset($reg_name)) {echo $reg_name;} ?>' class="form-control" placeholder='Name' name='nameRegister'>
                                     <input type="email" value='<?php if(isset($reg_email)) {echo $reg_email;} ?>' class="form-control mt-2" placeholder='Email' name='emailRegister'>
                                     <input type="Password" value='<?php if(isset($reg_password)) {echo $reg_password;} ?>' class="form-control mt-2" placeholder='Password' name='passwordRegister'>

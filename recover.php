@@ -4,30 +4,56 @@
     <?php 
     include 'includes/head.php'; 
     
+    if($functions->loggedIn()) {
+        if(isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+        } else if (isset($_COOKIE['user_id'])) {
+            $user_id = $_COOKIE['user_id'];
+        }
+        
+        $user = $functions->user_data($user_id);
+
+        header('Location: '.$user->screenName);
+        exit(); 
+    }
+
+
+    // Creating token
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+
     $eRecoverEmail = '';
     $_SESSION['eRecoverEmail'] = '';
     
     if(isset($_POST['email'])) {
-        $email = $functions->checkInput($_POST['email']);
-        if(!empty($email)) {
-            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                
-                if($functions->email_exist($email)) {
+
+        // Checking if tokens match
+        if(hash_equals($_POST['token'], $_SESSION['token'])) {
+
+            $email = $functions->checkInput($_POST['email']);
+            if(!empty($email)) {
+                if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     
-                    $_SESSION['rec_pass'] = 1;
-                    $_SESSION['rec_email'] = $email;
-                    echo("<script>location.href = '".BASE_URL."'</script>");  
+                    if($functions->email_exist($email)) {
+                        
+                        $_SESSION['rec_pass'] = 1;
+                        $_SESSION['rec_email'] = $email;
+                        $eRecoverEmail = "Mail with reset password link will be sent in a couple minutes.";
+                        
+                    } else {
+                        $eRecoverEmail = "Sorry, this email doesn't exist.";
+                    }
                     
                 } else {
-                    $eRecoverEmail = "Sorry, this email doesn't exist.";
+                    $eRecoverEmail = "Invalid Email";
                 }
                 
             } else {
-                $eRecoverEmail = "Invalid Email";
+                $eRecoverEmail = "Email field is require.";
             }
-            
         } else {
-            $eRecoverEmail = "Email field is require.";
+            $eRecoverEmail = 'Sorry. Server problem. Please try again later.';
         }
     }
     
@@ -46,6 +72,7 @@
                        <div class="card-body">
                            <div class="card-title text-center mb-3"><h2><strong style='letter-spacing: 1px;'>Recover Password</strong></h2></div>
                            <form method='post' autocomplete="off">
+                            <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                                <input type="email" placeholder='Email Adress' class='form-control mt-2' name='email'>                            
                                <div class="form-group mt-3">
                                    <div class="row">

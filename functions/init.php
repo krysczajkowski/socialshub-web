@@ -1,7 +1,7 @@
 <?php
 
-    //session_start();
-    //ob_start();
+    // Turn off all error reporting
+    error_reporting(0);
 
     include 'db.php';
     include 'functions.php';

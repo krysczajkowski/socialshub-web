@@ -13,6 +13,11 @@ if(!$functions->loggedIn()) {
 <body ondragstart="return false" ondrag="return false">
     <?php include 'includes/nav.php';
 
+    // Creating token
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+
     //Downloading all data about user's social medias
     $sm = $functions->showSocialMedia($user->id);
 
@@ -22,7 +27,7 @@ if(!$functions->loggedIn()) {
         'facebook' => 'https://facebook.com/',
         'twitter' => 'https://twitter.com/', 
         'instagram' => 'https://instagram.com/',
-        'tiktok' => 'https://tiktok.com/@',
+        'tiktok' => 'https://www.tiktok.com/@',
         'snapchat' => 'https://snapchat.com/add/',
         'twitch' => 'https://twitch.tv/',
         'soundcloud' => 'https://soundcloud.com/',
@@ -34,47 +39,54 @@ if(!$functions->loggedIn()) {
 
     if(isset($_POST['submit'])) {
 
-        //If everything went good we can redirect to user.php
-        $changes_success = 1;
+        // Checking if tokens match
+        if(hash_equals($_POST['token'], $_SESSION['token'])) {
 
-        // FILTERING SOCIAL MEDIA
-        foreach ($sm as $socialMediaRow) {
+            //If everything went good we can redirect to user.php
+            $changes_success = 1;
 
-            $smedia = $socialMediaRow->smedia;                    
+            // FILTERING SOCIAL MEDIA
+            foreach ($sm as $socialMediaRow) {
+
+                $smedia = $socialMediaRow->smedia;                    
+                    
                 
+                $smedia_name = $functions->checkInput($_POST[$smedia . '-name']);
+                
+                //Session to hold in input wrong (over 40 chars) social name
+                $_SESSION[$smedia . '-inputName'] = $smedia_name;
+                
+
+                if((empty($smedia_name))) { 
+
+                    $smedia_link = '';    
+
+                } else if(!empty($smedia_name) && strlen($smedia_name) < 40) {
+
+                    //If user write all url (instead of rest) we delete unnecessary part
+                    if (strpos($smedia_name, $links[$smedia]) !== false) {
+                        $smedia_name = str_replace($links[$smedia], '', $smedia_name);
+                    }
+
+                    $smedia_link = $links[$smedia] . $smedia_name;
+
+                } else {
+                    $changes_success = 0;
+                    $_SESSION['eSettings'] = $smedia . ' name must be under 40 letters.';
+                } 
+
+                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, 0);
+                $functions->addNewSocialMedia($user->id);
+                                        
+            }
+
+            if($changes_success) {
+                $_SESSION['profilepicture-tutorial_access'] = 1;
+                echo("<script>location.replace('profilepicture-tutorial.php')</script>");
+            }
             
-            $smedia_name = $functions->checkInput($_POST[$smedia . '-name']);
-            
-            //Session to hold in input wrong (over 40 chars) social name
-            $_SESSION[$smedia . '-inputName'] = $smedia_name;
-            
-
-            if((empty($smedia_name))) { 
-
-                $smedia_link = '';    
-
-            } else if(!empty($smedia_name) && strlen($smedia_name) < 40) {
-
-                //If user write all url (instead of rest) we delete unnecessary part
-                if (strpos($smedia_name, $links[$smedia]) !== false) {
-                    $smedia_name = str_replace($links[$smedia], '', $smedia_name);
-                }
-
-                $smedia_link = $links[$smedia] . $smedia_name;
-
-            } else {
-                $changes_success = 0;
-                $_SESSION['eSettings'] = $smedia . ' name must be under 40 letters.';
-            } 
-
-            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, 0);
-            $functions->addNewSocialMedia($user->id);
-                                    
-        }
-
-        if($changes_success) {
-            $_SESSION['profilepicture-tutorial_access'] = 1;
-            echo("<script>location.replace('profilepicture-tutorial.php')</script>");
+        } else {
+            $_SESSION['eSettings'] = 'Sorry. Server problem. Please try again later.';
         }
     }          
 
@@ -92,7 +104,7 @@ if(!$functions->loggedIn()) {
     </div>
     <!-- FORM -->
     <form action="" method='POST' enctype="multipart/form-data">
-
+    <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
         <!-- ADD SOCIAL LINKS -->
         <div class="row col-10 offset-1">
         <?php    

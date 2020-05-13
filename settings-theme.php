@@ -7,6 +7,11 @@ if(!$functions->loggedIn()) {
     header('Location: index.php');
 }
 
+// Creating token
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+
 ?>
  
 <body ondragstart="return false" ondrag="return false">
@@ -14,6 +19,7 @@ if(!$functions->loggedIn()) {
 
         //If everything went good we can redirect to user.php
         $changes_success = 1;
+
 
         if(isset($_POST['button-1'])) {
             $newTheme = 'button-1';
@@ -46,6 +52,7 @@ if(!$functions->loggedIn()) {
         } else if(isset($_POST['gradient-button-3'])) {
             $newTheme = 'gradient-button-3';
         }
+
 
 
         if(isset($newTheme)) {
@@ -84,12 +91,16 @@ if(!$functions->loggedIn()) {
                     <div class="col-12 my-3 pl-4">
                         <a href="privacy_and_security.php" class='text-dark h5 none-decoration'>Privacy and Security</a>
                     </div>
+                    <div class="col-12 my-3 pl-4">
+                        <a href="logout.php" class='text-dark h5 none-decoration'>Logout</a>
+                    </div>
                 </div>
             </div>
             
             <!-- RIGHT SETTINGS PANEL -->
             <div class="col-md-8 col-lg-9 border-left">
                 <form action="" method='post'>
+                    <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                     <h3 class='px-4 row pt-4 pb-2 font-weight-bold'>Click button to pick your links theme</h3>
 
                     <h5 class='font-weight-bold row px-4 mb-1 text-muted normal-font'>Black & White</h5>

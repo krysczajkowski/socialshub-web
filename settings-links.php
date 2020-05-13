@@ -65,7 +65,12 @@ h1 {
 
                    <!-- Go to custom links message for mobile users -->
                     <div class="row d-block d-md-none d-lg-none d-lg-none border-bottom border-secondary text-center pt-1 pb-3 mb-5">
-                        <a href="settings.php" class='link'><i class="fas fa-user-edit"></i> Edit Your Profile</a>
+                        <div class="col-12">
+                            <a href="settings.php" class="link pb-3"><i class="fas fa-user-edit"></i> Edit Your Profile</a>
+                        </div>
+                        <div class="col-12">
+                            <a href="settings-theme.php" class="link"><i class="fas fa-palette mt-3"></i> Change your links's theme</a>
+                        </div>
                     </div>
 
 

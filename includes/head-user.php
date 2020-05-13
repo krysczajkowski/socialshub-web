@@ -1,4 +1,24 @@
-<?php include 'functions/init.php'; ?>
+<?php include 'functions/init.php'; 
+
+if(isset($_GET['username']) && !empty($_GET['username'])){
+    $username    = $functions->checkInput($_GET['username']);
+    $profileId   = $functions->userIdByUsername($username);
+    $profileData = $functions->user_data($profileId);
+
+    if(!$profileData) {
+        echo("<script>location.href = '".BASE_URL."page404.html'</script>");
+        exit();
+    } else {
+        $functions->addVisitor($profileId);
+    }
+
+} else {
+    echo("<script>location.href = '".BASE_URL."'</script>");
+    die();
+}
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -31,10 +51,10 @@
     <!--  Font awsome  -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- OG -->
-    <meta property="og:title" content="SocialsHub.net | Future world largest free bio link tool" />
+    <meta property="og:title" content="@<?php echo $profileData->screenName ?> | SocialsHub.net" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://www.socialshub.net" />
-    <meta property="og:image" content="https://socialshub.net/socialshub-images/signUp-link.png" />
+    <meta property="og:image" content="https://socialshub.net/<?php echo $profileData->profileImage?>" />
     <meta property="og:description" content="SocialsHub.net | All Your Content in One Link" />
 </head>
 

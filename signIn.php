@@ -14,6 +14,11 @@
     $permissions = ['email'];
     $loginURL = $helper->getLoginUrl($redirectURL, $permissions);
 
+
+    // Creating token
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
 ?>
 
 
@@ -55,28 +60,34 @@ $eLogin = '';
 $sLogin = '';
 
 if(isset($_POST['loginEmail']) && !empty($_POST['loginEmail']) &&isset($_POST['loginPassword'])) {
-    $email     = $_POST['loginEmail'];
-    $password  = $_POST['loginPassword'];
-    $remember  = isset($_POST['remember']);
-    
-    if(!empty($email) && !empty($password)) {
-        $email     = $functions->checkInput($email);
-        $password  = $functions->checkInput($password);
+    // Checking if tokens match
+    if(hash_equals($_POST['token'], $_SESSION['token'])) {
+
+        $email     = $_POST['loginEmail'];
+        $password  = $_POST['loginPassword'];
+        $remember  = isset($_POST['remember']);
         
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $eLogin = 'Invalid format of email.';
-        } else {
-            $user = $functions->login_user($email, $password, $remember);
-            if($user != null) {
-                header('Location: '.BASE_URL.$user->screenName);
-                exit();
-            }else{
-                $eLogin = "Your credentials are not correct.";
+        if(!empty($email) && !empty($password)) {
+            $email     = $functions->checkInput($email);
+            $password  = $functions->checkInput($password);
+            
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $eLogin = 'Invalid format of email.';
+            } else {
+                $user = $functions->login_user($email, $password, $remember);
+                if($user != null) {
+                    header('Location: '.BASE_URL.$user->screenName);
+                    exit();
+                }else{
+                    $eLogin = "Your credentials are not correct.";
+                }
             }
+            
+        } else {
+            $eLogin = "Your credentials are not correct.";
         }
-        
     } else {
-        $eLogin = "Your credentials are not correct.";
+        $eLogin = 'Sorry. Server problem. Please try again later.';
     }
 }
 
@@ -103,6 +114,7 @@ if(isset($_POST['forgot-password'])) {
                     <div class="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-3 mt-5">
                         <div class="card card-body shadow-sm"> 
                             <form method='post'>
+                                <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                                 <input type="text" value='<?php if(isset($email)) {echo $email ;} ?>' class="form-control" placeholder='Email' name='loginEmail'>
                                 <input type="Password" class="form-control mt-2" placeholder='Password' name='loginPassword'>
                                 <div class="custom-control custom-checkbox mt-2">

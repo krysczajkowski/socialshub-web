@@ -16,19 +16,17 @@
 
 	if(!empty($id)){
 
-        $stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `link` = ? WHERE id = ?")->execute([$title,$link,$id]);
-        $stmt = null;
-	}else{
+		if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `link` = ? WHERE id = ? AND account_id = ?")->execute([$title,$link,$id,$account_id])){
+			$stmt = null;
+		} else {
+			echo 'Sorry! We have a server problem.';
+		}
+		
+	} else {
 
         $count  =  $pdo->query("SELECT count(*) AS total FROM links where account_id = ".$account_id)->rowCount();
-		
-		
 
         $order = (int)$count[0]['total'] + 1;
-
-
-
-       
 		
 		$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`link`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:link,:date,:order,1)");
 

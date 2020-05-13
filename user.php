@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<?php include 'includes/head.php'; ?>
+<?php include 'includes/head-user.php'; ?>
 
 <body>
     <?php
@@ -24,8 +24,8 @@
             echo("<script>location.href = '".BASE_URL."page404.html'</script>");
             exit();
         } else {
-//            $functions->addView($profileId);
-            $functions->addVisitor($profileId);
+            //Protection against extra profile views from bots
+            echo "<img src='".$functions->addVisitor($profileId)."' class='d-none'>";
         }
 
     } else {
@@ -127,7 +127,7 @@ if ($user->id === $profileId) {
 
                                         if($user->id === $profileId && empty($links)) {
                                             echo "<div class='text-center mt-4'>";
-                                            echo "<a style='font-size: 1.1rem' class='btn btn-outline-dark font-weight-bold px-5 py-2' href='settings-links.php'>Hey! Click here to add your own links</a>";
+                                            echo "<a style='font-size: 1.1rem' class='btn-block custom-link-click small-font mt-2 gradient-button button-4' href='settings-links.php'>Hey @$user->screenName! Click here to add your own links</a>";
                                             echo "</div>";
                                         }
 
@@ -176,8 +176,6 @@ if ($user->id === $profileId) {
     </div>
 </div>
     
-    <?php include 'includes/footer.php'; ?>
-    
     <!-- This website is using cookies information here -->
     <?php include 'includes/cookie-info.php' ?>
     
@@ -189,5 +187,16 @@ if ($user->id === $profileId) {
     <script src='js/click.js'></script>
     <?php include 'js/script.php' ?>
     <script src='js/accept-cookies.js'></script>
+    <script>
+        // Change title 
+        document.title = "@<?php echo $profileData->screenName . ' | SocialsHub.net'; ?>";
+
+        // OG TAGS
+        // Change title tag
+        // document.querySelector('meta[property="og:title"]').setAttribute("content", "@<?php echo $profileData->screenName?> | SocialsHub.net");
+
+        // Change image tag
+        // document.querySelector('meta[property="og:image"]').setAttribute("content", "https://socialshub.net/<?php echo $profileData->profileImage?>");
+    </script>
 </body>
 </html>

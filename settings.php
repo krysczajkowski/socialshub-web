@@ -20,6 +20,10 @@ if(!$functions->loggedIn()) {
         //If everything went good we can redirect to user.php
         $changes_success = 1;
 
+        // Creating token
+        if (empty($_SESSION['token'])) {
+            $_SESSION['token'] = bin2hex(random_bytes(32));
+        }
 
         //Links
         $links = [
@@ -27,7 +31,7 @@ if(!$functions->loggedIn()) {
             'facebook' => 'https://facebook.com/',
             'twitter' => 'https://twitter.com/', 
             'instagram' => 'https://instagram.com/',
-            'tiktok' => 'https://tiktok.com/@',
+            'tiktok' => 'https://www.tiktok.com/@',
             'snapchat' => 'https://snapchat.com/add/',
             'twitch' => 'https://twitch.tv/',
             'soundcloud' => 'https://soundcloud.com/',
@@ -43,109 +47,116 @@ if(!$functions->loggedIn()) {
         if(isset($_POST['email']) && isset($_POST['name']) && isset($_POST['textarea']) ) {
             if(isset($_FILES['uploadProfile'])) {
 
-                $name   = $_POST['name'];
-                $email  = $functions->checkInput($_POST['email']);
-                $bio    = $functions->checkInput($_POST['textarea']);
+                // Checking if tokens match
+                if(hash_equals($_POST['token'], $_SESSION['token'])) {
 
-                $name = preg_replace("/[^a-zA-Z0-9]/", "", $name);
+                    $name   = $_POST['name'];
+                    $email  = $functions->checkInput($_POST['email']);
+                    $bio    = $functions->checkInput($_POST['textarea']);
 
-                if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $_SESSION['eSettings'] = 'Invalid email.';
-                } else if (strlen($name) < 2 || strlen($name) > 25) {
-                    $_SESSION['eSettings'] = 'Name must be between 2 and 25 characters.';
-                } else if ($name != $user->screenName && $functions->name_exist($name)) {
-                    $_SESSION['eSettings'] = 'Sorry, this name is already taken.';
-                } else if ($email != $user->email && $functions->email_exist($email)) {
-                    $_SESSION['eSettings'] = 'This email is already in use.';
-                } else {
-                    //Old names of images
-                    $DBprofImage  = $user->profileImage;
-                    $DBcoverImage = $user->profileCover;
-                    
-                    //Checking profile image
-                    if(!empty($_FILES['uploadProfile']['name'][0])) {
-                        $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id);
-                        if(!empty($profileRoot)) {
-                            $DBprofImage = $profileRoot;
+                    $name = preg_replace("/[^a-zA-Z0-9]/", "", $name);
+
+                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $_SESSION['eSettings'] = 'Invalid email.';
+                    } else if (strlen($name) < 2 || strlen($name) > 25) {
+                        $_SESSION['eSettings'] = 'Name must be between 2 and 25 characters.';
+                    } else if ($name != $user->screenName && $functions->name_exist($name)) {
+                        $_SESSION['eSettings'] = 'Sorry, this name is already taken.';
+                    } else if ($email != $user->email && $functions->email_exist($email)) {
+                        $_SESSION['eSettings'] = 'This email is already in use.';
+                    } else {
+                        //Old names of images
+                        $DBprofImage  = $user->profileImage;
+                        $DBcoverImage = $user->profileCover;
+                        
+                        //Checking profile image
+                        if(!empty($_FILES['uploadProfile']['name'][0])) {
+                            $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id);
+                            if(!empty($profileRoot)) {
+                                $DBprofImage = $profileRoot;
+                            }
                         }
-                    }
-                    
-                    //Checking cover image
-                    if(!empty($_FILES['uploadCover']['name'][0])) {
-                        $profileRoot = $functions->uploadImage($_FILES['uploadCover'], $user->id);
-                        if(!empty($profileRoot)) {
-                            $DBcoverImage = $profileRoot;
-                        }
-                    }   
+                        
+                        //Checking cover image
+                        if(!empty($_FILES['uploadCover']['name'][0])) {
+                            $profileRoot = $functions->uploadImage($_FILES['uploadCover'], $user->id);
+                            if(!empty($profileRoot)) {
+                                $DBcoverImage = $profileRoot;
+                            }
+                        }   
 
-                    //Updating user's data
-                    $functions->update('users', $user->id, array('email' => $email, 'screenName' => $name, 'bio' => $bio, 'profileImage' => $DBprofImage, 'profileCover' => $DBcoverImage));                   
+                        //Updating user's data
+                        $functions->update('users', $user->id, array('email' => $email, 'screenName' => $name, 'bio' => $bio, 'profileImage' => $DBprofImage, 'profileCover' => $DBcoverImage));                   
 
 
-                    // FILTERING SOCIAL MEDIA
-                    foreach ($sm as $socialMediaRow) {
+                        // FILTERING SOCIAL MEDIA
+                        foreach ($sm as $socialMediaRow) {
 
-                        $smedia = $socialMediaRow->smedia;                    
+                            $smedia = $socialMediaRow->smedia;                    
+                                            
+                            
+                            $smedia_name = $functions->checkInput($_POST[$smedia . '-name']);
+                            
+                            //Session to hold in input wrong (over 30 chars) social name
+                            $_SESSION[$smedia . '-inputName'] = $smedia_name;
+                            
+
+                            //Checking if social media checkbox is checked 
+                            if(isset($_POST['checkbox-'.$smedia])) {
+                                $isBouncing = 1;
+                            } else {
+                                $isBouncing = 0;
+                            }
+
+
+                            if((empty($smedia_name))) { 
+
+                                $smedia_link = '';
+
+                                // Setting #2 tutorial for new user
+                                if(isset($_SESSION['set-tut2'])) {
+                                    setcookie('new-user-tut2', '1', time()+20);
+                                    unset($_SESSION['set-tut2']);
+                                }
+
+                                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, $isBouncing);
+                                $functions->addNewSocialMedia($user->id);
+                                                    
                                         
-                        
-                        $smedia_name = $functions->checkInput($_POST[$smedia . '-name']);
-                        
-                        //Session to hold in input wrong (over 30 chars) social name
-                        $_SESSION[$smedia . '-inputName'] = $smedia_name;
-                        
+                            } else if(!empty($smedia_name) && strlen($smedia_name) < 100) {
 
-                        //Checking if social media checkbox is checked 
-                        if(isset($_POST['checkbox-'.$smedia])) {
-                            $isBouncing = 1;
-                        } else {
-                            $isBouncing = 0;
+                                //If user write all url (instead of rest) we delete unnecessary part
+                                if (strpos($smedia_name, $links[$smedia]) !== false) {
+                                    $smedia_name = str_replace($links[$smedia], '', $smedia_name);
+                                }
+
+                                $smedia_link = $links[$smedia] . $smedia_name;
+
+                                // Setting #2 tutorial for new user
+                                if(isset($_SESSION['set-tut2'])) {
+                                    setcookie('new-user-tut2', '1', time()+20);
+                                    unset($_SESSION['set-tut2']);
+                                }
+
+
+                                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, $isBouncing);
+                                $functions->addNewSocialMedia($user->id);
+
+
+                            } else {
+                                $changes_success = 0;
+                                $_SESSION['eSettings'] = $smedia . ' name must be under 100 letters.';
+                            } 
+                                                    
                         }
-
-
-                        if((empty($smedia_name))) { 
-
-                            $smedia_link = '';
-
-                            // Setting #2 tutorial for new user
-                            if(isset($_SESSION['set-tut2'])) {
-                                setcookie('new-user-tut2', '1', time()+20);
-                                unset($_SESSION['set-tut2']);
-                            }
-
-                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, $isBouncing);
-                            $functions->addNewSocialMedia($user->id);
-                                                  
-                                      
-                        } else if(!empty($smedia_name) && strlen($smedia_name) < 100) {
-
-                            //If user write all url (instead of rest) we delete unnecessary part
-                            if (strpos($smedia_name, $links[$smedia]) !== false) {
-                                $smedia_name = str_replace($links[$smedia], '', $smedia_name);
-                            }
-
-                            $smedia_link = $links[$smedia] . $smedia_name;
-
-                            // Setting #2 tutorial for new user
-                            if(isset($_SESSION['set-tut2'])) {
-                                setcookie('new-user-tut2', '1', time()+20);
-                                unset($_SESSION['set-tut2']);
-                            }
-
-
-                            $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, $isBouncing);
-                            $functions->addNewSocialMedia($user->id);
-
-
-                        } else {
-                            $changes_success = 0;
-                            $_SESSION['eSettings'] = $smedia . ' name must be under 100 letters.';
-                        } 
-                                                
+    
+                        if($changes_success) {
+                            echo("<script>location.href = '".BASE_URL."$name'</script>");
+                        }
                     }
- 
-                    if($changes_success) {
-                        echo("<script>location.href = '".BASE_URL."$name'</script>");
-                    }
+
+                } else {
+                    $_SESSION['eSettings'] = 'Sorry. Server problem. Please try again later.';
                 }
                 
             }
@@ -225,7 +236,8 @@ if(!$functions->loggedIn()) {
 
                     <!-- FORM -->
                     <form action="" method='POST' enctype="multipart/form-data">
-                   
+                        <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
+
                         <div class="row">
                             <div class="d-flex col-3 py-2 justify-content-end justify-text-md-start">
                                 <div class="profileImage-sm border rounded-circle" style='height: 45px; width: 45px;'></div>

@@ -13,31 +13,43 @@ if(!$functions->loggedIn()) {
 if($functions->isUserFbUser($_SESSION['user_id'])) {
     header('Location: index.php');
 }
-    
+
+// Creating token
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+
 // CHANGE PASSWORD CODE
 $eChangePassword = '';
 $sChangePassword = '';
     
 if(isset($_POST['oldPassword']) && isset($_POST['newPassword']) && isset($_POST['confPassword'])) {
-    $oldPassword   = $functions->checkInput($_POST['oldPassword']);
-    $newPassword   = $functions->checkInput($_POST['newPassword']);
-    $confPassword  = $functions->checkInput($_POST['confPassword']);
 
-    $user_id = $_SESSION['user_id'];
+    // Checking if tokens match
+    if(hash_equals($_POST['token'], $_SESSION['token'])) {
 
-    //checkPassword() check is this correct password
-    if($functions->checkPassword($oldPassword, $user_id)) {
-        if(strlen($newPassword) < 5 || strlen($newPassword) > 25) {
-            $eChangePassword = 'New password must be between 5 and 25 characters';
-        } else if($newPassword != $confPassword) {
-            $eChangePassword = 'You must enter the same password twice in order to confirm it.';
+        $oldPassword   = $functions->checkInput($_POST['oldPassword']);
+        $newPassword   = $functions->checkInput($_POST['newPassword']);
+        $confPassword  = $functions->checkInput($_POST['confPassword']);
+
+        $user_id = $_SESSION['user_id'];
+
+        //checkPassword() check is this correct password
+        if($functions->checkPassword($oldPassword, $user_id)) {
+            if(strlen($newPassword) < 5 || strlen($newPassword) > 25) {
+                $eChangePassword = 'New password must be between 5 and 25 characters';
+            } else if($newPassword != $confPassword) {
+                $eChangePassword = 'You must enter the same password twice in order to confirm it.';
+            } else {
+                $hash = md5($newPassword);
+                $functions->update('users', $user_id, array('password' => "$hash"));
+                $sChangePassword = 'Your password has been updated.';
+            }
         } else {
-            $hash = md5($newPassword);
-            $functions->update('users', $user_id, array('password' => "$hash"));
-            $sChangePassword = 'Your password has been updated.';
+            $eChangePassword = 'Your current password is incorrect.';
         }
     } else {
-        $eChangePassword = 'Your current password is incorrect.';
+        $eChangePassword = 'Sorry. Server problem. Please try again later.';
     }
 }    
     
@@ -92,7 +104,7 @@ if(isset($_POST['oldPassword']) && isset($_POST['newPassword']) && isset($_POST[
                     
                     <!-- FORM -->
                     <form action="" method='POST'>
-                       
+                        <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
                         <!-- CURRENT PASSWORD -->
                         <div class="row pt-3">
                             <div class="col-xs-12 col-md-3 py-2 d-flex justify-content-end justify-text-md-start">

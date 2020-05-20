@@ -231,7 +231,7 @@ if(!$functions->loggedIn()) {
                    
                     <!-- Go to custom links message for mobile users -->
                     <div class="row d-block d-md-none d-lg-none d-lg-none border-bottom border-secondary text-center p-2 mb-4">
-                        <a href="settings-links.php" class='link'><i class="fas fa-feather-alt"></i> Edit Your Custom Links</a>
+                        <a href="settings-links.php" class='link font-weight-bold h5'><i class="fas fa-feather-alt"></i> Edit Your Custom Links</a>
                     </div>
 
                     <!-- FORM -->

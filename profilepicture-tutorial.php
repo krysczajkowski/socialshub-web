@@ -59,7 +59,7 @@ if (empty($_SESSION['token'])) {
 
                     <div class="form-group text-center">
                         <img src="images/defaultProfileImage.png" id='profileDisplay' class='rounded-circle w-50 h-50 d-block mx-auto my-3' alt="" onclick='uploadProfileClick()'>
-                        <label for="uploadProfile">Click to pick profile image</label>
+                        <label for="uploadProfile" class='font-weight-bold'>Click To Pick Profile Image</label>
                         <input type="file" onchange='displayImage(this)' name='uploadProfile' id='uploadProfile' class='form-control' style='display:none;'>
                     </div>
 
@@ -69,7 +69,7 @@ if (empty($_SESSION['token'])) {
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" name='submit' class='btn btn-primary btn-block'>Finish! Go to profile</button>
+                        <button type="submit" name='submit' class='btn text-white btn-block' style="background-color:#cd6769;border: 1px solid #ac393b;">Finish! Go to profile</button>
                     </div>
                 </form>
             </div>

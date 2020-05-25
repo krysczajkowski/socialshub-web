@@ -65,7 +65,7 @@
                     <h4 class='font-weight-bold mt-3 mb-0 pb-0 user-screenName'>@<?php echo $profileData->screenName; ?></h4>
 
                     <div class="mb-3">
-<p style="white-space: pre-line; font-size: 1rem;">
+<p style="white-space: pre-line; font-size: 1rem;" class="row col-12 col-md-9">
 <?php 
     //BIO DISPLAY
     if(!empty($profileData->bio)) {

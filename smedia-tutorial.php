@@ -135,7 +135,7 @@ if(!$functions->loggedIn()) {
 
             <div class="fixed-bottom container">
                 <!-- SUBMIT -->
-                <input type="submit" name='submit' value='NEXT' class="mt-2 btn btn-primary btn-block font-weight-bold py-1" >  
+                <input type="submit" name='submit' value='NEXT' class="mt-2 text-white btn btn-block font-weight-bold py-1" style="background-color:#cd6769;border: 1px solid #ac393b;">  
             </div>
 
             <?php

@@ -74,7 +74,7 @@ h1 {
                     </div>
 
 
-    				<h1 class='h3 font-weight-bold'>My Links</h1>
+    				<h1 class='h3 font-weight-bold'>My Links 6</h1>
     				<div class="row">
     					<div class="col">
     						<div class="form-group">

@@ -86,6 +86,8 @@ h1 {
     							<div class="error d-none error-message alert alert-danger alert-dismissible mt-2">
     							</div>
     							<input type="hidden" id="id_link">
+                                <!--Hidden field containing our session token-->
+                                <input type="hidden" id="token_special" name="token_special" value="<?= $_SESSION['token_special']; ?>">
     						</div>						
     						<a href="#" id="save_button" class="btn btn-primary btn-lg btn-block normal-font font-weight-bold">ADD NEW LINK</a>
     					</div>
@@ -187,7 +189,7 @@ h1 {
 
             if($("#link").val().length > 0){
                 if(Validalink($("#link").val())){
-                    $.post( "ajax/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val() }, function(data){
+                    $.post( "ajax/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val(),token_special: $("#token_special").val() }, function(data){
                         $( "#sortable" ).selectable();
                         $('#link').val('');
                     } );

@@ -2,6 +2,17 @@
 	session_start();
 	include "../functions/db.php";
 
+    //Make sure that the token POST variable exists.
+    if(!isset($_POST['token_special'])){
+        echo 'Sorry! No token found!';
+    }
+
+    //It exists, so compare the token we received against the
+    //token that we have stored as a session variable.
+    if(hash_equals($_POST['token_special'], $_SESSION['token_special']) === false){
+        echo 'Sorry! Token mismatch!';
+    }
+
 	$date = date('Y-m-d H:i:s');
 	
 	if(isset($_COOKIE['user_id'])) {

@@ -71,7 +71,7 @@ if(!$functions->loggedIn()) {
                         
                         //Checking profile image
                         if(!empty($_FILES['uploadProfile']['name'][0])) {
-                            $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id);
+                            $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id, 'images/');
                             if(!empty($profileRoot)) {
                                 $DBprofImage = $profileRoot;
                             }
@@ -79,7 +79,7 @@ if(!$functions->loggedIn()) {
                         
                         //Checking cover image
                         if(!empty($_FILES['uploadCover']['name'][0])) {
-                            $profileRoot = $functions->uploadImage($_FILES['uploadCover'], $user->id);
+                            $profileRoot = $functions->uploadImage($_FILES['uploadCover'], $user->id, 'images/');
                             if(!empty($profileRoot)) {
                                 $DBcoverImage = $profileRoot;
                             }
@@ -371,7 +371,8 @@ if(!$functions->loggedIn()) {
     </div>
 
     <div class='col-10 col-lg-6 mx-0'>
-        <input type='text' placeholder='Rest of your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
+        <input type='text' placeholder='Rest of your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' onkeyup='previewURL(`".$socialMediaRow->smedia."-name`, `".$socialMediaRow->smedia."-div`, `$links[$smedia]`)' 
+            onfocus='previewURL(`".$socialMediaRow->smedia."-name`, `".$socialMediaRow->smedia."-div`, `$links[$smedia]`)' onblur='clearURL(`".$socialMediaRow->smedia."-div`)' autocomplete='off'>
     </div>
     <div class='input-group-append col-2 col-lg-1 mx-0'>
         <a id='' class='input-group-text w-100 px-auto link' href='#collapse-".$socialMediaRow->smedia."' data-parent='#accordion-".$socialMediaRow->smedia."' data-toggle='collapse' aria-expanded='true'>
@@ -379,6 +380,7 @@ if(!$functions->loggedIn()) {
         </a>
     </div>
 
+    <div class='w-100 text-center' id='".$socialMediaRow->smedia."-div'></div>
 
     <div class='collapse mt-2 mb-2' id='collapse-".$socialMediaRow->smedia."'>
 
@@ -434,5 +436,6 @@ if(!$functions->loggedIn()) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <?php include 'js/script.php' ?>
     <script src='js/search.js'></script>
+    <script src='js/link-preview.js'></script>
 </body>
 </html>

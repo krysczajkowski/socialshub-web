@@ -46,6 +46,10 @@ if (empty($_SESSION['token'])) {
             $newTheme = 'button-11';
         } else if(isset($_POST['button-12'])) {
             $newTheme = 'button-12';
+        } else if(isset($_POST['button-13'])) {
+            $newTheme = 'button-13';
+        } else if(isset($_POST['button-14'])) {
+            $newTheme = 'button-14';
         } else if(isset($_POST['gradient-button-1'])) {
             $newTheme = 'gradient-button-1';
         } else if(isset($_POST['gradient-button-2'])) {
@@ -120,7 +124,9 @@ if (empty($_SESSION['token'])) {
                     <input type="submit" name='button-9' class='gradient-button button-9' value='Click to apply theme'>
                     <input type="submit" name='button-10' class='gradient-button button-10' value='Click to apply theme'>  
                     <input type="submit" name='button-11' class='gradient-button button-11' value='Click to apply theme'>   
-                    <input type="submit" name='button-12' class='gradient-button button-12' value='Click to apply theme'>  
+                    <input type="submit" name='button-12' class='gradient-button button-12' value='Click to apply theme'> 
+                    <input type="submit" name='button-13' class='gradient-button button-13' value='Click to apply theme'> 
+                    <input type="submit" name='button-14' class='gradient-button button-14' value='Click to apply theme'>    
 
                     <h5 class='font-weight-bold row px-4 mt-3 mb-1 text-muted normal-font'>Other Gradients</h5>
 

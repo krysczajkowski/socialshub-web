@@ -106,7 +106,7 @@ if(!$functions->loggedIn()) {
     <form action="" method='POST' enctype="multipart/form-data">
     <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
         <!-- ADD SOCIAL LINKS -->
-        <div class="row col-10 offset-1">
+        <div class="row col-10 offset-1 col-md-8 offset-md-2">
         <?php    
             foreach ($sm as $socialMediaRow) {
                 
@@ -125,8 +125,10 @@ if(!$functions->loggedIn()) {
         </div>
 
         <div class='col-12 col-lg-7 mx-0'>
-        <input type='text' placeholder='Rest of your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' >
+        <input type='text' autocomplete='off' placeholder='Rest of your ".$socialMediaRow->smedia." URL' class='form-control w-100' name='".$socialMediaRow->smedia."-name' id='".$socialMediaRow->smedia."-name' value='$name' onkeyup='previewURL(`".$socialMediaRow->smedia."-name`, `".$socialMediaRow->smedia."-div`, `$links[$smedia]`)' 
+            onfocus='previewURL(`".$socialMediaRow->smedia."-name`, `".$socialMediaRow->smedia."-div`, `$links[$smedia]`)' onblur='clearURL(`".$socialMediaRow->smedia."-div`)'>
         </div>
+        <div class='w-100 text-center' id='".$socialMediaRow->smedia."-div'></div>
         </div>";
 
                 
@@ -155,5 +157,6 @@ if(!$functions->loggedIn()) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <?php include 'js/script.php' ?>
     <script src='js/search.js'></script>
+    <script src='js/link-preview.js'></script>
 </body>
 </html>

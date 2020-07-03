@@ -354,7 +354,7 @@ class Functions {
     }
 
     //      IMAGE FUNCTIONS
-    public function uploadImage($file, $id) {
+    public function uploadImage($file, $id, $target_path) {
         
         // File information
         $uploaded_name = basename($file['name']);
@@ -364,7 +364,7 @@ class Functions {
         $uploaded_tmp  = $file[ 'tmp_name' ];
 
         // Where are we going to be writing to?
-        $target_path   = 'images/';
+        //$target_path   = 'images/';
 
         //$target_file   = basename( $uploaded_name, '.' . $uploaded_ext ) . '-';
         $target_file   =  md5( uniqid() . $uploaded_name ) . '.' . $uploaded_ext;

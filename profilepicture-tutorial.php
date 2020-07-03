@@ -4,6 +4,10 @@
 
 <?php include 'includes/head.php'; 
 
+if(!$functions->loggedIn()) {
+    header('Location: index.php');
+}
+
 // Creating token
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
@@ -30,7 +34,7 @@ if (empty($_SESSION['token'])) {
                 
                 //Checking profile image
                 if(!empty($_FILES['uploadProfile']['name'][0])) {
-                    $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id);
+                    $profileRoot = $functions->uploadImage($_FILES['uploadProfile'], $user->id, 'images/');
                     if(!empty($profileRoot)) {
                         $DBprofImage = $profileRoot;
                     }
@@ -55,16 +59,16 @@ if (empty($_SESSION['token'])) {
             <div class="col-10 col-md-6 col-lg-4 offset-1 offset-md-3 offset-lg-4 border mt-5 p-4">
                 <form action="" method='POST' enctype='multipart/form-data'>
                     <input type="hidden" value="<?php echo $_SESSION['token']; ?>" name='token'>
-                    <h3 class='text-center'>Create Profile</h3>
+                    <h5 class='text-center font-weight-bold'>@<?php echo $user->screenName; ?></h5>
 
                     <div class="form-group text-center">
-                        <img src="images/defaultProfileImage.png" id='profileDisplay' class='rounded-circle w-50 h-50 d-block mx-auto my-3' alt="" onclick='uploadProfileClick()'>
-                        <label for="uploadProfile" class='font-weight-bold'>Click To Pick Profile Image</label>
+                        <img src="images/defaultProfileImage.png" id='profileDisplay' class='rounded-circle d-block mx-auto my-3' style='width: 40%!important; height: 40%!important;' alt="" onclick='uploadProfileClick()'>
+                        <label for="uploadProfile" class='text-muted'>[Click to upload profile image]</label>
                         <input type="file" onchange='displayImage(this)' name='uploadProfile' id='uploadProfile' class='form-control' style='display:none;'>
                     </div>
 
                     <div class="form-group">
-                        <label for="bio">Bio</label>
+                        <label for="bio" class='font-weight-bold'>Bio</label>
                         <textarea name="bio" id="bio" class='form-control' placeholder='Message to all your followers'></textarea>
                     </div>
 

@@ -76,6 +76,10 @@ if(isset($_POST['loginEmail']) && !empty($_POST['loginEmail']) &&isset($_POST['l
             } else {
                 $user = $functions->login_user($email, $password, $remember);
                 if($user != null) {
+                    //Generate a secure token using openssl_random_pseudo_bytes.
+                    $myToken = bin2hex(openssl_random_pseudo_bytes(24));
+                    //Store the token as a session variable.
+                    $_SESSION['token_special'] = $myToken;
                     header('Location: '.BASE_URL.$user->screenName);
                     exit();
                 }else{

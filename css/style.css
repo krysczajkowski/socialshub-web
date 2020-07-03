@@ -200,6 +200,7 @@ img.signUp-link {
 .button-1 {
     border: 2px solid #000!important;
     color: #000!important;
+    background-color: #fff;
 }
 
 .button-1:hover {
@@ -230,6 +231,7 @@ img.signUp-link {
 .button-4 {
     border: 2px solid #000!important;
     color: #000!important;
+    background-color: #fff;
 }
 
 .button-4:hover {
@@ -323,6 +325,29 @@ img.signUp-link {
     background-color: #fff!important;
     color: #ff3300!important;
 }
+
+.button-13 {
+    background-color: #FF69B4!important;
+    border: 2px solid #FF69B4;
+    color: #fff!important;
+}
+
+.button-13:hover {
+    background-color: #fff!important;
+    color: #FF69B4!important;
+}
+
+.button-14 {
+    background-color: #FFC0CB!important;
+    border: 2px solid #FFC0CB;
+    color: #fff!important;
+}
+
+.button-14:hover {
+    background-color: #fff!important;
+    color: #FFC0CB!important;
+}
+
 
 .gradient-button-1 {background-image: linear-gradient(to right, #000 0%,#444 50%, #666 100%);color: #FFF!important;}
 .gradient-button-1:hover { background-position: right center; color: #fff!important;}

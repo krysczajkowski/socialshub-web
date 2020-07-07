@@ -1,60 +1,98 @@
 <?php
+error_reporting(E_ALL);
 	session_start();
-	include "../functions/db.php";
-
+	include "../functions/init.php";
     //Make sure that the token POST variable exists.
-    if(!isset($_POST['token_special'])){
-        echo 'Sorry! No token found!';
-    }
+    // if(!isset($_POST['token_special'])){
+    //     echo 'Sorry! No token found!';
+    // }
 
     //It exists, so compare the token we received against the
     //token that we have stored as a session variable.
-    if(hash_equals($_POST['token_special'], $_SESSION['token_special']) === false){
-        echo 'Sorry! Token mismatch!';
-    }
-
-	$date = date('Y-m-d H:i:s');
+    // if(hash_equals($_POST['token_special'], $_SESSION['token_special']) === false){
+    //     echo 'Sorry! Token mismatch!';
+	// }
 	
-	if(isset($_COOKIE['user_id'])) {
-		$account_id = $_COOKIE['user_id'];	
-	} else {
-		$account_id = $_SESSION['user_id'];
-	}
+if(isset($_SESSION['insertError'])) {
+	echo $_SESSION['insertError'];
+}
 
-	$id = str_replace('img-', '', $_POST["id"]);
-	$title = test_input($_POST["title"]);
-	$link = test_input($_POST["link"]);
-
-	if(!empty($id)){
-
-		if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `link` = ? WHERE id = ? AND account_id = ?")->execute([$title,$link,$id,$account_id])){
-			$stmt = null;
+	if(isset($_POST['title']) && isset($_POST['id'])) {
+		$date = date('Y-m-d H:i:s');
+	
+		if(isset($_COOKIE['user_id'])) {
+			$account_id = $_COOKIE['user_id'];	
 		} else {
-			echo 'Sorry! We have a server problem.';
+			$account_id = $_SESSION['user_id'];
 		}
-		
-	} else {
 
-        $count  =  $pdo->query("SELECT count(*) AS total FROM links where account_id = ".$account_id)->rowCount();
+		$id = str_replace('img-', '', $_POST["id"]);
+		$title = $functions->checkInput($_POST["title"]);
+		$link = $functions->checkInput($_POST["link"]);
 
-        $order = (int)$count[0]['total'] + 1;
-		
-		$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`link`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:link,:date,:order,1)");
+		if(!empty($id)){
 
-	    $stmt->bindParam(":account_id", $account_id, PDO::PARAM_STR);
-		$stmt->bindParam(":title", $title, PDO::PARAM_STR);
-		$stmt->bindParam(":link", $link, PDO::PARAM_STR);
- 	    $stmt->bindParam(":date", $date , PDO::PARAM_STR);
-	    $stmt->bindParam(":order", $order, PDO::PARAM_STR);	   
-        $stmt->execute();
+			if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `link` = ? WHERE id = ? AND account_id = ?")->execute([$title,$link,$id,$account_id])){
+				$stmt = null;
+			} else {
+				echo 'Sorry! We have a server problem.';
+			}
 
-	/*$statement->bindValue(':link', $link);
-	$statement->bindValue(':date', $date);
-	$statement->bindValue(':order', $order);
-	$statement->bindValue(':is_active', 1);
+			if(!empty($_FILES['file']['name'][0])) {
 
-	$statement->execute();*/
+				$validImg = $functions->uploadImage($_FILES['file'], $account_id, '../images4links/'); 
 
+				$stmt = $pdo->prepare("SELECT id FROM `images4links` WHERE `link_id` = :link_id");
+				$stmt->bindParam(":link_id", $id, PDO::PARAM_INT);
+				$stmt->execute();
+
+				if($stmt->rowCount() > 0) {
+					//This link has a img included
+
+					$stmt = $pdo->prepare("UPDATE `images4links` SET `link_image` = :link_image WHERE `link_id` = :link_id");
+					$stmt->bindParam(":link_image", $validImg, PDO::PARAM_STR);
+					$stmt->bindParam(":link_id", $id, PDO::PARAM_INT);
+					$stmt->execute();
+					
+				} else {
+					//This link has no img included
+
+					$stmt = $pdo->prepare("INSERT INTO `images4links` (`link_id`,`link_image`)  VALUES (:link_id,:link_image)");
+					$stmt->bindParam(":link_id", $id);
+					$stmt->bindParam(":link_image", $validImg, PDO::PARAM_STR);
+					$stmt->execute();
+				}
+
+			}
+			
+		} else {
+
+			$count  =  $pdo->query("SELECT count(*) AS total FROM links where account_id = ".$account_id)->rowCount();
+
+			$order = (int)$count[0]['total'] + 1;
+			
+			$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`link`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:link,:date,:order,1)");
+
+			$stmt->bindParam(":account_id", $account_id, PDO::PARAM_STR);
+			$stmt->bindParam(":title", $title, PDO::PARAM_STR);
+			$stmt->bindParam(":link", $link, PDO::PARAM_STR);
+			$stmt->bindParam(":date", $date , PDO::PARAM_STR);
+			$stmt->bindParam(":order", $order, PDO::PARAM_STR);	   
+			$stmt->execute();
+
+			if(!empty($_FILES['file']['name'][0])) {
+
+				$lastInsertedId = $pdo->lastInsertId();
+				$validImg = $functions->uploadImage($_FILES['file'], $account_id, '../images4links/'); 
+
+				$stmt = $pdo->prepare("INSERT INTO `images4links` (`link_id`,`link_image`)  VALUES (:link_id,:link_image)");
+				$stmt->bindParam(":link_id", $lastInsertedId);
+				$stmt->bindParam(":link_image", $validImg, PDO::PARAM_STR);
+				$stmt->execute();
+
+			}
+
+		}
 
 	}
 ?>

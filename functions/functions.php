@@ -411,7 +411,6 @@ class Functions {
 
     }
 
-
     //      reCAPTCHA FUNCTIONS
     public function post_captcha($user_response) {
         $fields_string = '';

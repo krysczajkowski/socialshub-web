@@ -7,13 +7,6 @@ try{
     echo 'Connection error!'. $e->getMessage();
 }
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
 //For backward compatibility with the hash_equals function.
 //This function was released in PHP 5.6.0.
 //It allows us to perform a timing attack safe string comparison.

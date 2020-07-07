@@ -8,6 +8,16 @@ if(!$functions->loggedIn()) {
     header('Location: index.php');
 }
     
+if(isset($_SESSION['twojstary'])) {
+    echo $_SESSION['twojstary'];
+}
+
+if(isset($_SESSION['odbyt'])) {
+    echo $_SESSION['odbyt'];
+} else {
+    echo 'nie';
+}
+
 ?>
 
 <style>
@@ -74,7 +84,7 @@ h1 {
                     </div>
 
 
-    				<h1 class='h3 font-weight-bold'>My Links 6</h1>
+    				<h1 class='h3 font-weight-bold'>My Links</h1>
     				<div class="row">
     					<div class="col">
     						<div class="form-group">
@@ -88,7 +98,8 @@ h1 {
     							<input type="hidden" id="id_link">
                                 <!--Hidden field containing our session token-->
                                 <input type="hidden" id="token_special" name="token_special" value="<?= $_SESSION['token_special']; ?>">
-    						</div>						
+    						</div>		
+                            <input type="file" name="linkImg" id="linkImg">				
     						<a href="#" id="save_button" class="btn btn-primary btn-lg btn-block normal-font font-weight-bold">ADD NEW LINK</a>
     					</div>
     				</div>
@@ -116,7 +127,7 @@ h1 {
     <!-- Including footer -->
     <?php include 'includes/footer.php'; ?>
    
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -189,10 +200,35 @@ h1 {
 
             if($("#link").val().length > 0){
                 if(Validalink($("#link").val())){
-                    $.post( "ajax/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val(),token_special: $("#token_special").val() }, function(data){
-                        $( "#sortable" ).selectable();
-                        $('#link').val('');
-                    } );
+                    // $.post( "ajax/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val(),token_special: $("#token_special").val() }, function(data){
+                    //     $( "#sortable" ).selectable();
+                    //     $('#link').val('');
+                    // } );
+
+                    var formData = new FormData();
+                    formData.append('title', $("#title").val());
+                    formData.append('link', $("#link").val());
+                    formData.append('id', $("#id_link").val());
+                    formData.append('token_special', $("#token_special").val() );
+
+                    if ($('#linkImg').get(0).files.length > 0) {
+                        formData.append('file', $('#linkImg').prop('files')[0]);
+                    }
+
+                    $.ajax({
+                        url: 'ajax/insert.php',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false, // musi byc, bo inaczej wysyla wyswietla linki
+                        processData:false, // musi byc, bo inaczej wysyla blad
+                        success: function(response){
+                            $( "#sortable" ).selectable();
+                            $('#link').val('');
+                            console.log(formData);
+                            console.log(formData.has('file'));
+                        },
+                    });
+
                     $("#id_link").val('');
 					$("#title").val('');
                 }else{

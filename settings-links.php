@@ -7,17 +7,11 @@
 if(!$functions->loggedIn()) {
     header('Location: index.php');
 }
-    
-if(isset($_SESSION['twojstary'])) {
-    echo $_SESSION['twojstary'];
-}
 
-if(isset($_SESSION['odbyt'])) {
-    echo $_SESSION['odbyt'];
-} else {
-    echo 'nie';
-}
-
+//Generate a secure token using openssl_random_pseudo_bytes.
+$myToken = bin2hex(openssl_random_pseudo_bytes(24));
+//Store the token as a session variable.
+$_SESSION['token_special'] = $myToken;
 ?>
 
 <style>
@@ -98,8 +92,15 @@ h1 {
     							<input type="hidden" id="id_link">
                                 <!--Hidden field containing our session token-->
                                 <input type="hidden" id="token_special" name="token_special" value="<?= $_SESSION['token_special']; ?>">
-    						</div>		
-                            <input type="file" name="linkImg" id="linkImg">				
+    						</div>
+                            <div class="text-center mt-4 mb-3">
+                                <h5 class="font-weight-bold text-muted pb-0 mb-1">Add an image <i class="far fa-file-image"></i></h5>
+                                <p class="text-muted font-weight-bold super-small-font">It's not required</p>
+                            </div>		
+                            <div class='bg-light mb-3'>
+                                <input type="file" name="linkImg" id="linkImg" class='py-2 px-auto'>				
+                            </div>
+                            
     						<a href="#" id="save_button" class="btn btn-primary btn-lg btn-block normal-font font-weight-bold">ADD NEW LINK</a>
     					</div>
     				</div>
@@ -224,8 +225,6 @@ h1 {
                         success: function(response){
                             $( "#sortable" ).selectable();
                             $('#link').val('');
-                            console.log(formData);
-                            console.log(formData.has('file'));
                         },
                     });
 

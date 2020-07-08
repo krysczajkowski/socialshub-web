@@ -120,8 +120,25 @@ if ($user->id === $profileId) {
                                         }
 
                                         foreach ($links as $link) {
-                                            if(!empty($link->title)) {
-                                                echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button $theme' target='_blank' data-customlink='$link->id'>$link->title</a>";
+                                            // Check if image is included to this link
+                                            $linkImageRawPath = $functions->getLinkImage($link->id);
+
+                                            if(!empty($linkImageRawPath)) {
+                                                $linkImagePath = substr($linkImageRawPath, 3);
+
+                                                // Display link with image
+                                                if(!empty($link->title)) {
+                                                    echo "
+                                                    <a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button row d-flex $theme' target='_blank' data-customlink='$link->id'>
+                                                        <div class='col-2' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded'></div>
+                                                        <div class='col-8' style='display: flex; align-items: center; justify-content: center;'>$link->title</div>
+                                                    </a>";
+                                                }
+                                            } else {
+                                                // Display link without image
+                                                if(!empty($link->title)) {
+                                                    echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button $theme' target='_blank' data-customlink='$link->id'>$link->title</a>";
+                                                }
                                             }
                                         }
 

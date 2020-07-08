@@ -1,23 +1,27 @@
 <?php
 error_reporting(E_ALL);
-	session_start();
-	include "../functions/init.php";
-    //Make sure that the token POST variable exists.
-    // if(!isset($_POST['token_special'])){
-    //     echo 'Sorry! No token found!';
-    // }
+session_start();
+include "../functions/init.php";
 
-    //It exists, so compare the token we received against the
-    //token that we have stored as a session variable.
-    // if(hash_equals($_POST['token_special'], $_SESSION['token_special']) === false){
-    //     echo 'Sorry! Token mismatch!';
-	// }
+$token_error = false;
+
+//Make sure that the token POST variable exists.
+if(!isset($_POST['token_special'])){
+	$token_error = true;
+}
+
+//It exists, so compare the token we received against the
+//token that we have stored as a session variable.
+if(hash_equals($_POST['token_special'], $_SESSION['token_special']) === false){
+	$token_error = true;
+}
 	
 if(isset($_SESSION['insertError'])) {
 	echo $_SESSION['insertError'];
 }
 
-	if(isset($_POST['title']) && isset($_POST['id'])) {
+
+	if(isset($_POST['title']) && isset($_POST['id']) && $token_error == false) {
 		$date = date('Y-m-d H:i:s');
 	
 		if(isset($_COOKIE['user_id'])) {

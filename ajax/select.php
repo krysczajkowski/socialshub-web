@@ -27,7 +27,7 @@
 			
 			$link_image = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$image_path = $link_image[0]['link_image'];
-			$image = "<div class='col-2 p-0 p-md-2 m-0 m-md-0'><img src='$image_path' class='img-fluid'></div>";
+			$image = "<div class='col-2 p-0 p-md-2 m-0 m-md-0'><img src='$image_path' class='rounded img-fluid' style='max-height: 150px!important; width: auto;'></div>";
 		} else {
 			//Link has no image
 			$image = '';

@@ -722,6 +722,22 @@ class Functions {
 
     }
 
+    public function getLinkImage($linkId) {
+        $stmt = $this->pdo->prepare("SELECT * FROM images4links WHERE link_id = :link_id");
+        $stmt->bindParam(':link_id', $linkId);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0) {
+            // There is a img included to this link
+            $result = $stmt->fetch(PDO::FETCH_OBJ);
+            return $result->link_image;
+
+        } else {
+            // There is no img included to this link
+            return '';
+        }
+    }
+
     //       RANKING FUNCTIONS 
 
     public function rankingGenerator() {

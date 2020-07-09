@@ -184,7 +184,7 @@ img.signUp-link {
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     cursor: pointer;
     display: inline-block;
-    border-radius: 25px;
+    border-radius: 12px;
     font-family: 'Montserrat';
     font-weight: 700!important;
     padding-right: 1rem!important;

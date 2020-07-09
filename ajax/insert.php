@@ -50,7 +50,7 @@ if(isset($_SESSION['insertError'])) {
 				$stmt->bindParam(":link_id", $id, PDO::PARAM_INT);
 				$stmt->execute();
 
-				if($stmt->rowCount() > 0) {
+				if($stmt->rowCount() > 0 && $validImg != '') {
 					//This link has a img included
 
 					$stmt = $pdo->prepare("UPDATE `images4links` SET `link_image` = :link_image WHERE `link_id` = :link_id");
@@ -58,7 +58,7 @@ if(isset($_SESSION['insertError'])) {
 					$stmt->bindParam(":link_id", $id, PDO::PARAM_INT);
 					$stmt->execute();
 					
-				} else {
+				} elseif($stmt->rowCount() == 0 && $validImg != '') {
 					//This link has no img included
 
 					$stmt = $pdo->prepare("INSERT INTO `images4links` (`link_id`,`link_image`)  VALUES (:link_id,:link_image)");
@@ -89,10 +89,12 @@ if(isset($_SESSION['insertError'])) {
 				$lastInsertedId = $pdo->lastInsertId();
 				$validImg = $functions->uploadImage($_FILES['file'], $account_id, '../images4links/'); 
 
-				$stmt = $pdo->prepare("INSERT INTO `images4links` (`link_id`,`link_image`)  VALUES (:link_id,:link_image)");
-				$stmt->bindParam(":link_id", $lastInsertedId);
-				$stmt->bindParam(":link_image", $validImg, PDO::PARAM_STR);
-				$stmt->execute();
+				if($validImg != '') {
+					$stmt = $pdo->prepare("INSERT INTO `images4links` (`link_id`,`link_image`)  VALUES (:link_id,:link_image)");
+					$stmt->bindParam(":link_id", $lastInsertedId);
+					$stmt->bindParam(":link_image", $validImg, PDO::PARAM_STR);
+					$stmt->execute();
+				}
 
 			}
 

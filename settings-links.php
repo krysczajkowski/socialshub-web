@@ -97,9 +97,10 @@ h1 {
                                 <h5 class="font-weight-bold text-muted pb-0 mb-1">Add an image <i class="far fa-file-image"></i></h5>
                                 <p class="text-muted font-weight-bold super-small-font">It's not required</p>
                             </div>		
-                            <div class='bg-light mb-3'>
+                            <div class='bg-light'>
                                 <input type="file" name="linkImg" id="linkImg" class='py-2 px-auto'>				
                             </div>
+                            <div class="text-muted font-weight-bold super-small-font mb-3 ">Only .jpg, .jpeg or .png allowed</div>
                             
     						<a href="#" id="save_button" class="btn btn-primary btn-lg btn-block normal-font font-weight-bold">ADD NEW LINK</a>
     					</div>

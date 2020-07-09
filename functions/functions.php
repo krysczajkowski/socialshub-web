@@ -396,6 +396,7 @@ class Functions {
 
             } else {
                 $_SESSION['eSettings'] = 'Sorry, your image was not uploaded.1';
+                return '';
             }
 
 
@@ -407,6 +408,7 @@ class Functions {
         else {
             // Invalid file
             $_SESSION['eSettings'] = 'Your image was not uploaded. We can only accept JPEG or PNG images.';
+            return '';
         }
 
     }

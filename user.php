@@ -130,8 +130,8 @@ if ($user->id === $profileId) {
                                                 if(!empty($link->title)) {
                                                     echo "
                                                     <a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button row d-flex $theme' target='_blank' data-customlink='$link->id'>
-                                                        <div class='col-2' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded'></div>
-                                                        <div class='col-8' style='display: flex; align-items: center; justify-content: center;'>$link->title</div>
+                                                        <div class='col-1 col-md-2 ml-2 ml-md-0' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded'></div>
+                                                        <div class='col-9 col-md-8 py-2' style='display: flex; align-items: center; justify-content: center;'>$link->title</div>
                                                     </a>";
                                                 }
                                             } else {

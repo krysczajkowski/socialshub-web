@@ -32,11 +32,12 @@ if(isset($_SESSION['insertError'])) {
 
 		$id = str_replace('img-', '', $_POST["id"]);
 		$title = $functions->checkInput($_POST["title"]);
+		$description = $functions->checkInput($_POST["description"]);
 		$link = $functions->checkInput($_POST["link"]);
 
 		if(!empty($id)){
 
-			if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `link` = ? WHERE id = ? AND account_id = ?")->execute([$title,$link,$id,$account_id])){
+			if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `description` = ? , `link` = ? WHERE id = ? AND account_id = ?")->execute([$title,$description,$link,$id,$account_id])){
 				$stmt = null;
 			} else {
 				echo 'Sorry! We have a server problem.';
@@ -75,10 +76,11 @@ if(isset($_SESSION['insertError'])) {
 
 			$order = (int)$count[0]['total'] + 1;
 			
-			$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`link`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:link,:date,:order,1)");
+			$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`description`,`link`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:description,:link,:date,:order,1)");
 
 			$stmt->bindParam(":account_id", $account_id, PDO::PARAM_STR);
 			$stmt->bindParam(":title", $title, PDO::PARAM_STR);
+			$stmt->bindParam(":description", $description, PDO::PARAM_STR);
 			$stmt->bindParam(":link", $link, PDO::PARAM_STR);
 			$stmt->bindParam(":date", $date , PDO::PARAM_STR);
 			$stmt->bindParam(":order", $order, PDO::PARAM_STR);	   

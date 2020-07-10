@@ -8,7 +8,7 @@
 		$account_id = $_SESSION['user_id'];
 	}
 
-    $stm  = $pdo->query("SELECT * FROM links WHERE is_active = '1' and account_id = ".$account_id." ORDER BY 6 DESC");
+    $stm  = $pdo->query("SELECT * FROM links WHERE is_active = '1' and account_id = ".$account_id." ORDER BY `order` DESC");
     $datas =  $stm->fetchAll(PDO::FETCH_ASSOC);
 	
 	
@@ -56,16 +56,25 @@
             $table = "";
         }
 
+		//Getting description
+		if(!empty($value['description'])) {
+			$description = "<span class='normal-font text-muted'>".$value['description']."</span><br>";
+		} else {
+			$description = '';
+		}
+
+
 		$clicks = $functions->showCustomLinksClickCounter($account_id, $linkId);
 
 		$var .= "
 		<li class='list-group-item bg-white noselect row d-flex' id='order-".$value['id']."'>	
 			".$image."
 			<div id='accordion-".$linkId."' class='col-10'>	
+				".$description."
 				<span class='h5 font-weight-bold'>".$value['title']."</span><br>
 				<a href='".$value['link']."' target='_blank'>".$value['link']."</a>
 				<div class='row mt-3'>
-					<i class='col-2 col-md-1 fa fa-edit cursor-pointer' id='img-".$value['id']."' data='".$value['title']."'></i>
+					<i class='col-2 col-md-1 fa fa-edit cursor-pointer' id='img-".$value['id']."' data='".$value['title']."' data-description='".$value['description']."'></i>
 					<i class='col-2 col-md-1 fa fa-trash text-danger cursor-pointer' id='img-".$value['id']."' data='".$value['title']."'></i>
 			        <i class='col-2 col-md-1 fas fa-chart-pie cursor-pointer link' href='#collapse-".$linkId."' data-parent='#accordion-".$linkId."' data-toggle='collapse' aria-expanded='true'></i>	
 				</div>

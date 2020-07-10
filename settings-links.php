@@ -82,8 +82,13 @@ h1 {
     				<div class="row">
     					<div class="col">
     						<div class="form-group">
-    							<input type="text" id="title" class="form-control" placeholder="Title" >							
+    							<input type="text" id="title" class="form-control" placeholder="Link title" >							
     							<input type="hidden" id="id_title">
+    						</div>
+    						<div class="form-group mb-2 pb-0">
+    							<input type="text" id="description" class="form-control" placeholder="Link description" id="link">
+                                <p class="my-0 py-0  super-small-font font-weight-bold text-muted">Description is optional</p>
+                                <input type="hidden" id="id_description">
     						</div>
     						<div class="form-group">
     							<input type="text" id="link" class="form-control" placeholder="https://url" id="link">
@@ -157,6 +162,7 @@ h1 {
                 });*/
                 $(this).find(".fa-edit").click(function(){					
                     $("#title").val($(this).attr('data'));
+                    $("#description").val($(this).attr('data-description'));
 					$("#link").val( parent.find("a").attr('href') );
                     $("#id_link").val($(this).attr('id'));
                     $("#link").focus();
@@ -209,6 +215,7 @@ h1 {
 
                     var formData = new FormData();
                     formData.append('title', $("#title").val());
+                    formData.append('description', $("#description").val());
                     formData.append('link', $("#link").val());
                     formData.append('id', $("#id_link").val());
                     formData.append('token_special', $("#token_special").val() );
@@ -231,6 +238,7 @@ h1 {
 
                     $("#id_link").val('');
 					$("#title").val('');
+                    $("#description").val('');
                 }else{
                     $(".error-message").html("Please provide a valid link.");
                     $(".error-message").removeClass("d-none");

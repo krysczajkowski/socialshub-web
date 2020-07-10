@@ -131,13 +131,21 @@ if ($user->id === $profileId) {
                                                     echo "
                                                     <a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button row d-flex $theme' target='_blank' data-customlink='$link->id'>
                                                         <div class='col-1 col-md-2 ml-2 ml-md-0' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded'></div>
-                                                        <div class='col-9 col-md-8 py-2' style='display: flex; align-items: center; justify-content: center;'>$link->title</div>
+                                                        <div class='col-9 col-md-8 py-2' style='display: flex; align-items: center; justify-content: center;'>
+                                                            <div class='d-flex flex-column'>
+                                                                $link->title
+                                                                <span class='normal-font mb-0 pb-0' style='font-size: 0.75rem!important;font-weight: 400!important;'>$link->description</span>
+                                                            </div>
+                                                        </div>
                                                     </a>";
                                                 }
                                             } else {
                                                 // Display link without image
                                                 if(!empty($link->title)) {
-                                                    echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button $theme' target='_blank' data-customlink='$link->id'>$link->title</a>";
+                                                    echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button $theme' target='_blank' data-customlink='$link->id'>
+                                                    $link->title
+                                                    <p class='normal-font mb-0 pb-0 px-3' style='font-size: 0.75rem!important;font-weight: 400!important;'>$link->description</p>
+                                                    </a>";
                                                 }
                                             }
                                         }

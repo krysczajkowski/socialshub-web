@@ -108,7 +108,7 @@ if ($user->id === $profileId) {
                     <div class="row">
                         <div class="col-12 col-md-10 offset-md-1 mt-2">
                             <div class="row">
-                                <div class='col-12 col-md-10 offset-md-1'>
+                                <div class='col-12 col-md-10 offset-md-1 px-0'>
                                     <?php 
                                         $links = $functions->showActiveLinks($profileId);
                                         //Displaying links :D
@@ -123,16 +123,22 @@ if ($user->id === $profileId) {
                                             // Check if image is included to this link
                                             $linkImageRawPath = $functions->getLinkImage($link->id);
 
+                                            if($link->isBouncing == 1) {
+                                                $bouncingLink = 'pulse-link';
+                                            } else {
+                                                $bouncingLink = '';
+                                            }
+
                                             if(!empty($linkImageRawPath)) {
                                                 $linkImagePath = substr($linkImageRawPath, 3);
 
                                                 // Display link with image
                                                 if(!empty($link->title)) {
                                                     echo "
-                                                    <a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button row d-flex $theme' target='_blank' data-customlink='$link->id'>
-                                                        <div class='col-1 col-md-2 ml-2 ml-md-0' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded'></div>
+                                                    <a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button mx-0 row d-flex $theme $bouncingLink' target='_blank' data-customlink='$link->id'>
+                                                        <div class='col-1 col-md-2 ml-2 ml-md-0' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded link-image'></div>
                                                         <div class='col-9 col-md-8 py-2' style='display: flex; align-items: center; justify-content: center;'>
-                                                            <div class='d-flex flex-column'>
+                                                            <div class='d-flex flex-column link-title'>
                                                                 $link->title
                                                                 <span class='normal-font mb-0 pb-0' style='font-size: 0.75rem!important;font-weight: 400!important;'>$link->description</span>
                                                             </div>
@@ -142,7 +148,7 @@ if ($user->id === $profileId) {
                                             } else {
                                                 // Display link without image
                                                 if(!empty($link->title)) {
-                                                    echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button $theme' target='_blank' data-customlink='$link->id'>
+                                                    echo "<a href='$link->link' class='btn-block custom-link-click small-font mt-2 mx-0 gradient-button link-title $theme $bouncingLink' target='_blank' data-customlink='$link->id'>
                                                     $link->title
                                                     <p class='normal-font mb-0 pb-0 px-3' style='font-size: 0.75rem!important;font-weight: 400!important;'>$link->description</p>
                                                     </a>";

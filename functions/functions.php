@@ -663,7 +663,7 @@ class Functions {
     //       CUSTOM LINKS FUNCTIONS  
 
     public function showActiveLinks ($account_id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM links WHERE account_id = :account_id and is_active = 1 ORDER BY `order` DESC");
+        $stmt = $this->pdo->prepare("SELECT * FROM links WHERE account_id = :account_id and is_active = 1 and is_enable = 1 ORDER BY `order` DESC");
         $stmt->bindParam(':account_id', $account_id);
         $stmt->execute();
 

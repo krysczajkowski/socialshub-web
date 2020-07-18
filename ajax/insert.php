@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 session_start();
 include "../functions/init.php";
 
@@ -21,7 +20,7 @@ if(isset($_SESSION['insertError'])) {
 }
 
 
-	if(isset($_POST['title']) && isset($_POST['id']) && $token_error == false) {
+	if(isset($_POST['title']) && !empty($_POST['title']) && strlen($_POST['title']) < 150 && !empty($_POST['link']) && strlen($_POST['link']) < 250 && isset($_POST['id']) && $token_error == false) {
 		$date = date('Y-m-d H:i:s');
 	
 		if(isset($_COOKIE['user_id'])) {
@@ -34,10 +33,11 @@ if(isset($_SESSION['insertError'])) {
 		$title = $functions->checkInput($_POST["title"]);
 		$description = $functions->checkInput($_POST["description"]);
 		$link = $functions->checkInput($_POST["link"]);
+		$checkbox = $functions->checkInput($_POST['checkbox']);
 
 		if(!empty($id)){
 
-			if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `description` = ? , `link` = ? WHERE id = ? AND account_id = ?")->execute([$title,$description,$link,$id,$account_id])){
+			if($stmt = $pdo->prepare("UPDATE `links` SET `title` = ? , `description` = ? , `link` = ? , `isBouncing` = ? WHERE id = ? AND account_id = ?")->execute([$title,$description,$link,$checkbox,$id,$account_id])){
 				$stmt = null;
 			} else {
 				echo 'Sorry! We have a server problem.';
@@ -76,12 +76,13 @@ if(isset($_SESSION['insertError'])) {
 
 			$order = (int)$count[0]['total'] + 1;
 			
-			$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`description`,`link`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:description,:link,:date,:order,1)");
+			$stmt = $pdo->prepare("INSERT INTO `links` ( `account_id`,`title`,`description`,`link`,`isBouncing`,`date`,`order`,`is_active`)  VALUES( :account_id,:title,:description,:link,:isBouncing,:date,:order,1)");
 
 			$stmt->bindParam(":account_id", $account_id, PDO::PARAM_STR);
 			$stmt->bindParam(":title", $title, PDO::PARAM_STR);
 			$stmt->bindParam(":description", $description, PDO::PARAM_STR);
 			$stmt->bindParam(":link", $link, PDO::PARAM_STR);
+			$stmt->bindParam(":isBouncing", $checkbox, PDO::PARAM_STR);
 			$stmt->bindParam(":date", $date , PDO::PARAM_STR);
 			$stmt->bindParam(":order", $order, PDO::PARAM_STR);	   
 			$stmt->execute();

@@ -50,6 +50,36 @@ if (empty($_SESSION['token'])) {
             $newTheme = 'button-13';
         } else if(isset($_POST['button-14'])) {
             $newTheme = 'button-14';
+        } else if(isset($_POST['button-15'])) {
+            $newTheme = 'button-15';
+        } else if(isset($_POST['button-16'])) {
+            $newTheme = 'button-16';
+        } else if(isset($_POST['button-17'])) {
+            $newTheme = 'button-17';
+        } else if(isset($_POST['button-18'])) {
+            $newTheme = 'button-18';
+        } else if(isset($_POST['button-19'])) {
+            $newTheme = 'button-19';
+        } else if(isset($_POST['button-20'])) {
+            $newTheme = 'button-20';
+        } else if(isset($_POST['button-21'])) {
+            $newTheme = 'button-21';
+        } else if(isset($_POST['button-22'])) {
+            $newTheme = 'button-22';
+        } else if(isset($_POST['button-23'])) {
+            $newTheme = 'button-23';
+        } else if(isset($_POST['button-24'])) {
+            $newTheme = 'button-24';
+        } else if(isset($_POST['button-25'])) {
+            $newTheme = 'button-25';
+        } else if(isset($_POST['button-26'])) {
+            $newTheme = 'button-26';
+        } else if(isset($_POST['button-27'])) {
+            $newTheme = 'button-27';
+        } else if(isset($_POST['button-28'])) {
+            $newTheme = 'button-28';
+        } else if(isset($_POST['button-29'])) {
+            $newTheme = 'button-29';
         } else if(isset($_POST['gradient-button-1'])) {
             $newTheme = 'gradient-button-1';
         } else if(isset($_POST['gradient-button-2'])) {
@@ -113,7 +143,8 @@ if (empty($_SESSION['token'])) {
                     <input type="submit" name='button-1' class='gradient-button button-1' value='Click to apply theme'> 
                     <input type="submit" name='button-5' class='gradient-button button-5' value='Click to apply theme'>
                     <input type="submit" name='button-4' class='gradient-button button-4' value='Click to apply theme'>
-
+                    <input type="submit" name='button-27' class='gradient-button button-27' value='Click to apply theme'>    
+                    
                     <input type="submit" name='gradient-button-1' class='gradient-button gradient-button-1' value='Click to apply theme'>
 
                     <h5 class='font-weight-bold row px-4 mt-3 mb-1 text-muted normal-font'>Rainbow</h5>
@@ -126,7 +157,22 @@ if (empty($_SESSION['token'])) {
                     <input type="submit" name='button-11' class='gradient-button button-11' value='Click to apply theme'>   
                     <input type="submit" name='button-12' class='gradient-button button-12' value='Click to apply theme'> 
                     <input type="submit" name='button-13' class='gradient-button button-13' value='Click to apply theme'> 
-                    <input type="submit" name='button-14' class='gradient-button button-14' value='Click to apply theme'>    
+                    <input type="submit" name='button-14' class='gradient-button button-14' value='Click to apply theme'>  
+                    <!-- <input type="submit" name='button-15' class='gradient-button button-15' value='Click to apply theme'>     -->
+                    <!-- <input type="submit" name='button-16' class='gradient-button button-16' value='Click to apply theme'>     -->
+                    <input type="submit" name='button-17' class='gradient-button button-17' value='Click to apply theme'>    
+                    <input type="submit" name='button-18' class='gradient-button button-18' value='Click to apply theme'>    
+                    <input type="submit" name='button-19' class='gradient-button button-19' value='Click to apply theme'>    
+                    <input type="submit" name='button-20' class='gradient-button button-20' value='Click to apply theme'>    
+                    <input type="submit" name='button-21' class='gradient-button button-21' value='Click to apply theme'>    
+                    <input type="submit" name='button-22' class='gradient-button button-22' value='Click to apply theme'>    
+                    <input type="submit" name='button-23' class='gradient-button button-23' value='Click to apply theme'>   
+                    <input type="submit" name='button-24' class='gradient-button button-24' value='Click to apply theme'>    
+                    <input type="submit" name='button-25' class='gradient-button button-25' value='Click to apply theme'>    
+                    <input type="submit" name='button-26' class='gradient-button button-26' value='Click to apply theme'>    
+                    <input type="submit" name='button-28' class='gradient-button button-28' value='Click to apply theme'>    
+                    <input type="submit" name='button-29' class='gradient-button button-29' value='Click to apply theme'>     
+
 
                     <h5 class='font-weight-bold row px-4 mt-3 mb-1 text-muted normal-font'>Other Gradients</h5>
 

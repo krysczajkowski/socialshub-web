@@ -107,6 +107,11 @@ h1 {
                             </div>
                             <div class="text-muted font-weight-bold super-small-font mb-3 ">Only .jpg, .jpeg or .png allowed</div>
                             
+                            <div class="custom-control custom-checkbox custom-test pt-2 border-top mb-1 pb-3">
+                                <input type="checkbox" class="custom-control-input" id="checkbox-link" name="checkbox-link">
+                                <label for="checkbox-link" class="custom-control-label mt-1"><b> Make this link pulse </b>- it forces users to click it</label><br>
+                            </div>
+
     						<a href="#" id="save_button" class="btn btn-primary btn-lg btn-block normal-font font-weight-bold">ADD NEW LINK</a>
     					</div>
     				</div>
@@ -149,7 +154,6 @@ h1 {
     </script>
 <script>
     $(function() {
-
         $.fn.sortableli = function() {
             $("#sortable li").each(function(index){
                 var parent = $(this);
@@ -166,6 +170,14 @@ h1 {
 					$("#link").val( parent.find("a").attr('href') );
                     $("#id_link").val($(this).attr('id'));
                     $("#link").focus();
+
+                    // Checking boucing checkbox
+                    if($(this).attr('data-bouncing') == '1') {
+                        $("#checkbox-link").prop("checked", true);
+                    } else {
+                        $("#checkbox-link").prop("checked", false);
+                    }
+
                     return false;
                 });
             });
@@ -206,19 +218,26 @@ h1 {
         $("#save_button").click(function(){
             $(".error-message").addClass("d-none");
 
-            if($("#link").val().length > 0){
+            if($("#link").val().length > 0 && $("#title").val().length > 0){
                 if(Validalink($("#link").val())){
                     // $.post( "ajax/insert.php", { title: $("#title").val(),link: $("#link").val(),id: $("#id_link").val(),token_special: $("#token_special").val() }, function(data){
                     //     $( "#sortable" ).selectable();
                     //     $('#link').val('');
                     // } );
 
+                    if($("#checkbox-link").is(':checked')) {
+                        var checkboxValue = 1;
+                    } else {
+                        var checkboxValue = 0;
+                    }
+
                     var formData = new FormData();
                     formData.append('title', $("#title").val());
                     formData.append('description', $("#description").val());
                     formData.append('link', $("#link").val());
                     formData.append('id', $("#id_link").val());
-                    formData.append('token_special', $("#token_special").val() );
+                    formData.append('token_special', $("#token_special").val());
+                    formData.append('checkbox', checkboxValue);
 
                     if ($('#linkImg').get(0).files.length > 0) {
                         formData.append('file', $('#linkImg').prop('files')[0]);
@@ -233,6 +252,8 @@ h1 {
                         success: function(response){
                             $( "#sortable" ).selectable();
                             $('#link').val('');
+                            $("#checkbox-link").prop("checked", false);
+                            console.log(formData.get('checkbox'));
                         },
                     });
 
@@ -244,7 +265,7 @@ h1 {
                     $(".error-message").removeClass("d-none");
                 }
             }else{
-                $(".error-message").html("Please enter your link.");
+                $(".error-message").html("Please enter your link and title.");
                 $(".error-message").removeClass("d-none");
             }
             return false;
@@ -269,12 +290,26 @@ h1 {
             return false;
         });
 
+
     });
 
     function Validalink(link) {
         var regex=/^(ht|f)tps?:\/\/\w+([\.\-\w]+)?\.([a-z]{2,4}|travel)(:\d{2,5})?(\/.*)?$/i;
         return regex.test(link);
     }
+
+    $(document).on("change", "input[data-enableLink='1']", function () {
+        // 1. Złap wartość z inputa
+        // 2. Wyślij tą wartość do pliku php i wjeb ją do bazy danych
+        // 3. Podczas wyświetlania linków wczytuj tą wartość z bazy danych
+        
+        var checkbox_value = $(this).prop("checked");
+        var link_id = $(this).prop("id");
+
+        $.post( "ajax/enable-link.php", { checkbox_value: checkbox_value, link_id: link_id}, function(data){
+            console.log('wyslano');
+        } );
+    });
 </script>	
 </body>
 </html>

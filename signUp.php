@@ -60,7 +60,7 @@
 
     <section class="row">
         <div class="col-10 offset-1">
-            <img src="signup-img/profile.png" alt="" class='img-fluid lax rounded border' data-lax-preset='zoomIn-0.8'>
+            <img src="signup-img/my-profile.png" alt="" class='img-fluid lax rounded border' data-lax-preset='zoomIn-0.8'>
         </div>
     </section>
 

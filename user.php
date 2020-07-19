@@ -136,7 +136,7 @@ if ($user->id === $profileId) {
                                                 if(!empty($link->title)) {
                                                     echo "
                                                     <a href='$link->link' class='btn-block custom-link-click small-font mt-2 gradient-button mx-0 row d-flex $theme $bouncingLink' target='_blank' data-customlink='$link->id'>
-                                                        <div class='col-1 col-md-2 ml-2 ml-md-0' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' style='height: auto; width: 60px;' class='rounded link-image'></div>
+                                                        <div class='col-1 col-md-2 ml-2 ml-md-0' style='display: flex; align-items: center; justify-content: center;'><img src='$linkImagePath' class='rounded link-image'></div>
                                                         <div class='col-9 col-md-8 py-2' style='display: flex; align-items: center; justify-content: center;'>
                                                             <div class='d-flex flex-column link-title'>
                                                                 $link->title

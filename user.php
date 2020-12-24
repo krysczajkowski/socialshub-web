@@ -7,7 +7,10 @@
 <body>
     <?php
 
-    include 'includes/nav.php';
+    // Including copy link popup
+    if($functions->loggedIn()) {
+        include 'includes/user-nav.php';
+    }
 
     // Including copy link popup
     if($functions->loggedIn()) {
@@ -206,9 +209,15 @@ if ($user->id === $profileId) {
         </div>
     </div>
 </div>
+<?php 
+    if(!$functions->loggedIn()) {
+        echo "<footer class='text-center font-weight-bold text-muted mt-5 pt-3'><a href='https://socialshub.net/signUp-box.php?ref=".$profileData->screenName."' class='text-muted' style='font-size: 0.9rem;'><img src='logo/logo-little.png' style='height: 15px; width: auto' class='mb-1 mr-1'> Made with SocialsHub.net</a></footer>";
+    }
+
+?>
     
     <!-- This website is using cookies information here -->
-    <?php include 'includes/cookie-info.php' ?>
+    <?php //include 'includes/cookie-info.php' ?>
     
    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

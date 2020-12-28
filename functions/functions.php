@@ -445,7 +445,6 @@ class Functions {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-
     //       DELETE ACCOUNT FUNCTIONS
 
     public function delete_account($id) {

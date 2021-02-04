@@ -13,7 +13,10 @@ if(!$functions->loggedIn()) {
 <body>
    
     <?php include 'includes/nav.php';
-    
+        // Adding scan-food to user's smedia
+        $functions->addNewSmedia($user->id, 'scan-food');
+
+
         //Downloading all data about user's social medias
         $sm = $functions->showSocialMedia($user->id);
         
@@ -38,7 +41,8 @@ if(!$functions->loggedIn()) {
             'linkedin' => 'https://linkedin.com/in/',
             'spotify' => 'https://open.spotify.com/',
             'github' => 'https://github.com/',
-            'pinterest' => 'https://pinterest.com/'
+            'pinterest' => 'https://pinterest.com/',
+            'scan-food' => 'https://scan-food.pl/profil/'
         ];
 
 

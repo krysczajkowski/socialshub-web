@@ -34,7 +34,8 @@ if(!$functions->loggedIn()) {
         'linkedin' => 'https://linkedin.com/in/',
         'spotify' => 'https://open.spotify.com/',
         'github' => 'https://github.com/',
-        'pinterest' => 'https://pinterest.com/'
+        'pinterest' => 'https://pinterest.com/',
+        'scan-food' => 'https://scan-food.pl/profil/'
     ];
 
     if(isset($_POST['submit'])) {
@@ -75,8 +76,8 @@ if(!$functions->loggedIn()) {
                     $_SESSION['eSettings'] = $smedia . ' name must be under 40 letters.';
                 } 
 
-                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, 0);
                 $functions->addNewSocialMedia($user->id);
+                $functions->updateSocialLinks($user->id, $smedia , $smedia_name, $smedia_link, 0);
                                         
             }
 

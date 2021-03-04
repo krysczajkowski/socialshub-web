@@ -195,7 +195,7 @@ class Functions {
 
         //Creating rows in Social_links table
         
-        $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'snapchat','facebook', 'github', 'linkedin', 'pinterest', 'spotify', 'soundcloud'];
+        $socialmedia = ['youtube', 'instagram', 'tiktok', 'twitch', 'twitter', 'snapchat','facebook', 'github', 'linkedin', 'pinterest', 'spotify', 'soundcloud', 'scan-food'];
 
         for($i = 0; $i < count($socialmedia); $i++) {
 
@@ -570,7 +570,7 @@ class Functions {
 
     public function addNewSocialMedia ($account_id) {
 
-        $newSocialMedia = ['github', 'linkedin', 'pinterest', 'spotify', 'soundcloud'];
+        $newSocialMedia = ['github', 'linkedin', 'pinterest', 'spotify', 'soundcloud', 'scan-food'];
 
         for($i=0; $i < count($newSocialMedia); $i++) {
             $stmt = $this->pdo->prepare("SELECT * FROM social_links WHERE account_id = :account_id AND smedia = :smedia");
@@ -657,6 +657,23 @@ class Functions {
 
         return $result;
 
+    }
+
+    public function addNewSmedia($account_id, $smedia) {
+        $stmt = $this->pdo->prepare("SELECT id FROM social_links WHERE account_id = :account_id AND smedia = :smedia");
+        $stmt->bindParam(':account_id', $account_id);
+        $stmt->bindParam(':smedia', $smedia);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0) {
+
+            $stmt = $this->pdo->prepare("INSERT INTO social_links (id, account_id, smedia) VALUES (NULL, :account_id, :smedia)");
+            $stmt->bindParam(':smedia', $smedia);
+            $stmt->bindParam(':account_id', $account_id);
+            $stmt->execute();
+
+            return true;
+        } 
     }
 
     //       CUSTOM LINKS FUNCTIONS  

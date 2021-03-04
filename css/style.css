@@ -127,8 +127,8 @@ input:checked + .slider:before {
 }
 
 .smedia-icon-settings {
-    height: 20px;
-    width: auto;
+    height: 20px!important;
+    width: 20px!important;
 }
 
 .smedia-icon-index {
@@ -142,8 +142,8 @@ input:checked + .slider:before {
 }
 
 .smedia-icon {
-    height: 32px;
-    width: auto;
+    height: 32px!important;
+    width: 32px!important;
     transition: transform .1s;
 }
 

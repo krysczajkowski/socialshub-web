@@ -47,24 +47,24 @@
 
     <section class='row'>
         <div class="col-12 intro">
-            <p class='h1 font-weight-900 lax' data-lax-preset='zoomOut-0.5 fadeOut'>All Your Content in One Link</p>
-            <p class='lax' data-lax-preset='zoomOut-0.5 fadeOut'>Free instagram, twitter, twitch, tiktok tool for everyone.</p>
-            <a href="signUp-box.php" class="btn btn-danger font-weight-bold px-5 py-2 mt-2 mx-auto lax" data-lax-preset='zoomOut-0.5 fadeOut' style='font-size: 1.2rem;'>
+            <p class='h1 font-weight-900'>All Your Content in One Link</p>
+            <p>Free instagram, twitter, twitch, tiktok tool for everyone.</p>
+            <a href="signUp-box.php" class="btn btn-danger font-weight-bold px-5 py-2 mt-2 mx-auto get_started_btn">
                 GET STARTED FOR FREE 
             </a>
 
-            <div class="arrow arrow-first d-none d-lg-block lax" data-lax-preset='zoomOut-0.5 fadeOut'></div>
-            <div class="arrow arrow-second d-none d-lg-block lax"  data-lax-preset='zoomOut-0.5 fadeOut'></div>
+            <div class="arrow arrow-first d-none d-lg-block"></div>
+            <div class="arrow arrow-second d-none d-lg-block"></div>
         </div>
     </section>
 
     <section class="row">
         <div class="col-10 offset-1">
-            <img src="signup-img/my-profile.png" alt="" class='img-fluid lax rounded border' data-lax-preset='zoomIn-0.8'>
+            <img src="signup-img/profile.png" alt="" class='img-fluid rounded border'>
         </div>
     </section>
 
-    <section class="row lax" data-lax-preset='zoomIn-0.8'>
+    <section class="row">
         <div class="col-12 col-lg-6" >
             <div class="col-10 offset-1 tiles-text">
                 <p class="h3 font-weight-bold">
@@ -81,7 +81,7 @@
     </section>
 
 
-    <section class="row lax" data-lax-preset='zoomIn-0.8'>
+    <section class="row">
         <div class="col-12 col-lg-6 container ">
             <div class="col-10 offset-1">
                 <img src="signup-img/woman.jpg" alt="" class='img-fluid'>
@@ -99,7 +99,7 @@
 
 
     
-    <section class="row lax" data-lax-preset='zoomIn-0.8'>
+    <section class="row">
         <div class="col-10 offset-1 text-center container-text">
             <p class="h3 font-weight-bold">
                 Your Profile Looks Perfect on Every Device.
@@ -113,7 +113,7 @@
 
 
 
-    <section class="trial-block shadow3 lax" id="ContactUs" data-lax-preset='zoomIn-0.8'>
+<!--     <section class="trial-block shadow3" id="ContactUs">
         <div class="height250">
             <div class="social-overlap process-scetion mt100">
                <div class="container">
@@ -139,10 +139,10 @@
                </div>
          </div>
         </div> 
-    </section>
+    </section> -->
 
-
-    <section class="row lax" data-lax-preset='zoomIn-0.8'>
+<!-- 
+    <section class="row">
         <div class="col-10 offset-1 text-center container-text ">
             <p class="h3 font-weight-bold">
                 Increse Your Social Reach
@@ -152,12 +152,12 @@
         <div class="col-10 offset-1">
             <img src="signup-img/laptop1.png" alt="" class='img-fluid'>
         </div>
-    </section>
+    </section> -->
 
     
-    <section class="row lax my-5" data-lax-preset='zoomIn-0.8'>
+    <section class="row my-5">
         <div class="col-10 offset-1 ">
-            <a href="signUp-box.php" class="btn btn-block btn-danger font-weight-bold px-5 py-3 mx-auto" style='font-size: 1.2rem;'>
+            <a href="signUp-box.php" class="btn btn-block btn-danger font-weight-bold px-5 py-2 mx-auto get_started_btn">
                 GET STARTED FOR FREE 
             </a>
         </div>
@@ -178,22 +178,9 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
-    <script>
-        window.onload = function() {
-            lax.setup() // init
-
-            const updateLax = () => {
-                lax.update(window.scrollY)
-                window.requestAnimationFrame(updateLax)
-            }
-
-            window.requestAnimationFrame(updateLax)
-        }
-    </script>
 
 </body>
 </html>

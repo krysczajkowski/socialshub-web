@@ -111,16 +111,17 @@
         
         
         <section class='row signUp-container'>
-            <div class="d-none d-md-block col-md-6 p-5">
+            <div class="col-12 col-md-6 p-5 order-2 order-md-1">
                 <img src="signup-img/laptop2.png" alt="" class='img-fluid'>
             </div>
 
-            <div class="col-12 col-md-6 p-4" id="singup">
+            <div class="col-12 col-md-6 p-4 order-1 order-md-2" id="singup">
 
                 <div class="col-md-10 mb-4">
                     <div class="pt-2 ">
                         <div class="font-open-sans">
-                            <p class='font-weight-bold my-0 text-dark mb-1 small-font'>Create Free Account Now</p>
+                            <p class="font-weight-bold my-0 text-dark mb-1 medium-font"><img src="logo/logo-little.png" alt="" style="width: auto!important; height: 25px;" class="mr-2 mb-1">SocialsHub.net</p>
+                            <p class="font-weight-bold my-0 text-secondary mb-1 normal-font">Sign up to get one link to all your content.</p>
                                 
                             <div class=''> 
                                 <form action="" method="post" id='i-recaptcha'>
